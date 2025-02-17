@@ -4,7 +4,20 @@ export default defineNuxtConfig({
   modules: ["@nuxtjs/tailwindcss"],
   devtools: { enabled: true },
 
+  routeRules: {
+    "/": {
+      redirect: "/hero",
+    },
+  },
+
   tailwindcss: {
     configPath: "~/config/tailwind.config.ts",
+  },
+
+  app: {
+    pageTransition: {
+      name: "page",
+      mode: "out-in",
+    },
   },
 });
