@@ -6,22 +6,35 @@
 
 <script setup lang="ts">
 definePageMeta({
-  layout: "experience",
   pageTransition: {
     name: "blur",
   },
+});
+
+useHead({
+  title: "Carlos Segura García - <Experience />",
 });
 
 const router = useRouter();
 
 // Scroll handler
 const onScrollDown = (e: WheelEvent) => {
+  // Prevent if control key is pressed
+  if (e.ctrlKey) {
+    return;
+  }
+
   if (e.deltaY > 0) {
     router.push("/projects");
   }
 };
 
 const onScrollUp = (e: WheelEvent) => {
+  // Prevent if control key is pressed
+  if (e.ctrlKey) {
+    return;
+  }
+
   if (e.deltaY < 0) {
     router.push("/hero");
   }
