@@ -1,6 +1,5 @@
 <template>
-  <div class="Hero__background--shape-1" />
-  <HeroSection />
+  <SectionHero />
 </template>
 
 <script setup lang="ts">
@@ -62,16 +61,3 @@ onUnmounted(() => {
   window.removeEventListener("touchend", onTouchDown.end);
 });
 </script>
-
-<style lang="scss" scoped>
-.Hero {
-  &__background {
-    &--shape-1 {
-      @apply absolute left-1/2 top-1/2 h-[200px] w-[200px] -translate-x-1/2 -translate-y-1/2;
-
-      // Rotate 3D
-      transform: skewX(-40deg);
-    }
-  }
-}
-</style>

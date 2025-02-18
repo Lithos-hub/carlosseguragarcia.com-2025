@@ -4,6 +4,10 @@ export default defineNuxtConfig({
   modules: ["@pinia/nuxt", "@nuxt/ui"],
   devtools: { enabled: true },
 
+  colorMode: {
+    preference: "system",
+  },
+
   routeRules: {
     "/": {
       redirect: "/hero",

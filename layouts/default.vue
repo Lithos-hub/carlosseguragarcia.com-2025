@@ -1,16 +1,13 @@
 <template>
-  <section class="DefaultLayout">
-    <LeftColumn />
-    <!-- HERO SECTION -->
-    <div class="flex-1">
-      <slot />
+  <div class="flex h-screen w-screen flex-col overflow-hidden">
+    <LayoutTopBar />
+    <div class="flex flex-1">
+      <LayoutLeftColumn />
+      <div class="h-full flex-1">
+        <slot />
+      </div>
+      <LayoutRightColumn />
     </div>
-    <RightColumn />
-  </section>
+    <LayoutBottomBar />
+  </div>
 </template>
-
-<style lang="scss" scoped>
-.DefaultLayout {
-  @apply relative flex h-screen w-full;
-}
-</style>
