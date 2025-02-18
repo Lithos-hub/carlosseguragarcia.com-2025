@@ -1,6 +1,9 @@
 <template>
   <section class="Hero">
     <div class="Hero__content">
+      <ClientOnly>
+        <ComponentName name="Hero" :mounted-time="mountedTime" />
+      </ClientOnly>
       <h1 class="Hero__name">Carlos Segura García</h1>
       <h2 class="Hero__title">Front-end Developer</h2>
       <p class="Hero__description">
@@ -38,47 +41,51 @@
           <small class="Hero__logo-name">TypeScript</small>
         </div>
       </div>
-      <NuxtLink to="/experience">
-        <div class="Hero__routing-container">
-          <small class="Hero__routing-text">
-            scroll down or click here to router.push("/experience")
-          </small>
-          <UIcon
-            name="i-heroicons-chevron-double-down"
-            class="Hero__routing-icon"
-          />
-        </div>
-      </NuxtLink>
+      <RoutingButton
+        to="/experience"
+        icon="i-heroicons-chevron-double-down"
+        text="scroll down or click here to router.push('/experience')"
+        direction="down"
+      />
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const mountedTime = ref(0);
+const startTime = ref(performance.now());
+
+onMounted(() => {
+  mountedTime.value = Math.round(performance.now() - startTime.value);
+});
+</script>
 
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
 
 .Hero {
-  @apply relative flex h-full flex-col items-center justify-center gap-5;
+  @include section-wrapper;
 
   &__content {
-    @apply flex flex-col items-center justify-center gap-5 px-5;
+    @apply flex flex-col items-center justify-center gap-5 px-2 text-center lg:px-5;
   }
 
   &__name {
-    @apply font-exo z-10 text-5xl font-bold leading-none text-stone-900 dark:text-white;
+    @apply font-exo text-3xl font-bold leading-none text-stone-900 lg:text-5xl dark:text-white;
     width: 500px;
   }
 
   &__title {
-    @apply font-exo z-10 text-2xl font-medium leading-none text-stone-900 dark:text-white;
+    @apply font-exo text-lg font-medium leading-none text-stone-900 lg:text-2xl dark:text-white;
   }
 
   &__description {
-    @apply font-exo z-10 text-center text-stone-900 dark:text-white;
+    @apply font-exo max-w-[80vw] text-wrap text-center text-sm text-stone-900 lg:text-base dark:text-white;
   }
 
   &__logos {
-    @apply relative flex w-[351px] flex-wrap items-center justify-center gap-5 p-5;
+    @apply flex w-[351px] flex-wrap items-center justify-center gap-5 p-5;
   }
 
   &__logo {
@@ -95,18 +102,6 @@
     &-name {
       @apply font-exo z-10 text-xs font-medium leading-none opacity-50 dark:text-white dark:opacity-100;
     }
-  }
-
-  &__routing-container {
-    @apply flex h-[100px] flex-col items-center justify-center gap-2.5 dark:text-stone-200;
-  }
-
-  &__routing-icon {
-    @apply h-5 w-5 animate-bounce object-contain opacity-50 dark:text-green-500;
-  }
-
-  &__routing-text {
-    @apply font-jetbrainsMono text-xs text-stone-700/50 dark:text-green-500;
   }
 }
 </style>

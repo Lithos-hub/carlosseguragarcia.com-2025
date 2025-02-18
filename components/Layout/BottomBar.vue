@@ -11,14 +11,14 @@
         <UIcon
           size="25"
           name="i-mdi-linkedin"
-          class="text-stone-500 dark:text-white"
+          class="dark:text-primary text-stone-500"
         />
       </a>
       <a href="https://github.com/lithos-hub" target="_blank">
         <UIcon
           size="25"
           name="i-mdi-github"
-          class="text-stone-500 dark:text-white"
+          class="dark:text-primary text-stone-500"
         />
       </a>
     </div>

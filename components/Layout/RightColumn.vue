@@ -6,7 +6,7 @@
 
       <div class="RightColumn__line-diagonal-top" />
       <div
-        v-for="i in 50"
+        v-for="i in 80"
         :key="`extra-line-diagonal-top-${i}`"
         class="RightColumn__extra-line-diagonal-top"
         :class="[
@@ -24,7 +24,7 @@
       />
       <div class="RightColumn__container-middle" />
       <div
-        v-for="i in 50"
+        v-for="i in 80"
         :key="`extra-line-diagonal-middle-${i}`"
         :class="[
           `RightColumn__extra-line-diagonal-middle-${i}`,
@@ -79,7 +79,7 @@ const { visualDataBySection } = storeToRefs(useUiStore());
     @apply ml-[10px] h-[27px] w-[1px] -rotate-45 self-start;
   }
 
-  @for $i from 1 through 40 {
+  @for $i from 1 through 60 {
     &__extra-line-diagonal-top-#{$i} {
       @include colored-background;
       @apply absolute left-[8px] h-[25px] w-[1px] -rotate-45;
@@ -88,7 +88,7 @@ const { visualDataBySection } = storeToRefs(useUiStore());
     }
   }
 
-  @for $i from 1 through 40 {
+  @for $i from 1 through 60 {
     &__extra-line-diagonal-middle-#{$i} {
       @include colored-background;
       @apply absolute left-[8px] top-[590px] h-[25px] w-[1px] rotate-45;

@@ -13,13 +13,15 @@
 }
 
 .vite-gradient-bg {
-  background: radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
+  background:
+    radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
     radial-gradient(140.35% 140.35% at 100% 94.74%, #bd34fe, #bd34fe00),
     radial-gradient(89.94% 89.94% at 18.42% 15.79%, #41d1ff, #41d1ff00);
 }
 
 .vite-gradient-text {
-  background: radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
+  background:
+    radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
     radial-gradient(140.35% 140.35% at 100% 94.74%, #bd34fe, #bd34fe00),
     radial-gradient(89.94% 89.94% at 18.42% 15.79%, #41d1ff, #41d1ff00);
   -webkit-background-clip: text;
@@ -37,21 +39,25 @@
 }
 
 @mixin primary-gradient-text {
-  @apply bg-gradient-to-r dark:from-[#42d392] dark:to-[#647eff] from-stone-700 to-stone-500 text-transparent bg-clip-text;
+  @apply bg-gradient-to-r from-stone-700 to-stone-500 bg-clip-text text-transparent dark:from-[#42d392] dark:to-[#647eff];
 }
 
 @mixin secondary-gradient-text {
-  @apply bg-gradient-to-r dark:from-[#41d1ff] dark:to-[#bd34fe] from-stone-700 to-stone-500 text-transparent bg-clip-text;
+  @apply bg-gradient-to-r from-stone-700 to-stone-500 bg-clip-text text-transparent dark:from-[#41d1ff] dark:to-[#bd34fe];
 }
 
 @mixin animated-line {
-  @apply w-[1px] absolute right-[17px] rotate-45;
+  @apply absolute right-[17px] w-[1px] rotate-45;
 }
 
 @mixin colored-line {
-  @apply dark:border-stone-200/50 border-stone-500/50;
+  @apply dark:border-primary border-stone-500/50;
 }
 
 @mixin colored-background {
-  @apply bg-stone-500/50 dark:bg-stone-200/50;
+  @apply dark:bg-primary bg-stone-500/50;
+}
+
+@mixin section-wrapper {
+  @apply relative mx-auto flex h-full max-w-[80vw] flex-col items-center justify-center gap-5;
 }
