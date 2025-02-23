@@ -51,11 +51,11 @@
 }
 
 @mixin colored-line {
-  @apply dark:border-primary border-stone-500/50;
+  @apply dark:border-primary-500/50 border-stone-500/50;
 }
 
 @mixin colored-background {
-  @apply dark:bg-primary bg-stone-500/50;
+  @apply dark:bg-primary-500/50 bg-stone-500/50;
 }
 
 @mixin section-wrapper {

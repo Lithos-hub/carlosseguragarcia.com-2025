@@ -4,41 +4,52 @@
       <ClientOnly>
         <ComponentName name="Hero" :mounted-time="mountedTime" />
       </ClientOnly>
-      <h1 class="Hero__name">Carlos Segura García</h1>
-      <h2 class="Hero__title">Front-end Developer</h2>
-      <p class="Hero__description">
-        I'm a front-end developer with a passion for creating beautiful and
-        functional web applications, <br />mainly focused on
-        <strong class="vue-gradient-text text-2xl">Vue</strong> ecosystem.
-      </p>
-      <div class="Hero__logos">
-        <div class="Hero__logo-container">
-          <img src="/tech-logos/vue.png" alt="Vue" class="Hero__logo-image" />
-          <small class="Hero__logo-name">Vue</small>
-        </div>
-        <div class="Hero__logo-container">
-          <img src="/tech-logos/nuxt.svg" alt="Nuxt" class="Hero__logo-image" />
-          <small class="Hero__logo-name">Nuxt</small>
-        </div>
-        <div class="Hero__logo-container">
-          <img
-            src="/tech-logos/pinia.png"
-            alt="Pinia"
-            class="Hero__logo-image"
-          />
-          <small class="Hero__logo-name">Pinia</small>
-        </div>
-        <div class="Hero__logo-container">
-          <img src="/tech-logos/vite.svg" alt="Vite" class="Hero__logo-image" />
-          <small class="Hero__logo-name">Vite</small>
-        </div>
-        <div class="Hero__logo-container">
-          <img
-            src="/tech-logos/typescript.png"
-            alt="TypeScript"
-            class="Hero__logo-image"
-          />
-          <small class="Hero__logo-name">TypeScript</small>
+      <div />
+      <div class="Hero__content-wrapper">
+        <h1 class="Hero__name">Carlos Segura García</h1>
+        <h2 class="Hero__title">Front-end Developer</h2>
+        <p class="Hero__description">
+          I'm a front-end developer with a passion for creating beautiful and
+          functional web applications, <br />mainly focused on
+          <strong class="vue-gradient-text text-2xl">Vue</strong> ecosystem.
+        </p>
+        <div class="Hero__logos">
+          <div class="Hero__logo-container">
+            <img src="/tech-logos/vue.svg" alt="Vue" class="Hero__logo-image" />
+            <small class="Hero__logo-name">Vue</small>
+          </div>
+          <div class="Hero__logo-container">
+            <img
+              src="/tech-logos/nuxt.svg"
+              alt="Nuxt"
+              class="Hero__logo-image"
+            />
+            <small class="Hero__logo-name">Nuxt</small>
+          </div>
+          <div class="Hero__logo-container">
+            <img
+              src="/tech-logos/pinia.svg"
+              alt="Pinia"
+              class="Hero__logo-image"
+            />
+            <small class="Hero__logo-name">Pinia</small>
+          </div>
+          <div class="Hero__logo-container">
+            <img
+              src="/tech-logos/vite.svg"
+              alt="Vite"
+              class="Hero__logo-image"
+            />
+            <small class="Hero__logo-name">Vite</small>
+          </div>
+          <div class="Hero__logo-container">
+            <img
+              src="/tech-logos/typescript.svg"
+              alt="TypeScript"
+              class="Hero__logo-image"
+            />
+            <small class="Hero__logo-name">TypeScript</small>
+          </div>
         </div>
       </div>
       <RoutingButton
@@ -68,7 +79,11 @@ onMounted(() => {
   @include section-wrapper;
 
   &__content {
-    @apply flex flex-col items-center justify-center gap-5 px-2 text-center lg:px-5;
+    @apply flex h-full flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;
+
+    &-wrapper {
+      @apply flex flex-col items-center justify-center gap-5;
+    }
   }
 
   &__name {

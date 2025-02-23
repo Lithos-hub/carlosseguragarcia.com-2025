@@ -2,7 +2,7 @@
   <div class="ComponentName__wrapper">
     <div class="relative">
       <div class="ComponentName__file-info">
-        <img src="/tech-logos/vue.png" alt="Vue" class="h-4" />
+        <img src="/tech-logos/vue.svg" alt="Vue" class="h-4" />
         <code class="dark:text-primary text-xs">{{ name }}.vue</code>
       </div>
 

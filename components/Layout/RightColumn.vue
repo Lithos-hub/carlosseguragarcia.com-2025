@@ -53,25 +53,25 @@ const { visualDataBySection } = storeToRefs(useUiStore());
 @use "@/styles/main.scss" as *;
 @use "@/styles/general.scss" as *;
 .RightColumn {
-  @apply w-[100px];
+  @apply w-[80px];
 
   &__containers {
-    @apply relative flex h-[calc(100vh-100px)] flex-col;
+    @apply relative flex h-[calc(100vh-80px)] flex-col;
   }
 
   &__top-container {
     @include colored-line;
-    @apply flex h-[240px] w-full flex-col items-center border-l pt-5;
+    @apply flex h-[240px] w-full flex-col items-center border-l;
   }
 
   &__container-middle {
     @include colored-line;
-    @apply ml-auto h-[310px] w-[80px] border-l;
+    @apply ml-auto h-[310px] w-[60px] border-l;
   }
 
   &__container-bottom {
     @include colored-line;
-    @apply flex h-auto w-[100px] grow border-l;
+    @apply flex h-auto w-[80px] grow border-l;
   }
 
   &__line-diagonal-top {
@@ -105,6 +105,16 @@ const { visualDataBySection } = storeToRefs(useUiStore());
   &__container-bottom {
     @include colored-line;
     @apply h-[200px] border-l;
+  }
+
+  &__container-bottom-links,
+  &__top-container-links {
+    @include primary-gradient-text;
+    @apply font-jetbrainsMono flex h-full w-full flex-col items-center justify-between gap-5 py-10 text-xs;
+  }
+
+  .activeLinkClass {
+    @apply text-primary dark:text-white;
   }
 }
 

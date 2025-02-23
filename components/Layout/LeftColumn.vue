@@ -33,10 +33,10 @@ const { visualDataBySection } = storeToRefs(useUiStore());
 @use "@/styles/main.scss" as *;
 @use "@/styles/general.scss" as *;
 .LeftColumn {
-  @apply h-full w-[100px];
+  @apply h-full w-[80px];
 
   &__containers {
-    @apply relative flex h-full w-[100px] flex-col;
+    @apply relative flex h-full w-[80px] flex-col;
   }
 
   &__top-container {
@@ -46,7 +46,7 @@ const { visualDataBySection } = storeToRefs(useUiStore());
 
   &__bottom-container {
     @include colored-line;
-    @apply flex h-full w-[80px] flex-1 border-r;
+    @apply flex h-full w-[60px] flex-1 border-r;
   }
 
   &__line-diagonal-middle {

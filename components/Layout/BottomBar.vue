@@ -1,7 +1,7 @@
 <template>
   <div class="BottomBar">
     <div class="BottomBar__version">
-      <small class="BottomBar__version-content">{{ version }}</small>
+      {{ version }}
     </div>
     <div class="BottomBar__actions">
       <a
@@ -9,16 +9,16 @@
         target="_blank"
       >
         <UIcon
-          size="25"
+          size="20"
           name="i-mdi-linkedin"
-          class="dark:text-primary text-stone-500"
+          class="dark:text-primary hover:text-primary text-stone-500 dark:hover:text-white"
         />
       </a>
       <a href="https://github.com/lithos-hub" target="_blank">
         <UIcon
-          size="25"
+          size="20"
           name="i-mdi-github"
-          class="dark:text-primary text-stone-500"
+          class="dark:text-primary hover:text-primary text-stone-500 dark:hover:text-white"
         />
       </a>
     </div>
@@ -34,20 +34,17 @@ import { version } from "~/package.json";
 @use "@/styles/general.scss" as *;
 .BottomBar {
   @include colored-line;
-  @apply flex justify-between border-t;
+  @apply flex h-[42px] justify-between border-t;
 
   &__actions {
     @include colored-line;
-    @apply flex h-[50px] w-[100px] items-center justify-center gap-5 border-l;
+    @apply flex h-[42px] w-[80px] items-center justify-center gap-2 border-l p-1;
   }
 
   &__version {
     @include colored-line;
-    @apply font-lucania flex w-[80px] items-center justify-center gap-5 border-r;
-
-    &-content {
-      @include primary-gradient-text;
-    }
+    @include primary-gradient-text;
+    @apply font-lucania flex w-[60px] items-center justify-center border-r pb-1 text-sm;
   }
 }
 </style>
