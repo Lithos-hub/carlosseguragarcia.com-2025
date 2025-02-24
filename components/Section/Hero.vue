@@ -4,7 +4,6 @@
       <ClientOnly>
         <ComponentName name="Hero" :mounted-time="mountedTime" />
       </ClientOnly>
-      <div />
       <div class="Hero__content-wrapper">
         <h1 class="Hero__name">Carlos Segura García</h1>
         <h2 class="Hero__title">Front-end Developer</h2>
@@ -52,12 +51,12 @@
           </div>
         </div>
       </div>
-      <RoutingButton
+      <!-- <RoutingButton
         to="/experience"
         icon="i-heroicons-chevron-double-down"
         text="scroll down or click here to router.push('/experience')"
         direction="down"
-      />
+      /> -->
     </div>
   </section>
 </template>
@@ -82,7 +81,7 @@ onMounted(() => {
     @apply flex h-full flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;
 
     &-wrapper {
-      @apply flex flex-col items-center justify-center gap-5;
+      @apply flex h-full flex-col items-center justify-center gap-5;
     }
   }
 

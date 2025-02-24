@@ -1,5 +1,8 @@
 <template>
-  <SectionExperience />
+  <SectionExperience
+    @scroll-down.stop="onScrollDown"
+    @scroll-up.stop="onScrollUp"
+  />
 </template>
 
 <script setup lang="ts">
@@ -63,8 +66,8 @@ const onTouchHandler = (() => {
 
 onMounted(() => {
   // Mouse wheel event listeners
-  window.addEventListener("wheel", onScrollDown, { passive: true });
-  window.addEventListener("wheel", onScrollUp, { passive: true });
+  // window.addEventListener("wheel", onScrollDown, { passive: true });
+  // window.addEventListener("wheel", onScrollUp, { passive: true });
 
   // Touch event listeners
   window.addEventListener("touchstart", onTouchHandler.start, {

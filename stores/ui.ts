@@ -30,5 +30,7 @@ export const useUiStore = defineStore("ui", () => {
     return options[path as keyof typeof options];
   });
 
-  return { visualDataBySection };
+  return {
+    visualDataBySection,
+  };
 });
