@@ -91,7 +91,7 @@ const { visualDataBySection } = storeToRefs(useUiStore());
   @for $i from 1 through 60 {
     &__extra-line-diagonal-middle-#{$i} {
       @include colored-background;
-      @apply absolute left-[8px] top-[590px] h-[25px] w-[1px] rotate-45;
+      @apply absolute left-[8px] h-[25px] w-[1px] rotate-45;
       animation: opacity-motion 3s linear infinite;
       animation-delay: #{$i * 0.2}s;
     }

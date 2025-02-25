@@ -62,7 +62,7 @@ const links = [
 @use "@/styles/general.scss" as *;
 .TopBar {
   @include colored-line;
-  @apply flex h-[42px] w-screen border-b;
+  @apply flex h-[42px] justify-between w-screen border-b;
 
   &__number {
     @include colored-line;
@@ -76,18 +76,16 @@ const links = [
   }
 
   &__links {
-    @apply flex w-full items-center justify-evenly px-2 lg:px-10;
+    @apply md:flex hidden;
   }
 
   &__link {
-    @include primary-gradient-text;
-    @apply font-jetbrainsMono text-xs;
+    @include colored-line;
+    @apply font-jetbrainsMono text-xs px-2 min-w-[150px] h-full border-x flex items-center justify-center;
   }
 
   &__link--active {
-    @apply text-primary underline underline-offset-[15px] dark:text-white;
-
-    text-decoration-thickness: 2px;
+    @apply text-primary border-b-4 border-primary w-full dark:text-white transition-all bg-stone-800 dark:bg-stone-100/10;
   }
 }
 </style>
