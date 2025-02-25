@@ -1,23 +1,19 @@
 <template>
   <section class="Experience">
-    <ClientOnly>
-      <ComponentName name="Experience" :mountedTime="mountedTime" />
-    </ClientOnly>
-    <div class="Experience__content">
-      <!-- <RoutingButton
+    <ComponentName name="Experience" :mountedTime="mountedTime" />
+    <!-- <RoutingButton
         to="/hero"
         icon="i-heroicons-chevron-double-up"
         text="scroll up or click here to router.push('/hero')"
         direction="up"
       /> -->
-      <ExperienceGallery />
-      <!-- <RoutingButton
+    <ExperienceGallery />
+    <!-- <RoutingButton
         to="/projects"
         icon="i-heroicons-chevron-double-down"
         text="scroll down or click here to router.push('/projects')"
         direction="down"
       /> -->
-    </div>
   </section>
 </template>
 
@@ -36,9 +32,5 @@ onMounted(() => {
 
 .Experience {
   @include section-wrapper;
-
-  &__content {
-    @apply w-full;
-  }
 }
 </style>

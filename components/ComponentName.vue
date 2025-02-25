@@ -27,7 +27,7 @@ defineProps<ComponentNameProps>();
 
 .ComponentName {
   &__wrapper {
-    @apply absolute right-0 top-5 flex flex-col items-center gap-2;
+    @apply absolute right-2 top-2 z-50 flex flex-col items-center gap-2;
   }
 
   &__file-info {
@@ -36,11 +36,11 @@ defineProps<ComponentNameProps>();
 }
 .floating-square {
   @include colored-line;
-  @apply absolute right-1/2 top-5 h-10 w-20 border-b border-r;
+  @apply absolute right-1/2 top-5 h-5 w-24 border-b border-r;
 }
 
 .mounted-time {
   @include primary-gradient-text;
-  @apply absolute right-5 top-16 w-32 text-xs;
+  @apply absolute right-5 top-6 w-32 text-[10px];
 }
 </style>
