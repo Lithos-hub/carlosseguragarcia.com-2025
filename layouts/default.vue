@@ -1,11 +1,7 @@
 <template>
-  <div class="flex h-screen w-screen flex-col overflow-hidden">
+  <div class="flex flex-col">
     <LayoutTopBar />
-    <div class="flex flex-1">
-      <LayoutLeftColumn class="hidden lg:block" />
-      <slot />
-      <LayoutRightColumn class="hidden lg:block" />
-    </div>
+    <slot />
     <LayoutBottomBar />
   </div>
 </template>

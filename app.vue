@@ -1,7 +1,8 @@
 <template>
-  <div class="bg-white dark:bg-stone-800">
+  <div class="scroll-smooth bg-white dark:bg-stone-800">
     <NuxtLayout>
-      <NuxtPage />
+      <SectionHero />
+      <SectionExperience />
     </NuxtLayout>
   </div>
 </template>

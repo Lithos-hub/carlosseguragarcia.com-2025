@@ -27,7 +27,7 @@ defineProps<ComponentNameProps>();
 
 .ComponentName {
   &__wrapper {
-    @apply absolute right-2 top-2 z-50 flex flex-col items-center gap-2;
+    @apply absolute right-5 top-5 z-10 flex flex-col items-center gap-2;
   }
 
   &__file-info {

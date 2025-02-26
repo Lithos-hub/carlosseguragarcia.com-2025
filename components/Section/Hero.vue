@@ -51,12 +51,6 @@
           </div>
         </div>
       </div>
-      <!-- <RoutingButton
-        to="/experience"
-        icon="i-heroicons-chevron-double-down"
-        text="scroll down or click here to router.push('/experience')"
-        direction="down"
-      /> -->
     </div>
   </section>
 </template>
@@ -76,6 +70,7 @@ onMounted(() => {
 
 .Hero {
   @include section-wrapper;
+  @apply flex flex-col items-center justify-center;
 
   &__content {
     @apply flex h-full flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;
