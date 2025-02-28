@@ -1,7 +1,9 @@
 <template>
   <div class="flex flex-col">
     <LayoutTopBar />
-    <slot />
+    <div class="mx-auto">
+      <slot />
+    </div>
     <LayoutBottomBar />
   </div>
 </template>

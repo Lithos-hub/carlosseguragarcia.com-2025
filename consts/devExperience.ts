@@ -154,4 +154,6 @@ const getYears = (experience: Experience) => {
   ];
 };
 
-export const YEARS = [...new Set(DEV_EXPERIENCE.map(getYears).flat())] as const;
+export const EXPERIENCE_YEARS = [
+  ...new Set(DEV_EXPERIENCE.map(getYears).flat()),
+] as const;

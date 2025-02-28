@@ -1,14 +1,14 @@
 <template>
-  <div class="ComponentName__wrapper">
-    <div class="relative">
-      <div class="ComponentName__file-info">
-        <img src="/tech-logos/vue.svg" alt="Vue" class="h-4" />
-        <code class="dark:text-primary text-xs">{{ name }}.vue</code>
+  <div class="ComponentName">
+    <div class="ComponentName__wrapper">
+      <div class="relative">
+        <div class="ComponentName__file-info">
+          <img src="/tech-logos/vue.svg" alt="Vue" class="h-4" />
+          <small class="ComponentName__file-info-text"
+            >{{ name }} | Mounted in {{ mountedTime }}ms</small
+          >
+        </div>
       </div>
-
-      <div class="floating-square" />
-
-      <small class="mounted-time">Mounted in {{ mountedTime }}ms</small>
     </div>
   </div>
 </template>
@@ -26,21 +26,35 @@ defineProps<ComponentNameProps>();
 @use "@/styles/general.scss" as *;
 
 .ComponentName {
+  @include middle-side-effect;
+  @apply absolute right-0 top-[100px] flex flex-col items-end justify-center bg-stone-600/10 p-2 dark:bg-stone-900;
+  clip-path: polygon(
+    10% 0,
+    100% 0,
+    100% 20%,
+    100% 80%,
+    90% 100%,
+    20% 100%,
+    0 100%,
+    0 30%
+  );
+
+  &::before {
+    content: "";
+    @apply absolute right-0 top-0 h-full w-full bg-stone-900/10 dark:bg-cyan-500/10;
+    clip-path: polygon(99.5% 0, 100% 0, 100% 100%, 50% 100%);
+  }
+
   &__wrapper {
-    @apply absolute right-5 top-5 z-10 flex flex-col items-center gap-2;
+    @apply flex flex-col items-end gap-2 p-2;
   }
 
   &__file-info {
-    @apply flex items-center gap-2;
+    @apply flex items-center gap-2 text-[14px] text-stone-900 dark:text-white;
   }
-}
-.floating-square {
-  @include colored-line;
-  @apply absolute right-1/2 top-5 h-5 w-24 border-b border-r;
-}
 
-.mounted-time {
-  @include primary-gradient-text;
-  @apply absolute right-5 top-6 w-32 text-[10px];
+  &__file-info-text {
+    @apply dark:text-primary text-stone-900;
+  }
 }
 </style>

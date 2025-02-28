@@ -1,8 +1,7 @@
 <template>
-  <div class="scroll-smooth bg-white dark:bg-stone-800">
+  <div class="App">
     <NuxtLayout>
-      <SectionHero />
-      <SectionExperience />
+      <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
@@ -24,4 +23,13 @@
   opacity: 0;
   filter: blur(1rem);
 }
+
+.App {
+  @apply bg-white dark:bg-slate-800;
+}
+
+// Debugging CSS
+// * {
+//   outline: 1px solid red;
+// }
 </style>

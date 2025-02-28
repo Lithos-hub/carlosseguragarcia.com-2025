@@ -49,8 +49,8 @@
 </template>
 
 <script setup lang="ts">
-import { type Experience } from "@/consts/experience";
 import { MONTHS } from "@/consts/months";
+import { type Experience } from "~/consts/devExperience";
 
 const props = defineProps<{
   experience: Experience;

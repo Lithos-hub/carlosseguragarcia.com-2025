@@ -3,7 +3,7 @@
     <div class="BottomBar__version">
       {{ version }}
     </div>
-    <div class="BottomBar__actions">
+    <div class="BottomBar__social">
       <a
         href="https://www.linkedin.com/in/carlos-segura-garcia"
         target="_blank"
@@ -33,18 +33,15 @@ import { version } from "~/package.json";
 @use "@/styles/main.scss" as *;
 @use "@/styles/general.scss" as *;
 .BottomBar {
-  @include colored-line;
-  @apply flex h-[42px] justify-between border-t;
-
-  &__actions {
-    @include colored-line;
-    @apply flex h-[42px] w-[80px] items-center justify-center gap-2 border-l p-1;
-  }
+  @apply fixed bottom-0 z-50 flex w-full justify-between p-5;
 
   &__version {
-    @include colored-line;
-    @include primary-gradient-text;
-    @apply font-lucania flex w-[60px] items-center justify-center border-r pb-1 text-sm;
+    @include corner-effect;
+    @apply font-lucania text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs backdrop-blur;
+  }
+  &__social {
+    @include corner-effect;
+    @apply flex w-[80px] items-center justify-center gap-2 border-y border-y-stone-500/10 p-2 backdrop-blur;
   }
 }
 </style>

@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { DEV_EXPERIENCE } from "@/consts/experience";
+import { DEV_EXPERIENCE } from "~/consts/devExperience";
 
 // Calculate total experience in the following format: x years, y months
 const totalExperience = () => {

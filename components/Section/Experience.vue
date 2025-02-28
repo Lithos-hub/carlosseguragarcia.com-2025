@@ -1,36 +1,33 @@
 <template>
-  <section class="Experience">
-    <ComponentName name="Experience" :mountedTime="mountedTime" />
-    <!-- <RoutingButton
-        to="/hero"
-        icon="i-heroicons-chevron-double-up"
-        text="scroll up or click here to router.push('/hero')"
-        direction="up"
-      /> -->
+  <div class="Experience">
+    <ComponentName
+      :name="visualDataBySection.componentName"
+      :mounted-time="mountedTimes[visibleSection]"
+    />
     <ExperienceGallery />
-    <!-- <RoutingButton
-        to="/projects"
-        icon="i-heroicons-chevron-double-down"
-        text="scroll down or click here to router.push('/projects')"
-        direction="down"
-      /> -->
-  </section>
+  </div>
 </template>
 
 <script setup lang="ts">
-const mountedTime = ref(0);
 const startTime = ref(performance.now());
 
+const { mountedTimes, visibleSection, visualDataBySection } =
+  storeToRefs(useUiStore());
+
 onMounted(() => {
-  mountedTime.value = Math.round(performance.now() - startTime.value);
+  mountedTimes.value.experience = Math.round(
+    performance.now() - startTime.value,
+  );
 });
 </script>
 
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
+</style>
 
+<style lang="scss">
 .Experience {
-  @include section-wrapper;
+  @apply flex h-full flex-col items-center justify-center;
 }
 </style>

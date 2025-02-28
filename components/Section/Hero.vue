@@ -1,9 +1,10 @@
 <template>
   <section class="Hero">
+    <ComponentName
+      :name="visualDataBySection.componentName"
+      :mounted-time="mountedTimes[visibleSection]"
+    />
     <div class="Hero__content">
-      <ClientOnly>
-        <ComponentName name="Hero" :mounted-time="mountedTime" />
-      </ClientOnly>
       <div class="Hero__content-wrapper">
         <h1 class="Hero__name">Carlos Segura García</h1>
         <h2 class="Hero__title">Front-end Developer</h2>
@@ -56,11 +57,13 @@
 </template>
 
 <script setup lang="ts">
-const mountedTime = ref(0);
 const startTime = ref(performance.now());
 
+const { mountedTimes, visibleSection, visualDataBySection } =
+  storeToRefs(useUiStore());
+
 onMounted(() => {
-  mountedTime.value = Math.round(performance.now() - startTime.value);
+  mountedTimes.value.hero = Math.round(performance.now() - startTime.value);
 });
 </script>
 
@@ -70,7 +73,16 @@ onMounted(() => {
 
 .Hero {
   @include section-wrapper;
-  @apply flex flex-col items-center justify-center;
+  @apply px-[10vw] dark:bg-black;
+
+  &::before {
+    content: "";
+    @apply absolute bottom-0 left-0 z-0 h-[50px] w-full;
+    background-image: url("/img/bg-1.svg");
+    background-size: cover;
+    background-position: 50% 60%;
+    background-repeat: no-repeat;
+  }
 
   &__content {
     @apply flex h-full flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;

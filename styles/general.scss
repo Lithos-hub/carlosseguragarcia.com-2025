@@ -59,5 +59,140 @@
 }
 
 @mixin section-wrapper {
-  @apply relative min-h-screen w-full;
+  @apply relative h-screen w-full;
+}
+
+@mixin corner-effect {
+  $corner-color-light: #1a1a1a;
+  $corner-color-dark: #00ffe5;
+
+  @apply bg-[length:5px_5px] bg-no-repeat;
+
+  background-image:
+    linear-gradient(to right, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to bottom, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to left, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to bottom, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to right, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to top, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to left, $corner-color-light 1px, transparent 1px),
+    linear-gradient(to top, $corner-color-light 1px, transparent 1px);
+
+  background-position:
+    0 0,
+    0 0,
+    100% 0,
+    100% 0,
+    0 100%,
+    0 100%,
+    100% 100%,
+    100% 100%;
+
+  .dark & {
+    background-image:
+      linear-gradient(to right, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to bottom, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to left, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to bottom, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to right, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to top, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to left, $corner-color-dark 1px, transparent 1px),
+      linear-gradient(to top, $corner-color-dark 1px, transparent 1px);
+  }
+}
+
+@mixin middle-side-effect {
+  $corner-color-light: #1a1a1a;
+  $corner-color-dark: #00ffe5;
+  $line-length: 100px;
+
+  @apply bg-no-repeat;
+
+  background-image: 
+    // Lado izquierdo
+    linear-gradient(
+      to bottom,
+      transparent 20%,
+      $corner-color-light 20%,
+      $corner-color-light 80%,
+      transparent 80%
+    ),
+    // Lado derecho
+    linear-gradient(
+        to bottom,
+        transparent 20%,
+        $corner-color-light 20%,
+        $corner-color-light 80%,
+        transparent 80%
+      ),
+    // Lado superior
+    linear-gradient(
+        to right,
+        transparent 20%,
+        $corner-color-light 20%,
+        $corner-color-light 80%,
+        transparent 80%
+      ),
+    // Lado inferior
+    linear-gradient(
+        to right,
+        transparent 20%,
+        $corner-color-light 20%,
+        $corner-color-light 80%,
+        transparent 80%
+      );
+
+  background-position:
+    0 50%,
+    // Lado izquierdo
+    100% 50%,
+    // Lado derecho
+    50% 0,
+    // Lado superior
+    50% 100%; // Lado inferior
+
+  background-size:
+    1px $line-length,
+    // Lado izquierdo
+    1px $line-length,
+    // Lado derecho
+    $line-length 1px,
+    // Lado superior
+    $line-length 1px; // Lado inferior
+
+  .dark & {
+    background-image: 
+      // Lado izquierdo
+      linear-gradient(
+        to bottom,
+        transparent 20%,
+        $corner-color-dark 20%,
+        $corner-color-dark 80%,
+        transparent 80%
+      ),
+      // Lado derecho
+      linear-gradient(
+          to bottom,
+          transparent 20%,
+          $corner-color-dark 20%,
+          $corner-color-dark 80%,
+          transparent 80%
+        ),
+      // Lado superior
+      linear-gradient(
+          to right,
+          transparent 20%,
+          $corner-color-dark 20%,
+          $corner-color-dark 80%,
+          transparent 80%
+        ),
+      // Lado inferior
+      linear-gradient(
+          to right,
+          transparent 20%,
+          $corner-color-dark 20%,
+          $corner-color-dark 80%,
+          transparent 80%
+        );
+  }
 }

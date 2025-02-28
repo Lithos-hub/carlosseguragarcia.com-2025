@@ -1,36 +1,22 @@
 import { defineStore } from "pinia";
+import { type Section, sections, sectionsOptions } from "~/consts/sections";
 
 export const useUiStore = defineStore("ui", () => {
-  const route = useRoute();
+  const visibleSection = ref<Section>(sectionsOptions.at(0) as Section);
+  const mountedTimes = ref<Record<Section, number>>({
+    hero: 0,
+    about: 0,
+    experience: 0,
+    projects: 0,
+  });
 
   const visualDataBySection = computed(() => {
-    const path = route.path;
-
-    const options = {
-      "/hero": {
-        id: "hero",
-        number: "00",
-        color: "red",
-        title: "<Hero />",
-      },
-      "/experience": {
-        id: "experience",
-        number: "01",
-        color: "green",
-        title: "<Experience />",
-      },
-      "/projects": {
-        id: "projects",
-        number: "02",
-        color: "blue",
-        title: "<Projects />",
-      },
-    };
-
-    return options[path as keyof typeof options];
+    return sections[visibleSection.value as keyof typeof sections];
   });
 
   return {
     visualDataBySection,
+    visibleSection,
+    mountedTimes,
   };
 });

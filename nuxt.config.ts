@@ -10,7 +10,7 @@ export default defineNuxtConfig({
 
   routeRules: {
     "/": {
-      redirect: "/hero",
+      redirect: "/home",
     },
   },
 

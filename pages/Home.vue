@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <section class="Home__section" id="experience" ref="experienceRef">
-      <SectionExperience />
+  <div class="Home">
+    <section class="Home__section" id="hero" ref="heroRef">
+      <SectionHero />
+    </section>
+    <section class="Home__section" id="about" ref="aboutRef">
+      <SectionAbout />
     </section>
   </div>
 </template>
@@ -10,12 +13,13 @@
 import { useIsVisible } from "@/composables/useIsVisible";
 import type { Section } from "~/consts/sections";
 
-const experienceRef = useTemplateRef<HTMLElement | null>("experienceRef");
+const heroRef = useTemplateRef<HTMLElement | null>("heroRef");
+const aboutRef = useTemplateRef<HTMLElement | null>("aboutRef");
 
 const { visibleSection } = storeToRefs(useUiStore());
 
 const { visibleElement } = useIsVisible({
-  refs: [experienceRef] as Ref<HTMLElement>[],
+  refs: [heroRef, aboutRef] as Ref<HTMLElement>[],
 });
 
 watch(visibleElement, (newVisibleElement) => {
