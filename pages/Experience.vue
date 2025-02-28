@@ -1,9 +1,7 @@
 <template>
-  <div>
-    <section class="Home__section" id="experience" ref="experienceRef">
-      <SectionExperience />
-    </section>
-  </div>
+  <section class="Experience__section" id="experience" ref="experienceRef">
+    <SectionExperience />
+  </section>
 </template>
 
 <script setup lang="ts">
@@ -27,7 +25,7 @@ watch(visibleElement, (newVisibleElement) => {
 
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
-.Home {
+.Experience {
   @apply flex flex-col;
   &__section {
     @include section-wrapper;

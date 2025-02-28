@@ -38,7 +38,7 @@ const totalExperience = () => {
 @use "@/styles/fonts.scss" as *;
 
 .Gallery {
-  @apply relative flex h-full w-full flex-col items-center justify-center gap-5 p-5;
+  @apply relative w-full;
 
   &__total-experience {
     @apply text-center text-xl text-stone-900 dark:text-white;
@@ -50,7 +50,7 @@ const totalExperience = () => {
   }
 
   &__items-wrapper {
-    @apply flex w-full flex-col;
+    @apply grid grid-cols-3 gap-5;
   }
 }
 </style>

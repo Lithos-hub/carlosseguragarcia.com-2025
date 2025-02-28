@@ -73,16 +73,15 @@ onMounted(() => {
 
 .Hero {
   @include section-wrapper;
-  @apply px-[10vw] dark:bg-black;
 
-  &::before {
-    content: "";
-    @apply absolute bottom-0 left-0 z-0 h-[50px] w-full;
-    background-image: url("/img/bg-1.svg");
-    background-size: cover;
-    background-position: 50% 60%;
-    background-repeat: no-repeat;
-  }
+  // &::before {
+  //   content: "";
+  //   @apply absolute bottom-0 left-0 z-0 h-[50px] w-full;
+  //   background-image: url("/img/bg-1.svg");
+  //   background-size: cover;
+  //   background-position: 50% 60%;
+  //   background-repeat: no-repeat;
+  // }
 
   &__content {
     @apply flex h-full flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;

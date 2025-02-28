@@ -59,7 +59,7 @@
 }
 
 @mixin section-wrapper {
-  @apply relative h-screen w-full;
+  @apply relative h-screen w-full px-5;
 }
 
 @mixin corner-effect {
