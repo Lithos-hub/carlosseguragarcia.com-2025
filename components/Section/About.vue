@@ -30,24 +30,6 @@ onMounted(() => {
 .About {
   @apply relative flex h-screen w-full flex-col items-center justify-center;
 
-  &::before {
-    content: "";
-    @apply absolute top-0 z-0 h-[20px] w-full;
-    background-image: url("/img/bg-1.svg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-
-  &::after {
-    content: "";
-    @apply absolute bottom-0 z-0 h-[20px] w-full;
-    background-image: url("/img/bg-1.svg");
-    background-size: cover;
-    background-position: 50% 60%;
-    background-repeat: no-repeat;
-  }
-
   &__inner {
     @apply px-[10vw];
   }

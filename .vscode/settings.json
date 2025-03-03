@@ -11,5 +11,8 @@
   },
   "editor.quickSuggestions": {
     "strings": "on"
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }

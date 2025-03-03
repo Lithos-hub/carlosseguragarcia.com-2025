@@ -1,11 +1,11 @@
 <template>
   <div class="Home">
-    <section class="Home__section" id="hero" ref="heroRef">
+    <div class="Home__div" id="hero" ref="heroRef">
       <SectionHero />
-    </section>
-    <section class="Home__section" id="about" ref="aboutRef">
+    </div>
+    <div class="Home__div" id="about" ref="aboutRef">
       <SectionAbout />
-    </section>
+    </div>
   </div>
 </template>
 
@@ -33,7 +33,7 @@ watch(visibleElement, (newVisibleElement) => {
 @use "@/styles/general.scss" as *;
 .Home {
   @apply flex flex-col;
-  &__section {
+  &__div {
     @include section-wrapper;
   }
 }

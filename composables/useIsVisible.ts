@@ -35,7 +35,7 @@ export const useIsVisible = ({ refs, options = {} }: UseIsVisibleProps) => {
 
   // Default configuration of the IntersectionObserver
   const defaultOptions: IntersectionObserverInit = {
-    threshold: 0.5, // The element is considered visible when 50% of it is in the viewport
+    threshold: 0.5, // The element is considered visible when 10% of it is in the viewport
     rootMargin: "0px",
     ...options,
   };

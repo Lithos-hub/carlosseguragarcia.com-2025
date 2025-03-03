@@ -1,11 +1,8 @@
 <template>
   <div class="Experience">
-    <section class="Experience__section" id="experience" ref="experienceRef">
+    <div class="Experience__div" id="experience" ref="experienceRef">
       <SectionExperience />
-    </section>
-    <!-- <section class="Experience__section" id="about" ref="aboutRef">
-      <SectionAbout />
-    </section> -->
+    </div>
   </div>
 </template>
 
@@ -19,6 +16,9 @@ const { visibleSection } = storeToRefs(useUiStore());
 
 const { visibleElement } = useIsVisible({
   refs: [experienceRef] as Ref<HTMLElement>[],
+  options: {
+    threshold: 0.1,
+  },
 });
 
 watch(visibleElement, (newVisibleElement) => {
@@ -31,9 +31,6 @@ watch(visibleElement, (newVisibleElement) => {
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
 .Experience {
-  @apply flex flex-col;
-  &__section {
-    @include section-wrapper;
-  }
+  @apply py-[10vh];
 }
 </style>

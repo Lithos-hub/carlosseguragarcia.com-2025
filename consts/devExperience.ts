@@ -4,6 +4,7 @@ type Stack = {
 };
 
 export interface Experience {
+  id: number;
   image: string;
   title: string;
   company: string;
@@ -29,6 +30,7 @@ type FieldExtractor<T> = (item: ExperienceItem) => T[];
 
 export const DEV_EXPERIENCE = [
   {
+    id: 1,
     image: "/company-logos/cgi.png",
     title: "Front-end Developer",
     company: "CGI",
@@ -41,7 +43,7 @@ export const DEV_EXPERIENCE = [
     initialMonth: 3,
     endMonth: 6,
     stack: [
-      { techName: "Vue", imageUrl: "/tech-logos/vue.svg" },
+      { techName: "Vue 2", imageUrl: "/tech-logos/vue.svg" },
       { techName: "Vuex", imageUrl: "/tech-logos/vuex.svg" },
       { techName: "Vuetify", imageUrl: "/tech-logos/vuetify.svg" },
       { techName: "JavaScript", imageUrl: "/tech-logos/javascript.svg" },
@@ -56,6 +58,7 @@ export const DEV_EXPERIENCE = [
     ],
   },
   {
+    id: 2,
     image: "/company-logos/cathedral_software.png",
     title: "Front-end Developer",
     company: "Cathedral Software",
@@ -68,7 +71,7 @@ export const DEV_EXPERIENCE = [
     initialMonth: 6,
     endMonth: 8,
     stack: [
-      { techName: "Vue", imageUrl: "/tech-logos/vue.svg" },
+      { techName: "Vue 3", imageUrl: "/tech-logos/vue.svg" },
       { techName: "React", imageUrl: "/tech-logos/react.svg" },
       { techName: "TypeScript", imageUrl: "/tech-logos/typescript.svg" },
       { techName: "Vuex", imageUrl: "/tech-logos/vuex.svg" },
@@ -97,6 +100,7 @@ export const DEV_EXPERIENCE = [
     ],
   },
   {
+    id: 3,
     image: "/company-logos/innoIT.png",
     title: "Front-end Developer",
     company: "InnoIT",
@@ -109,7 +113,7 @@ export const DEV_EXPERIENCE = [
     initialMonth: 8,
     endMonth: 6,
     stack: [
-      { techName: "Vue", imageUrl: "/tech-logos/vue.svg" },
+      { techName: "Vue 3", imageUrl: "/tech-logos/vue.svg" },
       { techName: "TypeScript", imageUrl: "/tech-logos/typescript.svg" },
       { techName: "Nuxt", imageUrl: "/tech-logos/nuxt.svg" },
       { techName: "Pinia", imageUrl: "/tech-logos/pinia.svg" },
@@ -125,6 +129,7 @@ export const DEV_EXPERIENCE = [
     ],
   },
   {
+    id: 4,
     image: "/company-logos/photopills.png",
     title: "Front-end Developer",
     company: "PhotoPills",
@@ -137,7 +142,7 @@ export const DEV_EXPERIENCE = [
     initialMonth: 6,
     endMonth: 1,
     stack: [
-      { techName: "Vue", imageUrl: "/tech-logos/vue.svg" },
+      { techName: "Vue 3", imageUrl: "/tech-logos/vue.svg" },
       { techName: "TypeScript", imageUrl: "/tech-logos/typescript.svg" },
       { techName: "Vitest", imageUrl: "/tech-logos/vitest.svg" },
       { techName: "Pinia", imageUrl: "/tech-logos/pinia.svg" },
@@ -153,6 +158,7 @@ export const DEV_EXPERIENCE = [
     ],
   },
   {
+    id: 5,
     image: "/company-logos/knowmad_mood.jpg",
     title: "Software Engineer",
     company: "Knowmad Mood",
@@ -165,7 +171,7 @@ export const DEV_EXPERIENCE = [
     initialMonth: 1,
     endMonth: null,
     stack: [
-      { techName: "Vue", imageUrl: "/tech-logos/vue.svg" },
+      { techName: "Vue 3", imageUrl: "/tech-logos/vue.svg" },
       { techName: "TypeScript", imageUrl: "/tech-logos/typescript.svg" },
       { techName: "Jest", imageUrl: "/tech-logos/jest.svg" },
       { techName: "Pinia", imageUrl: "/tech-logos/pinia.svg" },
@@ -176,7 +182,7 @@ export const DEV_EXPERIENCE = [
       "I'm working in an internal squad for El Corte Inglés to develop a new e-commerce experience",
     ],
   },
-] as Experience[];
+].sort((a, b) => b.id - a.id) as Experience[];
 
 // Get all years from beginning and end of experience + 1 year
 const getYears = (experience: Experience) => {
