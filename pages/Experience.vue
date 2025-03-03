@@ -1,7 +1,12 @@
 <template>
-  <section class="Experience__section" id="experience" ref="experienceRef">
-    <SectionExperience />
-  </section>
+  <div class="Experience">
+    <section class="Experience__section" id="experience" ref="experienceRef">
+      <SectionExperience />
+    </section>
+    <!-- <section class="Experience__section" id="about" ref="aboutRef">
+      <SectionAbout />
+    </section> -->
+  </div>
 </template>
 
 <script setup lang="ts">

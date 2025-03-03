@@ -25,7 +25,7 @@
 }
 
 .App {
-  @apply bg-white dark:bg-slate-800;
+  @apply bg-white dark:bg-stone-900;
 }
 
 // Debugging CSS

@@ -38,7 +38,7 @@ export const sections: Record<Section, SectionData> = {
   },
   projects: {
     id: "projects",
-    code: "C1",
+    code: "B1",
     mainColor: "blue",
     title: "<Projects />",
     componentName: "Projects.vue",

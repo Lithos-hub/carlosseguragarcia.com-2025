@@ -1,50 +1,56 @@
 <template>
   <div class="relative">
-    <div class="Card__triangle-right-bottom" />
     <div class="Card">
-      <div class="Card__left">
-        <img
-          :src="experience.image"
-          :alt="experience.title"
-          class="Card__image"
-          :class="{
-            'bg-stone-900 p-2.5 dark:bg-transparent':
-              experience.subtitle === 'InnoIT',
-          }"
-        />
-        <div class="Card__info">
-          <div class="Card__header">
-            <div class="Card__index">#{{ index + 1 }}</div>
-            <h3 class="Card__title">{{ experience.title }}</h3>
-          </div>
-          <div class="Card__details">
-            <small class="Card__company"> At: {{ experience.subtitle }} </small>
-            <small class="Card__date">
-              {{ getStartDate(experience) }} -
-              <span
-                :class="{
-                  'text-green-500': getEndDate(experience) === 'Present',
-                }"
-              >
-                {{ getEndDate(experience) }}
-              </span>
-            </small>
-          </div>
-        </div>
-      </div>
-
-      <div class="Card__stack">
-        <div
-          class="Card__stack-item"
-          v-for="stack in experience.stack"
-          :key="stack.techName"
-        >
+      <div class="Card__content">
+        <header class="Card__header">
+          <div class="Card__index">#{{ index + 1 }}</div>
           <img
-            :src="stack.imageUrl"
-            :alt="stack.techName"
-            class="Card__stack-image"
+            :src="experience.image"
+            :alt="experience.title"
+            class="Card__image"
+            :class="{
+              'bg-stone-900 p-2.5 dark:bg-transparent':
+                experience.subtitle === 'InnoIT',
+            }"
           />
-          <small class="Card__stack-name">{{ stack.techName }}</small>
+          <div>
+            <h3 class="Card__title">{{ experience.title }}</h3>
+            <div class="Card__details">
+              <small class="Card__company">
+                At: {{ experience.subtitle }}
+              </small>
+              <small class="Card__date">
+                {{ getStartDate(experience) }} -
+                <span
+                  class="text-stone-900 dark:text-white"
+                  :class="{
+                    'text-green-500': getEndDate(experience) === 'Present',
+                  }"
+                >
+                  {{ getEndDate(experience) }}
+                </span>
+              </small>
+            </div>
+          </div>
+        </header>
+
+        <div class="Card__stack">
+          <small class="Card__stack-label">Stack:</small>
+          <div class="Card__stack-items">
+            <div
+              class="Card__stack-item"
+              v-for="stack in experience.stack"
+              :key="stack.techName"
+            >
+              <img
+                :src="stack.imageUrl"
+                :alt="stack.techName"
+                class="Card__stack-image"
+              />
+
+              <small class="Card__stack-name">{{ stack.techName }}</small>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -55,7 +61,7 @@
 import { MONTHS } from "@/consts/months";
 import { type Experience } from "~/consts/devExperience";
 
-const props = defineProps<{
+defineProps<{
   experience: Experience;
   index: number;
 }>();
@@ -76,62 +82,23 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 @use "@/styles/fonts.scss" as *;
 
 .Card {
-  @apply relative flex h-full w-full flex-col gap-5 bg-stone-700 p-5 dark:bg-cyan-500;
+  @include svg-card-horizontal;
+  @apply h-full w-[450px];
 
-  clip-path: polygon(
-    10% 0,
-    100% 0,
-    100% 20%,
-    100% 80%,
-    92% 100%,
-    0 100%,
-    0% 80%,
-    0 20%
-  );
-
-  // &::before {
-  //   content: "";
-  //   @apply absolute inset-0 -left-2 -top-2 h-full w-full bg-stone-50 dark:bg-stone-700;
-  //   clip-path: polygon(
-  //     10% 0,
-  //     100% 0,
-  //     100% 20%,
-  //     100% 80%,
-  //     90% 100%,
-  //     0 100%,
-  //     0% 80%,
-  //     0 20%
-  //   );
-  // }
-
-  &__triangle-right-bottom {
-    @apply absolute bottom-0 right-0 h-5 w-5 bg-stone-700 dark:bg-cyan-500;
-    clip-path: polygon(100% 0, 0% 100%, 100% 100%);
-  }
-
-  &__left {
-    @apply flex gap-5;
+  &__header {
+    @apply flex items-center gap-5 py-1 pl-2;
   }
 
   &__image {
-    @apply h-[80px] w-[80px] object-contain;
-  }
-
-  &__info {
-    @apply flex flex-col gap-2;
-  }
-
-  &__header {
-    @apply flex items-center gap-3;
+    @apply h-[50px] w-[50px] object-contain;
   }
 
   &__index {
-    @apply text-primary text-lg dark:text-white;
+    @apply font-exo text-[40px] font-extrabold text-cyan-500/10;
   }
 
   &__title {
-    @include primary-gradient-text;
-    @apply font-whiteRabbit text-lg font-bold;
+    @apply text-primary font-whiteRabbit text-lg font-extralight;
   }
 
   &__details {
@@ -147,7 +114,15 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__stack {
-    @apply flex grow flex-wrap items-center gap-2 rounded-lg bg-stone-100 p-5 dark:bg-stone-900;
+    @apply flex w-full flex-col flex-wrap gap-2 p-2 dark:bg-stone-900;
+  }
+
+  &__stack-label {
+    @apply font-exo text-primary text-xs;
+  }
+
+  &__stack-items {
+    @apply flex flex-wrap items-center gap-2;
   }
 
   &__stack-item {

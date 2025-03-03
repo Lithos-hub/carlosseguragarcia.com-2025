@@ -196,3 +196,23 @@
         );
   }
 }
+
+@mixin svg-card-vertical {
+  @apply relative overflow-hidden;
+
+  border-image: url("/svg/light-card-vertical.svg") 0 0 fill;
+
+  .dark & {
+    border-image: url("/svg/dark-card-vertical.svg") 0 0 fill;
+  }
+}
+
+@mixin svg-card-horizontal {
+  @apply relative overflow-hidden;
+
+  border-image: url("/svg/light-card-horizontal.svg") 0 0 fill;
+
+  .dark & {
+    border-image: url("/svg/dark-card-horizontal.svg") 0 0 fill;
+  }
+}

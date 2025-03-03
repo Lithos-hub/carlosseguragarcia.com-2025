@@ -9,7 +9,6 @@
         :key="link.path"
         :to="link.path"
         class="TopBar__link"
-        :class="[`TopBar__link--${link.name}`]"
         active-class="TopBar__link--active"
       >
         {{ link.name }}</NuxtLink
@@ -76,7 +75,7 @@ const links = [
 
   &__link {
     @include corner-effect;
-    @apply font-jetbrainsMono dark:text-primary flex grow items-center justify-center gap-5 px-10 py-2 text-xs text-stone-800;
+    @apply font-jetbrainsMono dark:text-primary relative px-10 py-2 text-xs text-stone-800;
 
     &:hover {
       @apply text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-cyan-500;
@@ -87,6 +86,10 @@ const links = [
   &__dark-mode {
     @include corner-effect;
     @apply flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 p-2 backdrop-blur;
+  }
+
+  &__link-zone {
+    @apply font-lucania dark:text-primary absolute -bottom-7 left-1/2 -translate-x-1/2 text-[8px] text-stone-800;
   }
 }
 </style>
