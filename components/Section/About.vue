@@ -1,10 +1,6 @@
 <template>
   <div class="About">
     <div class="About__inner">
-      <ComponentName
-        :name="visualDataBySection.componentName"
-        :mounted-time="mountedTimes[visibleSection]"
-      />
       <div class="About__content">
         {{ DEV_INFO.aboutDescription }}
       </div>

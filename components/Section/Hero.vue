@@ -1,9 +1,5 @@
 <template>
   <section class="Hero">
-    <ComponentName
-      :name="visualDataBySection.componentName"
-      :mounted-time="mountedTimes[visibleSection]"
-    />
     <div class="Hero__content">
       <div class="Hero__content-wrapper">
         <h1 class="Hero__name">Carlos Segura García</h1>

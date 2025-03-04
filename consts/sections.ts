@@ -1,6 +1,7 @@
 export const sectionsOptions = [
   "hero",
   "about",
+  "summary",
   "experience",
   "projects",
 ] as const;
@@ -26,9 +27,15 @@ export const sections: Record<Section, SectionData> = {
     title: "<About />",
     componentName: "About.vue",
   },
+  summary: {
+    id: "summary",
+    code: "B1",
+    title: "<Summary />",
+    componentName: "Summary.vue",
+  },
   experience: {
     id: "experience",
-    code: "B1",
+    code: "B2",
     title: "<Experience />",
     componentName: "Experience.vue",
   },

@@ -7,9 +7,6 @@
             <img src="/tech-logos/vue.svg" alt="Vue" class="h-4" />
             <small class="text-[10px]">{{ name }}</small>
           </div>
-          <small class="self-end text-[10px]"
-            >Mounted in {{ mountedTime }}ms</small
-          >
         </div>
       </div>
     </div>
@@ -29,16 +26,12 @@ defineProps<ComponentNameProps>();
 @use "@/styles/general.scss" as *;
 
 .ComponentName {
-  @apply absolute right-5 top-[100px] h-[60px] w-[200px];
+  @apply w-auto px-10 py-4;
 
   border-image: url("/svg/light-banner-1.svg") 0 0 fill;
 
   .dark & {
     border-image: url("/svg/dark-banner-1.svg") 0 0 fill;
-  }
-
-  &__wrapper {
-    @apply flex h-12 flex-col items-center justify-center;
   }
 
   &__file-info {
