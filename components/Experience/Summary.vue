@@ -5,7 +5,7 @@
       <li>
         <span class="Summary__info-Summary__icon">&boxur;</span>
         <code class="Summary__info-Summary">
-          Total Summary:
+          Total experience:
           <span class="Summary__info-Summary-value">{{ totalSummary() }}</span>
         </code>
       </li>

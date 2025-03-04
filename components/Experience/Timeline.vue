@@ -115,7 +115,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 
   &__item {
     @include corner-effect;
-    @apply relative flex w-full border-b border-stone-900 dark:border-cyan-500;
+    @apply relative flex w-full;
   }
 
   &__left-side {
@@ -152,7 +152,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__right-side {
-    @apply flex-1 bg-stone-100 md:pl-6 dark:bg-stone-800;
+    @apply flex-1 border-stone-900 bg-stone-100 md:pl-6 dark:border-cyan-500 dark:bg-stone-800;
+  }
+
+  &__item:not(:last-child) .Timeline__right-side {
+    @apply border-b;
   }
 
   &__card {

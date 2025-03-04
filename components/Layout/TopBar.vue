@@ -70,12 +70,12 @@ const links = [
 
   &__links {
     @include corner-effect;
-    @apply flex w-auto items-center justify-center gap-5 border-y border-y-stone-500/10 p-2 backdrop-blur;
+    @apply hidden w-auto items-center justify-center gap-5 border-y border-y-stone-500/10 p-2 backdrop-blur md:flex;
   }
 
   &__link {
     @include corner-effect;
-    @apply font-jetbrainsMono dark:text-primary relative px-10 py-2 text-xs text-stone-800;
+    @apply font-jetbrainsMono dark:text-primary relative py-2 text-[12px] text-stone-800 md:px-5 lg:px-10;
 
     &:hover {
       @apply text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-cyan-500;

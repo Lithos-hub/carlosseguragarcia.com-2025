@@ -3,9 +3,12 @@
     <div class="ComponentName__wrapper">
       <div class="relative">
         <div class="ComponentName__file-info">
-          <img src="/tech-logos/vue.svg" alt="Vue" class="h-4" />
-          <small class="ComponentName__file-info-text"
-            >{{ name }} | Mounted in {{ mountedTime }}ms</small
+          <div class="flex gap-2">
+            <img src="/tech-logos/vue.svg" alt="Vue" class="h-4" />
+            <small class="text-[10px]">{{ name }}</small>
+          </div>
+          <small class="self-end text-[10px]"
+            >Mounted in {{ mountedTime }}ms</small
           >
         </div>
       </div>
@@ -26,35 +29,28 @@ defineProps<ComponentNameProps>();
 @use "@/styles/general.scss" as *;
 
 .ComponentName {
-  @include middle-side-effect;
-  @apply absolute right-0 top-[100px] flex flex-col items-end justify-center bg-stone-600/10 p-2 dark:bg-stone-900;
-  clip-path: polygon(
-    10% 0,
-    100% 0,
-    100% 20%,
-    100% 80%,
-    90% 100%,
-    20% 100%,
-    0 100%,
-    0 30%
-  );
+  @apply absolute right-5 top-[100px] h-[60px] w-[200px];
 
-  &::before {
-    content: "";
-    @apply absolute right-0 top-0 h-full w-full bg-stone-900/10 dark:bg-cyan-500/10;
-    clip-path: polygon(99.5% 0, 100% 0, 100% 100%, 50% 100%);
+  border-image: url("/svg/light-banner-1.svg") 0 0 fill;
+
+  .dark & {
+    border-image: url("/svg/dark-banner-1.svg") 0 0 fill;
   }
 
   &__wrapper {
-    @apply flex flex-col items-end gap-2 p-2;
+    @apply flex h-12 flex-col items-center justify-center;
   }
 
   &__file-info {
-    @apply flex items-center gap-2 text-[14px] text-stone-900 dark:text-white;
-  }
+    @apply flex w-full flex-col items-center;
 
-  &__file-info-text {
-    @apply dark:text-primary text-stone-900;
+    img {
+      @apply h-4;
+    }
+
+    small {
+      @apply dark:text-primary text-stone-900;
+    }
   }
 }
 </style>
