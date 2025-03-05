@@ -39,8 +39,53 @@ $bg-radial-end-color-light: rgba(255, 255, 255, 0.85);
 $bg-radial-start-color-dark: rgba(90, 189, 198, 0.1);
 $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
 
+@keyframes floatingDots {
+  0% {
+    background-position:
+      0 0,
+      $bg-size * 0.5 $bg-size * 0.5;
+  }
+  25% {
+    background-position:
+      $bg-size * 0.2 $bg-size * 0.1,
+      $bg-size * 0.7 $bg-size * 0.6;
+  }
+  50% {
+    background-position:
+      $bg-size * 0.5 $bg-size * 0.2,
+      $bg-size * 1 $bg-size * 0.7;
+  }
+  75% {
+    background-position:
+      $bg-size * 0.3 $bg-size * 0.3,
+      $bg-size * 0.8 $bg-size * 0.8;
+  }
+  100% {
+    background-position:
+      0 0,
+      $bg-size * 0.5 $bg-size * 0.5;
+  }
+}
+
+@keyframes pulseGradient {
+  0% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+}
+
 .App {
   @apply bg-white dark:bg-cyan-950/20;
+  position: relative;
+  overflow: hidden;
 
   background-image:
     radial-gradient($dots-color-light 1px, transparent 1px),
@@ -50,6 +95,7 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
     0 0,
     $bg-size * 0.5 $bg-size * 0.5;
   background-color: $background-color-light;
+  animation: floatingDots 15s ease-in-out infinite;
 
   &__radial-gradient-background {
     @apply fixed inset-0;
@@ -58,6 +104,7 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
       $bg-radial-start-color-light 0%,
       $bg-radial-end-color-light 100%
     );
+    animation: pulseGradient 8s ease-in-out infinite;
   }
 
   .dark & {
@@ -65,6 +112,7 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
       radial-gradient($dots-color-dark 0.1px, transparent 1px),
       radial-gradient($dots-color-dark 0.1px, transparent 1px);
     background-color: $background-color-dark;
+    animation: floatingDots 15s ease-in-out infinite;
 
     &__radial-gradient-background {
       background: radial-gradient(
@@ -72,6 +120,7 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
         $bg-radial-start-color-dark 0%,
         $bg-radial-end-color-dark 100%
       );
+      animation: pulseGradient 8s ease-in-out infinite;
     }
   }
 }
