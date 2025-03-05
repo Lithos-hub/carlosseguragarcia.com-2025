@@ -37,7 +37,7 @@ import { version } from "~/package.json";
 
   &__version {
     @include corner-effect;
-    @apply font-lucania text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs backdrop-blur;
+    @apply font-lucania dark:text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs text-stone-800 backdrop-blur;
   }
   &__social {
     @include corner-effect;

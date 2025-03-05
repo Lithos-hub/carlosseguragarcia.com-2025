@@ -66,6 +66,8 @@
   $corner-color-light: #1a1a1a;
   $corner-color-dark: #00ffe5;
 
+  box-shadow: 0 0 10px #1a1a1a01;
+
   @apply bg-[length:5px_5px] bg-no-repeat;
 
   background-image:
@@ -89,6 +91,8 @@
     100% 100%;
 
   .dark & {
+    box-shadow: 0 0 10px #04464015;
+
     background-image:
       linear-gradient(to right, $corner-color-dark 1px, transparent 1px),
       linear-gradient(to bottom, $corner-color-dark 1px, transparent 1px),

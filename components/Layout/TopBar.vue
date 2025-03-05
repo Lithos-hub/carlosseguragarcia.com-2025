@@ -17,6 +17,7 @@
     <div class="TopBar__dark-mode">
       <ClientOnly>
         <UToggle
+          class="dark-mode-toggle"
           v-model="isDarkMode"
           color="primary"
           on-icon="i-heroicons-moon"
@@ -65,7 +66,7 @@ const links = [
 
   &__code {
     @include corner-effect;
-    @apply font-lucania text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-lg backdrop-blur;
+    @apply font-lucania dark:text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-lg text-stone-800 backdrop-blur;
   }
 
   &__links {
@@ -78,7 +79,7 @@ const links = [
     @apply font-jetbrainsMono dark:text-primary relative py-2 text-[12px] text-stone-800 md:px-5 lg:px-10;
 
     &:hover {
-      @apply text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-cyan-500;
+      @apply text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-cyan-500 dark:shadow-[0_0_10px_#00eaff7d];
       background-size: 100% 100%;
     }
   }
@@ -86,6 +87,14 @@ const links = [
   &__dark-mode {
     @include corner-effect;
     @apply flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 p-2 backdrop-blur;
+
+    :deep(button) {
+      @apply dark:bg-primary-500 bg-stone-500;
+    }
+
+    :deep(.iconify) {
+      @apply text-stone-950 dark:text-white;
+    }
   }
 
   &__link-zone {

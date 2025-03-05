@@ -111,7 +111,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 @use "@/styles/fonts.scss" as *;
 
 .Experience {
-  @apply relative flex min-h-screen w-full max-w-4xl flex-col;
+  @apply relative mx-auto flex min-h-screen w-full max-w-4xl flex-col;
 
   &__item {
     @include corner-effect;
