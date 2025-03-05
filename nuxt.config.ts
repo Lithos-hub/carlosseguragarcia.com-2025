@@ -1,7 +1,12 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2024-11-01",
-  modules: ["@pinia/nuxt", "@nuxt/ui"],
+  modules: ["@pinia/nuxt", "@nuxt/ui", "@tresjs/nuxt"],
+
+  tres: {
+    devtools: true,
+  },
+
   devtools: { enabled: true },
 
   colorMode: {

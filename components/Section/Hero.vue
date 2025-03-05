@@ -107,7 +107,7 @@ onMounted(() => {
     }
 
     &-name {
-      @apply font-exo z-10 text-xs font-medium leading-none opacity-50 dark:text-white dark:opacity-100;
+      @apply font-exo text-xs font-medium leading-none opacity-50 dark:text-white dark:opacity-100;
     }
   }
 }

@@ -1,11 +1,42 @@
 <template>
   <div class="App">
     <div class="App__radial-gradient-background" />
+    <TresCanvas window-size>
+      <!-- Camera -->
+      <TresPerspectiveCamera :position="[0, 0, 5]" />
+
+      <!-- Lights -->
+      <TresAmbientLight :intensity="1" />
+
+      <!-- Post-processing -->
+      <EffectComposerPmndrs>
+        <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
+      </EffectComposerPmndrs>
+
+      <!-- Objects -->
+      <TresMesh scale-x="10" scale-y="5">
+        <TresBoxGeometry />
+        <TresMeshBasicMaterial
+          :color="isDarkMode ? '#08272a' : '#eff1f0'"
+          :tone-mapped="true"
+          :transparent="true"
+          :opacity="0.5"
+        />
+      </TresMesh>
+    </TresCanvas>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
+
+<script setup lang="ts">
+import { EffectComposerPmndrs } from "@tresjs/post-processing";
+
+import { BlendFunction } from "postprocessing";
+
+const isDarkMode = computed(() => useColorMode().value === "dark");
+</script>
 
 <style lang="scss">
 @use "@/styles/main.scss" as *;
@@ -27,8 +58,8 @@
 
 $bg-size: 40px;
 
-$dots-color-light: oklch(0.216 0.006 56.043 / 0.2);
-$dots-color-dark: #00eaff7d;
+$dots-color-light: oklch(0.216 0.006 56.043 / 0.5);
+$dots-color-dark: oklch(0.85 0.15 195 / 0.8);
 
 $background-color-light: #eff1f0;
 $background-color-dark: #08272a68;
