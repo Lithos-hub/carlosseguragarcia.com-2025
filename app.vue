@@ -1,29 +1,9 @@
 <template>
   <div class="App">
     <div class="App__radial-gradient-background" />
-    <TresCanvas window-size>
-      <!-- Camera -->
-      <TresPerspectiveCamera :position="[0, 0, 5]" />
-
-      <!-- Lights -->
-      <TresAmbientLight :intensity="1" />
-
-      <!-- Post-processing -->
-      <EffectComposerPmndrs>
-        <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
-      </EffectComposerPmndrs>
-
-      <!-- Objects -->
-      <TresMesh scale-x="10" scale-y="5">
-        <TresBoxGeometry />
-        <TresMeshBasicMaterial
-          :color="isDarkMode ? '#08272a' : '#eff1f0'"
-          :tone-mapped="true"
-          :transparent="true"
-          :opacity="0.5"
-        />
-      </TresMesh>
-    </TresCanvas>
+    <suspense>
+      <ThreejsScene />
+    </suspense>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -31,10 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { EffectComposerPmndrs } from "@tresjs/post-processing";
-
-import { BlendFunction } from "postprocessing";
-
 const isDarkMode = computed(() => useColorMode().value === "dark");
 </script>
 
