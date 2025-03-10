@@ -18,17 +18,34 @@
   src: url("@/assets/fonts/JetBrainsMono.ttf");
 }
 
-.font-whiteRabbit {
-  font-family: "White Rabbit";
-}
-.font-exo {
-  font-family: "Exo";
-}
-
-.font-lucania {
+@mixin font-lucania {
   font-family: "Lucania";
 }
 
-.font-jetbrainsMono {
+.font-lucania {
+  @include font-lucania;
+}
+
+@mixin font-exo {
+  font-family: "Exo";
+}
+
+.font-exo {
+  @include font-exo;
+}
+
+@mixin font-jetbrainsMono {
   font-family: "JetBrains Mono";
+}
+
+.font-jetbrainsMono {
+  @include font-jetbrainsMono;
+}
+
+@mixin font-whiteRabbit {
+  font-family: "White Rabbit";
+}
+
+.font-whiteRabbit {
+  @include font-whiteRabbit;
 }

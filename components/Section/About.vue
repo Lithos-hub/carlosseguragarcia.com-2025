@@ -2,19 +2,21 @@
   <div class="About">
     <div class="About__inner">
       <div class="About__content">
-        {{ DEV_INFO.aboutDescription }}
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione nostrum
+        tempore unde commodi assumenda nulla soluta quo fugit molestiae,
+        similique optio? Animi nisi vero, fugit vitae non quos incidunt fugiat
+        aspernatur voluptates et doloribus dolorum, eveniet quibusdam nostrum
+        esse sit eaque rerum necessitatibus odit laborum adipisci ipsam omnis
+        deleniti in!
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { DEV_INFO } from "~/consts/devInfo";
-
 const startTime = ref(performance.now());
 
-const { mountedTimes, visibleSection, visualDataBySection } =
-  storeToRefs(useUiStore());
+const { mountedTimes } = storeToRefs(useUiStore());
 
 onMounted(() => {
   mountedTimes.value.about = Math.round(performance.now() - startTime.value);
@@ -24,7 +26,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
 .About {
-  @apply relative flex h-screen w-full flex-col items-center justify-center;
+  @apply relative flex h-screen w-full flex-col items-center justify-center bg-gradient-to-b from-transparent to-black;
 
   &__inner {
     @apply px-[10vw];

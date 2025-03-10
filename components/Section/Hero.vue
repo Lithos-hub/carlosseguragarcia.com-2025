@@ -2,9 +2,13 @@
   <section class="Hero">
     <div class="Hero__content">
       <div class="Hero__content-wrapper">
-        <h1 class="Hero__name">Carlos Segura García</h1>
-        <h2 class="Hero__title">Front-end Developer</h2>
-        <p class="Hero__description">
+        <h1 class="Hero__name">
+          Hello, I'm <span class="text-primary">Carlos</span>.
+        </h1>
+        <h2 class="Hero__title">I'm a front-end developer.</h2>
+
+        <BaseButton>View my work</BaseButton>
+        <!-- <p class="Hero__description">
           I'm a front-end developer with a passion for creating beautiful and
           functional web applications, <br />mainly focused on
           <strong class="vue-gradient-text text-2xl">Vue</strong> ecosystem.
@@ -46,7 +50,7 @@
             />
             <small class="Hero__logo-name">TypeScript</small>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -79,12 +83,11 @@ onMounted(() => {
   }
 
   &__name {
-    @apply font-exo text-3xl font-bold leading-none text-stone-900 lg:text-5xl dark:text-white;
-    width: 500px;
+    @apply font-exo text-3xl font-light leading-none text-stone-900 lg:text-[80px] dark:text-white;
   }
 
   &__title {
-    @apply font-exo text-lg font-medium leading-none text-stone-900 lg:text-2xl dark:text-white;
+    @apply font-exo text-lg font-light leading-none text-stone-900 lg:text-[80px] dark:text-white;
   }
 
   &__description {

@@ -123,7 +123,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__index {
-    @apply font-exo text-[100px] font-extrabold text-cyan-500/80;
+    @apply font-exo text-primary text-[100px] font-extrabold dark:text-cyan-500/80;
   }
 
   &__date {
@@ -139,11 +139,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__connector {
-    @apply absolute right-0 top-0 h-full w-[2px] bg-cyan-500/50;
+    @apply bg-primary/50 absolute right-0 top-0 h-full w-[2px];
 
     &::before {
       content: "";
-      @apply absolute right-[-6px] top-[30px] h-[14px] w-[14px] rounded-full bg-cyan-500;
+      @apply bg-primary absolute right-[-6px] top-[30px] h-[14px] w-[14px] rounded-full;
     }
 
     &--last {
@@ -160,7 +160,21 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__card {
-    @apply flex h-full w-full flex-col gap-5 p-5;
+    @apply relative flex h-full w-full flex-col gap-5 p-5;
+
+    &::after {
+      content: "";
+      @apply bg-primary dark:bg-primary absolute right-0 top-0 h-[20px] w-[200px];
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 30%,
+        100% 70%,
+        100% 100%,
+        5% 100%,
+        0 50%
+      );
+    }
   }
 
   &__header {

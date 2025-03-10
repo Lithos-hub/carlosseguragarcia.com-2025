@@ -1,9 +1,9 @@
 <template>
   <div class="App">
     <div class="App__radial-gradient-background" />
-    <suspense>
+    <Suspense>
       <ThreejsScene />
-    </suspense>
+    </Suspense>
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -89,11 +89,7 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
   }
 }
 
-.App {
-  @apply bg-white dark:bg-cyan-950/20;
-  position: relative;
-  overflow: hidden;
-
+@mixin dots-background {
   background-image:
     radial-gradient($dots-color-light 1px, transparent 1px),
     radial-gradient($dots-color-light 1px, transparent 1px);
@@ -103,6 +99,20 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
     $bg-size * 0.5 $bg-size * 0.5;
   background-color: $background-color-light;
   animation: floatingDots 15s ease-in-out infinite;
+
+  .dark & {
+    background-image:
+      radial-gradient($dots-color-dark 0.1px, transparent 1px),
+      radial-gradient($dots-color-dark 0.1px, transparent 1px);
+    background-color: $background-color-dark;
+    animation: floatingDots 15s ease-in-out infinite;
+  }
+}
+
+.App {
+  @apply bg-white dark:bg-cyan-950/20;
+  position: relative;
+  overflow: hidden;
 
   &__radial-gradient-background {
     @apply fixed inset-0;
@@ -115,12 +125,6 @@ $bg-radial-end-color-dark: rgba(0, 0, 0, 0.9);
   }
 
   .dark & {
-    background-image:
-      radial-gradient($dots-color-dark 0.1px, transparent 1px),
-      radial-gradient($dots-color-dark 0.1px, transparent 1px);
-    background-color: $background-color-dark;
-    animation: floatingDots 15s ease-in-out infinite;
-
     &__radial-gradient-background {
       background: radial-gradient(
         circle,

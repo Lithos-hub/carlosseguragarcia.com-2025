@@ -1,3 +1,5 @@
+@use "./fonts.scss" as *;
+
 .vue-gradient-bg {
   background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
 }
@@ -272,4 +274,82 @@
   syntax: "<angle>";
   inherits: true;
   initial-value: 0turn;
+}
+
+// Neon effect for texts
+.neon-text-blue-glow {
+  @apply text-stone-800;
+  text-shadow:
+    0 0 1px rgb(8, 39, 53),
+    0 0 5px rgb(36, 32, 54),
+    0 0 10px rgb(144, 144, 144);
+
+  .dark & {
+    @apply text-primary;
+    text-shadow:
+      0 0 1px #fff,
+      0 0 2px #00ffb7,
+      0 0 6px #cbffff;
+  }
+}
+
+// Info text
+@mixin mini-info-text {
+  @include font-lucania;
+  @apply dark:text-primary text-[10px] text-stone-900 brightness-200;
+}
+
+.info-text {
+  @include mini-info-text;
+}
+
+// Squares
+@mixin square-shape {
+  @apply dark:bg-primary h-2 w-2 bg-stone-900 brightness-200;
+}
+
+.square {
+  @include square-shape;
+}
+
+// Triangles
+@mixin triangle-shape {
+  @include square-shape;
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+@mixin triangle-top-left {
+  @include triangle-shape;
+  clip-path: polygon(0 0, 0% 100%, 100% 0);
+}
+
+@mixin triangle-top-right {
+  @include triangle-shape;
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+}
+
+@mixin triangle-bottom-left {
+  @include triangle-shape;
+  clip-path: polygon(0 0, 0 100%, 100% 100%);
+}
+
+@mixin triangle-bottom-right {
+  @include triangle-shape;
+  clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+.triangle-shape-top-left {
+  @include triangle-top-left;
+}
+
+.triangle-shape-top-right {
+  @include triangle-top-right;
+}
+
+.triangle-shape-bottom-left {
+  @include triangle-bottom-left;
+}
+
+.triangle-shape-bottom-right {
+  @include triangle-bottom-right;
 }

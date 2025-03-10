@@ -1,10 +1,10 @@
 export default defineAppConfig({
   ui: {
-    primary: "green",
+    primary: "cyan",
     gray: "slate",
     toggle: {
       default: {
-        color: "green",
+        color: "cyan",
       },
     },
   },
