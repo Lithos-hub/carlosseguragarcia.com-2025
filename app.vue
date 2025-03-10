@@ -10,10 +10,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-const isDarkMode = computed(() => useColorMode().value === "dark");
-</script>
-
 <style lang="scss">
 @use "@/styles/main.scss" as *;
 

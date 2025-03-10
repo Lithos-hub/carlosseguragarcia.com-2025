@@ -70,7 +70,7 @@ import { version } from "~/package.json";
     @apply dark:text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs text-stone-800 backdrop-blur;
 
     &-title {
-      @apply font-exo text-[9px] text-cyan-500;
+      @apply font-exo text-primary text-[9px];
     }
   }
 
@@ -79,7 +79,7 @@ import { version } from "~/package.json";
     @apply mt-auto flex flex-col gap-0 text-[10px];
 
     span {
-      @apply text-cyan-500;
+      @apply text-primary;
     }
   }
 
@@ -90,7 +90,7 @@ import { version } from "~/package.json";
 }
 
 .social-button-wrapper {
-  @apply cursor-pointer p-2 hover:bg-cyan-500/10 hover:text-white dark:hover:bg-stone-500/10;
+  @apply hover:bg-primary/10 cursor-pointer p-2 hover:text-white dark:hover:bg-stone-500/10;
 
   &:hover :deep(span) {
     @apply text-white;

@@ -68,7 +68,7 @@ const totalSummary = () => {
     @apply font-bold text-stone-800 dark:text-white;
 
     &__icon {
-      @apply text-primary dark:text-cyan-500;
+      @apply text-primary dark:text-primary;
     }
 
     &-title {
@@ -77,7 +77,7 @@ const totalSummary = () => {
   }
 
   &__info-Summary-value {
-    @apply font-exo text-primary font-bold dark:text-cyan-500;
+    @apply font-exo text-primary dark:text-primary font-bold;
   }
 }
 </style>

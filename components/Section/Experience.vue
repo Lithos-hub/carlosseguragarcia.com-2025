@@ -123,7 +123,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__index {
-    @apply font-exo text-primary text-[100px] font-extrabold dark:text-cyan-500/80;
+    @apply font-exo text-primary dark:text-primary/80 text-[100px] font-extrabold;
   }
 
   &__date {
@@ -152,7 +152,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__right-side {
-    @apply flex-1 border-stone-900 bg-stone-100 md:pl-6 dark:border-cyan-500 dark:bg-stone-800;
+    @apply dark:border-primary flex-1 border-stone-900 bg-stone-100 md:pl-6 dark:bg-stone-800;
   }
 
   &__item:not(:last-child) .Experience__right-side {

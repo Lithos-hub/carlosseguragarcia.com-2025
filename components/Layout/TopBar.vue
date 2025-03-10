@@ -109,7 +109,7 @@ const links = [
     @apply font-jetbrainsMono relative py-2 text-[12px] md:px-5 lg:px-10;
 
     &:hover {
-      @apply text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-cyan-500 dark:shadow-[0_0_10px_#00eaff7d];
+      @apply text-primary dark:text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:shadow-[0_0_10px_#00eaff7d];
       background-size: 100% 100%;
     }
   }
