@@ -7,7 +7,7 @@
     <ScrollControls v-model="tubularSegments" htmlScroll />
 
     <!-- Grid -->
-    <Grid
+    <!-- <Grid
       :args="[100, 100]"
       :position="[0, -3, 0]"
       :rotation="[0, Math.PI / 2, 0]"
@@ -21,7 +21,7 @@
       :fade-from="0"
       :fade-distance="100"
       :fade-strength="1"
-    />
+    /> -->
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -81,8 +81,13 @@
       </TresMesh>
     </Levioso> -->
 
+    <!-- GLTF model (Triangle) -->
+    <Suspense>
+      <primitive :object="scene" />
+    </Suspense>
+
     <!-- Plane (wall - top left) -->
-    <TresMesh :position="[-20.25, 10, 0]" :rotation="[0, 0, 0]">
+    <!-- <TresMesh :position="[-20.25, 10, 0]" :rotation="[0, 0, 0]">
       <TresPlaneGeometry :args="[40, 15]" />
       <TresMeshPhysicalMaterial
         color="red"
@@ -90,9 +95,9 @@
         :metalness="0.2"
         :reflectivity="0.5"
       />
-    </TresMesh>
+    </TresMesh> -->
     <!-- Plane (wall - top right) -->
-    <TresMesh :position="[20.25, 10, 0]" :rotation="[0, 0, 0]">
+    <!-- <TresMesh :position="[20.25, 10, 0]" :rotation="[0, 0, 0]">
       <TresPlaneGeometry :args="[40, 15]" />
       <TresMeshPhysicalMaterial
         color="red"
@@ -100,10 +105,10 @@
         :metalness="0.2"
         :reflectivity="0.5"
       />
-    </TresMesh>
+    </TresMesh> -->
 
     <!-- Plane (wall - bottom) -->
-    <TresMesh :position="[0, -8, 0]" :rotation="[0, 0, 0]">
+    <!-- <TresMesh :position="[0, -8, 0]" :rotation="[0, 0, 0]">
       <TresPlaneGeometry :args="[50, 20]" />
       <TresMeshPhysicalMaterial
         color="red"
@@ -111,13 +116,13 @@
         :metalness="0.2"
         :reflectivity="0.5"
       />
-    </TresMesh>
+    </TresMesh> -->
 
     <!-- Plane (light - background) -->
-    <TresMesh :position="[0, 0, -20]" :rotation="[0, 0, 0]">
+    <!-- <TresMesh :position="[0, 0, -20]" :rotation="[0, 0, 0]">
       <TresPlaneGeometry :args="[100, 100]" />
       <TresMeshBasicMaterial color="white" />
-    </TresMesh>
+    </TresMesh> -->
 
     <!-- Oniric Building -->
     <!-- <TresMesh
@@ -132,7 +137,7 @@
 </template>
 
 <script setup lang="ts">
-import { Grid, ScrollControls } from "@tresjs/cientos";
+import { ScrollControls } from "@tresjs/cientos";
 import type { TresInstance } from "@tresjs/core";
 import {
   BloomPmndrs,
@@ -160,6 +165,8 @@ const gl = {
 const offset = new Vector2(0.002, 0.002);
 
 const { onLoop } = useRenderLoop();
+
+const { scene } = await useGLTF("/gltf/triangle.gltf", { draco: true });
 
 onLoop(({ elapsed, delta }) => {
   if (

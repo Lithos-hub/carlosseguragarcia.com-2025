@@ -3,6 +3,10 @@
     <div class="App__radial-gradient-background" />
     <Suspense>
       <ThreejsScene />
+
+      <template #fallback>
+        <div class="App__loading-experience">Loading...</div>
+      </template>
     </Suspense>
     <NuxtLayout>
       <NuxtPage />
