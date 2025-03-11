@@ -1,63 +1,13 @@
 @use "./fonts.scss" as *;
 
-.vue-gradient-bg {
-  background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
-}
-
-.vue-radial-gradient-bg {
-  background: radial-gradient(141.42% 141.42% at 100% 0%, #42d392 25%, #647eff);
-}
-
 .vue-gradient-text {
   background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.vite-gradient-bg {
-  background:
-    radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
-    radial-gradient(140.35% 140.35% at 100% 94.74%, #bd34fe, #bd34fe00),
-    radial-gradient(89.94% 89.94% at 18.42% 15.79%, #41d1ff, #41d1ff00);
-}
-
-.vite-gradient-text {
-  background:
-    radial-gradient(141.42% 141.42% at 100% 0%, #fff6, #fff0),
-    radial-gradient(140.35% 140.35% at 100% 94.74%, #bd34fe, #bd34fe00),
-    radial-gradient(89.94% 89.94% at 18.42% 15.79%, #41d1ff, #41d1ff00);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.typescript-gradient-bg {
-  background: -webkit-linear-gradient(315deg, #3179c7 25%, #3524cc);
-}
-
-.typescript-gradient-text {
-  background: -webkit-linear-gradient(315deg, #3179c7 25%, #3524cc);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
 @mixin primary-gradient-text {
-  @apply bg-gradient-to-r from-stone-700 to-stone-500 bg-clip-text text-transparent dark:from-[#42d392] dark:to-[#647eff];
-}
-
-@mixin secondary-gradient-text {
-  @apply bg-gradient-to-r from-stone-700 to-stone-500 bg-clip-text text-transparent dark:from-[#41d1ff] dark:to-[#bd34fe];
-}
-
-@mixin animated-line {
-  @apply absolute right-[17px] w-[1px] rotate-45;
-}
-
-@mixin colored-line {
-  @apply dark:border-primary-500/50 border-stone-500/50;
-}
-
-@mixin colored-background {
-  @apply dark:bg-primary-500/50 bg-stone-500/50;
+  @apply bg-gradient-to-r from-[#42d392] from-stone-700 to-[#647eff] to-stone-500 bg-clip-text text-transparent;
 }
 
 @mixin section-wrapper {
@@ -65,22 +15,9 @@
 }
 
 @mixin corner-effect {
-  $corner-color-light: #1a1a1a;
-  $corner-color-dark: #00ffe5;
-
-  box-shadow: 0 0 10px #1a1a1a01;
+  $corner-color: #00ffe5;
 
   @apply bg-[length:5px_5px] bg-no-repeat;
-
-  background-image:
-    linear-gradient(to right, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to bottom, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to left, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to bottom, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to right, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to top, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to left, $corner-color-light 1px, transparent 1px),
-    linear-gradient(to top, $corner-color-light 1px, transparent 1px);
 
   background-position:
     0 0,
@@ -92,19 +29,17 @@
     100% 100%,
     100% 100%;
 
-  .dark & {
-    box-shadow: 0 0 10px #04464015;
+  box-shadow: 0 0 10px #04464015;
 
-    background-image:
-      linear-gradient(to right, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to bottom, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to left, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to bottom, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to right, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to top, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to left, $corner-color-dark 1px, transparent 1px),
-      linear-gradient(to top, $corner-color-dark 1px, transparent 1px);
-  }
+  background-image:
+    linear-gradient(to right, $corner-color 1px, transparent 1px),
+    linear-gradient(to bottom, $corner-color 1px, transparent 1px),
+    linear-gradient(to left, $corner-color 1px, transparent 1px),
+    linear-gradient(to bottom, $corner-color 1px, transparent 1px),
+    linear-gradient(to right, $corner-color 1px, transparent 1px),
+    linear-gradient(to top, $corner-color 1px, transparent 1px),
+    linear-gradient(to left, $corner-color 1px, transparent 1px),
+    linear-gradient(to top, $corner-color 1px, transparent 1px);
 }
 
 @mixin middle-side-effect {
@@ -296,7 +231,7 @@
 // Info text
 @mixin mini-info-text {
   @include font-lucania;
-  @apply dark:text-primary text-[10px] text-stone-900 brightness-200;
+  @apply text-[10px] text-stone-900 brightness-200 dark:text-primary;
 }
 
 .info-text {
@@ -305,7 +240,7 @@
 
 // Squares
 @mixin square-shape {
-  @apply dark:bg-primary h-2 w-2 bg-stone-900 brightness-200;
+  @apply h-2 w-2 bg-stone-900 brightness-200 dark:bg-primary;
 }
 
 .square {

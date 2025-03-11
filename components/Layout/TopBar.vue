@@ -89,9 +89,8 @@ const links = [
   @apply fixed top-0 z-50 flex w-full justify-between p-5;
 
   &__code {
-    @include font-lucania;
     @include corner-effect;
-    @apply dark:text-primary h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 text-lg text-stone-800 backdrop-blur;
+    @apply font-lucania h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 text-lg text-stone-800 backdrop-blur dark:text-primary;
 
     &-info {
       span {
@@ -109,15 +108,14 @@ const links = [
     @apply font-jetbrainsMono relative py-2 text-[12px] md:px-5 lg:px-10;
 
     &:hover {
-      @apply text-primary dark:text-primary bg-stone-900 brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:shadow-[0_0_10px_#00eaff7d];
+      @apply bg-stone-900 text-secondary brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-secondary dark:shadow-[0_0_10px_#00eaff7d];
       background-size: 100% 100%;
     }
   }
 
   &__dark-mode {
     @include corner-effect;
-    @include font-lucania;
-    @apply dark:text-primary h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 text-lg text-stone-900 backdrop-blur;
+    @apply font-lucania h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 text-lg text-stone-900 backdrop-blur dark:text-primary;
 
     :deep(button) {
       @apply dark:bg-primary-500 bg-stone-500;
@@ -129,8 +127,7 @@ const links = [
   }
 
   &__link-zone {
-    @include font-lucania;
-    @apply dark:text-primary absolute -bottom-7 left-1/2 -translate-x-1/2 text-[8px] text-stone-800;
+    @apply font-lucania absolute -bottom-7 left-1/2 -translate-x-1/2 text-[8px] text-stone-800 dark:text-primary;
   }
 }
 </style>

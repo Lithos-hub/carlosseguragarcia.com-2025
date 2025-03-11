@@ -3,9 +3,6 @@
     <!-- Camera -->
     <TresPerspectiveCamera :fov="25" :position="[0, 0, TRIANGLE_SIZE * 10]" />
 
-    <!-- Scroll controls -->
-    <ScrollControls v-model="tubularSegments" htmlScroll />
-
     <!-- Grid -->
     <!-- <Grid
       :args="[100, 100]"
@@ -25,8 +22,6 @@
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
-      <!-- Noise -->
-      <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
       <!-- Chromatic Aberration -->
       <ChromaticAberrationPmndrs
         :offset
@@ -35,55 +30,23 @@
       />
       <!-- Bloom -->
       <BloomPmndrs
-        :radius="0.1"
-        :intensity="2"
-        :luminance-threshold="0.1"
+        :radius="0.6"
+        :intensity="0.1"
+        :luminance-threshold="0.2"
         :luminance-smoothing="1"
         mipmap-blur
       />
       <!-- Vignette -->
       <VignettePmndrs :darkness="1" :offset="0.4" />
+      <!-- Noise -->
+      <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
-
-    <!-- Triangles -->
-    <!-- <Levioso>
-      <TresMesh
-        ref="triangleBlackRef"
-        :position="[0, TRIANGLE_Y_OFFSET, 1]"
-        :rotation="[0, 0, Math.PI / 2]"
-      >
-        <TresTorusGeometry :args="[TRIANGLE_SIZE, 0.5, 3, 3]" />
-        <TresMeshPhysicalMaterial
-          :reflectivity="1"
-          :roughness="0"
-          :specular="1"
-          :metalness="0"
-          color="gold"
-        />
-      </TresMesh>
-
-      <TresMesh
-        ref="triangleInsideLightRef"
-        :position="[0, TRIANGLE_Y_OFFSET, 1]"
-        :rotation="[0, 0, Math.PI / 2]"
-      >
-        <TresTorusGeometry :args="[TRIANGLE_SIZE - 0.4, 0.1, 3, 3]" />
-        <TresMeshBasicMaterial color="white" />
-      </TresMesh>
-
-      <TresMesh
-        ref="triangleOutsideLightRef"
-        :position="[0, TRIANGLE_Y_OFFSET, 1]"
-        :rotation="[0, 0, Math.PI / 2]"
-      >
-        <TresTorusGeometry :args="[TRIANGLE_SIZE + 0.4, 0.1, 3, 3]" />
-        <TresMeshBasicMaterial color="white" />
-      </TresMesh>
-    </Levioso> -->
 
     <!-- GLTF model (Triangle) -->
     <Suspense>
-      <primitive :object="scene" />
+      <Levioso :range="[0.1, 0.5]">
+        <ThreejsObjectsTriangle />
+      </Levioso>
     </Suspense>
 
     <!-- Plane (wall - top left) -->
@@ -137,8 +100,6 @@
 </template>
 
 <script setup lang="ts">
-import { ScrollControls } from "@tresjs/cientos";
-import type { TresInstance } from "@tresjs/core";
 import {
   BloomPmndrs,
   ChromaticAberrationPmndrs,
@@ -150,12 +111,6 @@ import { BlendFunction } from "postprocessing";
 import { NoToneMapping, Vector2 } from "three";
 
 const TRIANGLE_SIZE = 5;
-const TRIANGLE_Y_OFFSET = 3;
-const tubularSegments = ref(3);
-
-const triangleBlackRef = shallowRef<TresInstance>();
-const triangleInsideLightRef = shallowRef<TresInstance>();
-const triangleOutsideLightRef = shallowRef<TresInstance>();
 
 const gl = {
   toneMapping: NoToneMapping,
@@ -165,18 +120,4 @@ const gl = {
 const offset = new Vector2(0.002, 0.002);
 
 const { onLoop } = useRenderLoop();
-
-const { scene } = await useGLTF("/gltf/triangle.gltf", { draco: true });
-
-onLoop(({ elapsed, delta }) => {
-  if (
-    triangleBlackRef.value &&
-    triangleInsideLightRef.value &&
-    triangleOutsideLightRef.value
-  ) {
-    triangleBlackRef.value.geometry.args[2] = tubularSegments.value;
-    triangleInsideLightRef.value.geometry.args[2] = tubularSegments.value;
-    triangleOutsideLightRef.value.geometry.args[2] = tubularSegments.value;
-  }
-});
 </script>

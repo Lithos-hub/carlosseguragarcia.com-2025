@@ -31,7 +31,7 @@
           <UIcon
             size="20"
             name="i-mdi-linkedin"
-            class="dark:text-primary p-2 text-stone-500"
+            class="p-2 text-stone-500 dark:text-primary"
           />
 
           <span class="info-text">LinkedIn</span>
@@ -44,7 +44,7 @@
           <UIcon
             size="20"
             name="i-mdi-github"
-            class="dark:text-primary p-2 text-stone-500"
+            class="p-2 text-stone-500 dark:text-primary"
           />
           <span class="info-text">GitHub</span>
         </div>
@@ -66,17 +66,15 @@ import { version } from "~/package.json";
 
   &__version {
     @include corner-effect;
-    @include font-lucania;
-    @apply dark:text-primary flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs text-stone-800 backdrop-blur;
+    @apply font-lucania flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs text-stone-800 backdrop-blur;
 
     &-title {
-      @apply font-exo text-primary text-[9px];
+      @apply font-exo text-[9px] text-primary;
     }
   }
 
   &__developedBy {
-    @include font-lucania;
-    @apply mt-auto flex flex-col gap-0 text-[10px];
+    @apply font-lucania mt-auto flex flex-col gap-0 text-[10px];
 
     span {
       @apply text-primary;
@@ -90,7 +88,7 @@ import { version } from "~/package.json";
 }
 
 .social-button-wrapper {
-  @apply hover:bg-primary/10 cursor-pointer p-2 hover:text-white dark:hover:bg-stone-500/10;
+  @apply cursor-pointer p-2 hover:bg-primary/10 hover:text-white dark:hover:bg-stone-500/10;
 
   &:hover :deep(span) {
     @apply text-white;
