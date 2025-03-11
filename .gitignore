@@ -24,3 +24,4 @@ logs
 
 # Bun files
 bun.*
+.qodo

@@ -10,6 +10,10 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({
+  layout: "threejs",
+});
+
 import { useIsVisible } from "@/composables/useIsVisible";
 import type { Section } from "~/consts/sections";
 

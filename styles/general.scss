@@ -230,8 +230,7 @@
 
 // Info text
 @mixin mini-info-text {
-  @include font-lucania;
-  @apply text-[10px] text-stone-900 brightness-200 dark:text-primary;
+  @apply font-lucania text-[10px] text-stone-900 brightness-200 dark:text-primary;
 }
 
 .info-text {

@@ -19,6 +19,12 @@ export default {
         light1: "#f2f4f3",
         light2: "#cfdbd5",
       },
+      fontFamily: {
+        lucania: ["Lucania", "sans-serif"],
+        exo: ["Exo", "sans-serif"],
+        jetbrainsMono: ["JetBrains Mono", "sans-serif"],
+        whiteRabbit: ["WhiteRabbit", "sans-serif"],
+      },
     },
   },
 } satisfies Config;

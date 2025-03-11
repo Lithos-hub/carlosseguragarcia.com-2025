@@ -13,6 +13,10 @@
 import { useIsVisible } from "@/composables/useIsVisible";
 import type { Section } from "~/consts/sections";
 
+definePageMeta({
+  layout: "threejs",
+});
+
 const heroRef = useTemplateRef<HTMLElement | null>("heroRef");
 const aboutRef = useTemplateRef<HTMLElement | null>("aboutRef");
 

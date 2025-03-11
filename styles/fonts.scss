@@ -1,6 +1,6 @@
 @font-face {
-  font-family: "White Rabbit";
-  src: url("@/assets/fonts/White-Rabbit.ttf");
+  font-family: "WhiteRabbit";
+  src: url("@/assets/fonts/WhiteRabbit.ttf");
 }
 
 @font-face {
@@ -16,36 +16,4 @@
 @font-face {
   font-family: "JetBrains Mono";
   src: url("@/assets/fonts/JetBrainsMono.ttf");
-}
-
-@mixin font-lucania {
-  font-family: "Lucania";
-}
-
-.font-lucania {
-  @include font-lucania;
-}
-
-@mixin font-exo {
-  font-family: "Exo";
-}
-
-.font-exo {
-  @include font-exo;
-}
-
-@mixin font-jetbrainsMono {
-  font-family: "JetBrains Mono";
-}
-
-.font-jetbrainsMono {
-  @include font-jetbrainsMono;
-}
-
-@mixin font-whiteRabbit {
-  font-family: "White Rabbit";
-}
-
-.font-whiteRabbit {
-  @include font-whiteRabbit;
 }

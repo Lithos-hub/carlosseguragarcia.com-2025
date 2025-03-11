@@ -1,1 +1,11 @@
 @import "tailwindcss";
+
+@layer base {
+  @font-face {
+    font-family: "WhiteRabbit";
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url(/fonts/WhiteRabbit.ttf) format("ttf");
+  }
+}
