@@ -49,93 +49,57 @@
 
   @apply bg-no-repeat;
 
-  background-image: 
-    // Lado izquierdo
-    linear-gradient(
-      to bottom,
-      transparent 20%,
-      $corner-color-light 20%,
-      $corner-color-light 80%,
-      transparent 80%
-    ),
-    // Lado derecho
-    linear-gradient(
-        to bottom,
-        transparent 20%,
-        $corner-color-light 20%,
-        $corner-color-light 80%,
-        transparent 80%
-      ),
-    // Lado superior
-    linear-gradient(
-        to right,
-        transparent 20%,
-        $corner-color-light 20%,
-        $corner-color-light 80%,
-        transparent 80%
-      ),
-    // Lado inferior
-    linear-gradient(
-        to right,
-        transparent 20%,
-        $corner-color-light 20%,
-        $corner-color-light 80%,
-        transparent 80%
-      );
-
   background-position:
     0 50%,
-    // Lado izquierdo
+    // Left side
     100% 50%,
-    // Lado derecho
+    // Right side
     50% 0,
-    // Lado superior
-    50% 100%; // Lado inferior
+    // Top side
+    50% 100%; // Bottom side
 
   background-size:
     1px $line-length,
-    // Lado izquierdo
+    // Left side
     1px $line-length,
-    // Lado derecho
+    // Right side
     $line-length 1px,
-    // Lado superior
-    $line-length 1px; // Lado inferior
+    // Top side
+    $line-length 1px; // Bottom side
 
-  .dark & {
-    background-image: 
-      // Lado izquierdo
-      linear-gradient(
+  background-image: 
+    // Left side
+    linear-gradient(
+      to bottom,
+      transparent 20%,
+      $corner-color-dark 20%,
+      $corner-color-dark 80%,
+      transparent 80%
+    ),
+    // Right side
+    linear-gradient(
         to bottom,
         transparent 20%,
         $corner-color-dark 20%,
         $corner-color-dark 80%,
         transparent 80%
       ),
-      // Lado derecho
-      linear-gradient(
-          to bottom,
-          transparent 20%,
-          $corner-color-dark 20%,
-          $corner-color-dark 80%,
-          transparent 80%
-        ),
-      // Lado superior
-      linear-gradient(
-          to right,
-          transparent 20%,
-          $corner-color-dark 20%,
-          $corner-color-dark 80%,
-          transparent 80%
-        ),
-      // Lado inferior
-      linear-gradient(
-          to right,
-          transparent 20%,
-          $corner-color-dark 20%,
-          $corner-color-dark 80%,
-          transparent 80%
-        );
-  }
+    // Top side
+    linear-gradient(
+        to right,
+        transparent 20%,
+        $corner-color-dark 20%,
+        $corner-color-dark 80%,
+        transparent 80%
+      ),
+    // Bottom side
+    linear-gradient(
+        to right,
+        transparent 20%,
+        $corner-color-dark 20%,
+        $corner-color-dark 80%,
+        transparent 80%
+      );
 }
 
 @mixin svg-card-vertical {

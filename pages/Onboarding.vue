@@ -1,8 +1,10 @@
 <template>
   <div class="OnBoarding">
-    <p>{{ welcomeText }}</p>
-    <p>{{ systemsText }}</p>
-    <pre>{{ filesText }}</pre>
+    <div class="OnBoarding__centered">
+      <p>{{ welcomeText }}</p>
+    </div>
+    <pre class="text-red-500">{{ systemsText }}</pre>
+    <pre class="text-slate-500">{{ filesText }}</pre>
   </div>
 </template>
 
@@ -22,6 +24,7 @@ const {
 
 const emit = defineEmits(["onboarding-completed"]);
 
+// *** TYPEWRITER *** //
 const welcomeTextInitial = [
   "Hello. Welcome to my website.",
   "Systems are starting up.",
@@ -30,33 +33,30 @@ const welcomeTextInitial = [
 
 const {
   text: welcomeText,
-  startTyping,
+  startTyping: startWelcomeTyping,
   isCompleted: isWelcomeCompleted,
 } = useTypeWriter({
   texts: welcomeTextInitial,
-  delay: 2000,
-  speed: 100,
-  caretAnimation: true,
-  caretSymbol: "|",
-  caretSpeed: 1000,
+  delay: 1000,
+  speed: 50,
+  caretAnimation: false,
 });
 
 const systemsTextInitial = [
-  `L O A D I N G . . .`,
-  `--------------------`,
-  `Checking system status...`,
-  `0%`,
-  `12%`,
-  `47%`,
-  `76%`,
-  `100%`,
-  `System status: OK`,
-  `--------------------`,
-  `Loading user experience...`,
-  `--------------------`,
-  `3D models loaded successfully. Total: 87KB`,
-  `--------------------`,
-  `Loading files...`,
+  `\nL O A D I N G . . .\n`,
+  `\n--------------------\n`,
+  `\nChecking system status...\n`,
+  `\n| Connection - DONE\n`,
+  `\n| API - DONE\n`,
+  `\n| Scheduler - DONE\n`,
+  `\n| Worker - DONE\n`,
+  `\n| System status: OK\n`,
+  `\n--------------------\n`,
+  `\nLoading user experience...\n`,
+  `\n--------------------\n`,
+  `\n3D models loaded successfully. Total: 87KB\n`,
+  `\n--------------------\n`,
+  `\nLoading files...\n`,
 ];
 
 const {
@@ -65,67 +65,72 @@ const {
   isCompleted: isSystemsCompleted,
 } = useTypeWriter({
   texts: systemsTextInitial,
-  delay: 2000,
-  speed: 80,
-  caretAnimation: true,
-  caretSymbol: "|",
-  caretSpeed: 1000,
+  delay: 1000,
+  speed: 30,
+  caretAnimation: false,
+  persistLines: systemsTextInitial.map(() => true),
 });
-
-const filesList = ref<string[]>([]);
 
 const {
   text: filesText,
   startTyping: startFilesTyping,
   isCompleted: isFilesCompleted,
 } = useTypeWriter({
-  texts: filesList.value.map((file) => `\n${file}`).slice(0, 40),
+  texts: files.value.map((file) => `\n${file}`).slice(0, 40),
   delay: 0,
   speed: 5,
-  caretAnimation: true,
-  caretSymbol: "|",
-  caretSpeed: 100,
-  persistLines: filesList.value.map(() => true),
+  caretAnimation: false,
+  persistLines: files.value.map(() => true),
 });
 
-// watch(isWelcomeCompleted, (hasCompleted) => {
-//   if (hasCompleted) {
-//     startSystemsTyping();
-//   }
-// });
+watch(isWelcomeCompleted, (hasCompleted) => {
+  if (hasCompleted) {
+    startSystemsTyping();
+  }
+});
 
-// watch(isSystemsCompleted, (hasCompleted) => {
-//   if (hasCompleted) {
-//     startFilesTyping();
-//   }
-// });
+watch(isSystemsCompleted, (hasCompleted) => {
+  if (hasCompleted) {
+    startFilesTyping();
+  }
+});
 
 watch(isFilesCompleted, (hasCompleted) => {
   if (hasCompleted) {
     emit("onboarding-completed");
   }
 });
-
-watch(isGettingFilesNames, (hasCompleted) => {
-  if (hasCompleted) {
-    filesList.value = files.value;
-    startFilesTyping();
-  }
-});
-
-onMounted(async () => {
-  await loadProjectFiles();
+onMounted(() => {
+  startWelcomeTyping();
+  loadProjectFiles();
 });
 </script>
 
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
+@use "@/styles/colors.scss" as *;
+
 .OnBoarding {
-  @apply h-screen bg-stone-950 p-10 brightness-200;
+  @apply h-screen bg-black;
+
+  &::after {
+    @apply absolute inset-0;
+    content: "";
+    background-color: transparent;
+    background-image:
+      linear-gradient($secondary 1px, transparent 1px),
+      linear-gradient(to right, $secondary 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.1;
+  }
 
   p {
-    @apply font-whiteRabbit text-xl font-bold text-green-500;
+    @apply font-lucania text-xl font-bold text-secondary;
+  }
+
+  &__centered {
+    @apply flex h-full flex-col items-center justify-center border-red-500 bg-red-500/10 p-5;
   }
 }
 </style>

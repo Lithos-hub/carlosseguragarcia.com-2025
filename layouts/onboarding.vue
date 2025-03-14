@@ -8,6 +8,6 @@
 
 <style scoped>
 .Onboarding {
-  @apply bg-black text-green-500 brightness-200;
+  @apply bg-black text-green-500;
 }
 </style>
