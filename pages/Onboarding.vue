@@ -1,9 +1,9 @@
 <template>
-  <div class="OnBoarding">
-    <div class="OnBoarding__centered">
-      <p>{{ welcomeText }}</p>
+  <div class="Onboarding">
+    <div class="Onboarding__centered">
+      <p class="Onboarding__welcome-text">{{ welcomeText }}</p>
       <Transition name="fade">
-        <div v-if="isSystemTyping" class="OnBoarding__system-text">
+        <div v-if="isSystemTyping" class="Onboarding__system-text">
           <pre class="w-[300px]">
       _______  _____  _______  ______  __________________  _______
      / ___/\ \/ / _ \/ __/ _ \/ __/\ \/ / __/_  __/ __/  |/  / __/
@@ -27,47 +27,48 @@
         </div>
       </Transition>
       <Transition name="fade">
-        <div v-if="isFilesTyping" class="OnBoarding__files-text">
-          <div class="flex justify-between gap-10">
-            <div class="flex h-full w-1/2 flex-col gap-10 bg-secondary/10 p-2">
-              <div class="flex gap-2 pb-2">
-                <small
-                  class="text-xs text-primary/50"
-                  v-for="(char, i) in scanningFilesChars"
-                  :key="char + i"
-                >
-                  {{ char }}
-                </small>
+        <div v-if="isFilesTyping" class="Onboarding__scanning-files">
+          <div class="Onboarding__scanning-files__pseudo-border" />
+          <div class="Onboarding__scanning-files__content">
+            <div class="absolute flex w-full justify-between gap-5 p-10">
+              <div class="flex flex-1 flex-col gap-1">
+                <div class="flex gap-2">
+                  <small
+                    class="text-xs text-primary/50"
+                    v-for="(char, i) in scanningFilesChars"
+                    :key="char + i"
+                  >
+                    {{ char }}
+                  </small>
+                </div>
+                <pre class="Onboarding__files-list">{{ filesText }}</pre>
               </div>
-              <pre>{{ filesText }}</pre>
-            </div>
-            <div class="flex w-1/2 flex-col gap-5">
-              <!-- SCANNING BAR -->
-              <div
-                class="relative flex h-[10px] w-full flex-col overflow-hidden border border-secondary"
-              >
-                <div
-                  class="absolute left-0 top-0 h-[10px] bg-secondarySoft"
-                  :style="{
-                    width: `${
-                      (filesText.split('\n').length /
+              <div class="flex w-full flex-1 flex-col gap-5 md:relative">
+                <!-- SCANNING BAR -->
+                <div class="Onboarding__scanning-bar">
+                  <div
+                    class="absolute left-0 top-0 h-[10px] bg-secondarySoft"
+                    :style="{
+                      width: `${
+                        (filesText.split('\n').length /
+                          CYBERINFO.FILES_LIST.length) *
+                        100
+                      }%`,
+                    }"
+                  />
+                </div>
+                <!-- SCANNING PERCENTAGE -->
+                <small class="font-lucania text-secondary">
+                  {{
+                    (
+                      (filesText.split("\n").length /
                         CYBERINFO.FILES_LIST.length) *
                       100
-                    }%`,
-                  }"
-                />
+                    ).toFixed(2)
+                  }}
+                  %
+                </small>
               </div>
-              <!-- SCANNING PERCENTAGE -->
-              <small class="font-lucania text-secondary">
-                {{
-                  (
-                    (filesText.split("\n").length /
-                      CYBERINFO.FILES_LIST.length) *
-                    100
-                  ).toFixed(2)
-                }}
-                %
-              </small>
             </div>
           </div>
         </div>
@@ -225,16 +226,16 @@ watch(isFilesCompleted, (hasCompleted) => {
   }
 });
 
-watch(isEndingCompleted, (hasCompleted) => {
-  if (hasCompleted) {
-    setTimeout(() => {
-      router.push("/home");
-    }, 1000);
-  }
-});
+// watch(isEndingCompleted, (hasCompleted) => {
+//   if (hasCompleted) {
+//     setTimeout(() => {
+//       router.push("/home");
+//     }, 1000);
+//   }
+// });
 
 onMounted(() => {
-  startWelcomeTyping();
+  startFilesTyping();
 });
 </script>
 
@@ -243,7 +244,7 @@ onMounted(() => {
 @use "@/styles/general.scss" as *;
 @use "@/styles/colors.scss" as *;
 
-.OnBoarding {
+.Onboarding {
   @apply h-screen bg-black;
 
   &::after {
@@ -257,8 +258,8 @@ onMounted(() => {
     opacity: 0.1;
   }
 
-  p {
-    @apply font-lucania text-xl font-bold text-secondary;
+  &__welcome-text {
+    @apply font-lucania text-sm font-bold text-secondary md:text-xl;
   }
 
   &__centered {
@@ -266,19 +267,52 @@ onMounted(() => {
   }
 
   &__system-text {
-    @apply expand-animation z-50 h-full w-full overflow-hidden border border-secondary/50 bg-black/10 p-5 backdrop-blur-sm;
+    @apply expand-animation z-50 h-full w-full overflow-hidden border border-secondary/50 p-5 backdrop-blur-sm;
 
     pre {
       @apply text-[10px] text-secondary;
     }
   }
 
-  &__files-text {
-    @apply z-50 h-full w-full overflow-hidden border border-primary/50 bg-black/10 p-5 backdrop-blur-sm;
+  $clip-shape: polygon(
+    0% 15%,
+    0 0,
+    15% 0%,
+    98% 0,
+    100% 5%,
+    100% 95%,
+    75% 95%,
+    73% 100%,
+    2% 100%,
+    0 95%
+  );
 
-    pre {
-      @apply text-[10px] text-primary/50;
+  &__scanning-files {
+    @apply relative h-[90vh] w-full overflow-hidden border-2 border-secondarySoft p-20;
+    clip-path: $clip-shape;
+
+    &::after {
+      content: "";
+      @apply absolute inset-0 z-0 h-full w-full bg-black;
+      clip-path: $clip-shape;
     }
+
+    &__pseudo-border {
+      @apply absolute inset-0 -left-1 h-[calc(100%+10px)] w-[calc(100%+10px)] bg-secondarySoft;
+      clip-path: $clip-shape;
+    }
+
+    &__content {
+      @apply absolute inset-0 z-10 flex h-full w-full gap-5;
+    }
+  }
+
+  &__files-list {
+    @apply p-5 text-[10px] text-primary/50;
+  }
+
+  &__scanning-bar {
+    @apply relative flex h-[10px] w-full flex-col overflow-hidden border border-secondary;
   }
 }
 
