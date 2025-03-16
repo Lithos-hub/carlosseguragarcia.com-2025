@@ -63,7 +63,7 @@ watch(isDarkMode, (newVal) => {
 const links = [
   {
     name: "<Home />",
-    path: "/",
+    path: "/home",
   },
   {
     name: "<Experience />",
@@ -86,11 +86,11 @@ const links = [
 @use "@/styles/fonts.scss" as *;
 
 .TopBar {
-  @apply fixed top-0 z-50 flex w-full justify-between p-5;
+  @apply fixed top-0 z-50 flex w-full justify-between p-5 brightness-200;
 
   &__code {
     @include corner-effect;
-    @apply font-lucania h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 text-lg text-stone-800 backdrop-blur dark:text-primary;
+    @apply h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 font-lucania text-lg text-stone-800 backdrop-blur dark:text-primary;
 
     &-info {
       span {
@@ -105,17 +105,19 @@ const links = [
 
   &__link {
     @include corner-effect;
-    @apply font-jetbrainsMono relative py-2 text-[12px] md:px-5 lg:px-10;
+    @apply relative py-2 font-jetbrainsMono text-[12px] md:px-5 lg:px-10;
 
     &:hover {
-      @apply bg-stone-900 text-secondary brightness-200 transition-all duration-300 dark:bg-stone-500/10 dark:text-secondary dark:shadow-[0_0_10px_#00eaff7d];
+      @include corner-effect-secondary;
+      @apply bg-black text-secondary transition-all duration-300;
       background-size: 100% 100%;
+      text-shadow: 0 0 0px;
     }
   }
 
   &__dark-mode {
     @include corner-effect;
-    @apply font-lucania h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 text-lg text-stone-900 backdrop-blur dark:text-primary;
+    @apply h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 font-lucania text-lg text-stone-900 backdrop-blur dark:text-primary;
 
     :deep(button) {
       @apply dark:bg-primary-500 bg-stone-500;
@@ -127,7 +129,7 @@ const links = [
   }
 
   &__link-zone {
-    @apply font-lucania absolute -bottom-7 left-1/2 -translate-x-1/2 text-[8px] text-stone-800 dark:text-primary;
+    @apply absolute -bottom-7 left-1/2 -translate-x-1/2 font-lucania text-[8px] text-stone-800 dark:text-primary;
   }
 }
 </style>

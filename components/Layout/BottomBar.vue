@@ -3,21 +3,21 @@
     <div class="flex gap-5">
       <div class="BottomBar__version">
         <span class="BottomBar__version-title">Version</span>
-        {{ version }}
+        <span class="BottomBar__version-number">{{ version }}</span>
       </div>
       <div class="BottomBar__developedBy">
         <div class="flex items-center gap-1">
           <div class="square" />
-          <span> Developed by </span>
+          <label class="BottomBar__developedBy-label"> Developed by </label>
         </div>
-        <span class="font-exo">Carlos Segura García</span>
+        <span class="BottomBar__developedBy-name">Carlos Segura García</span>
       </div>
       <div class="BottomBar__developedBy">
         <div class="flex items-center gap-1">
           <div class="square" />
-          <span> Location </span>
+          <label class="BottomBar__developedBy-label"> Location </label>
         </div>
-        <span class="font-exo">Málaga - Spain</span>
+        <span class="BottomBar__developedBy-location">Málaga - Spain</span>
       </div>
     </div>
     <div class="BottomBar__social">
@@ -61,23 +61,33 @@ import { version } from "~/package.json";
 @use "@/styles/main.scss" as *;
 @use "@/styles/general.scss" as *;
 @use "@/styles/fonts.scss" as *;
+
 .BottomBar {
   @apply fixed bottom-0 z-50 flex w-full justify-between p-5 brightness-200;
 
   &__version {
     @include corner-effect;
-    @apply font-lucania flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 text-xs text-stone-800 backdrop-blur;
+    @apply flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 font-lucania text-xs text-stone-800 backdrop-blur;
 
     &-title {
-      @apply font-exo text-[9px] text-primary;
+      @apply font-lucania text-[9px] text-primary;
+    }
+
+    &-number {
+      @apply font-exo text-[10px] text-secondary;
     }
   }
 
   &__developedBy {
-    @apply font-lucania mt-auto flex flex-col gap-0 text-[10px];
+    @apply mt-auto flex flex-col gap-0;
 
-    span {
-      @apply text-primary;
+    &-label {
+      @apply font-lucania text-[9px] text-primary;
+    }
+
+    &-name,
+    &-location {
+      @apply font-exo text-[10px] text-secondary;
     }
   }
 

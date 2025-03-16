@@ -25,52 +25,42 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
 <style lang="scss" scoped>
 .Button {
-  @apply relative overflow-hidden border brightness-200 transition-all;
-  clip-path: polygon(
+  $clip-shape: polygon(
     0 0,
-    100% 0,
-    100% 30%,
-    100% 70%,
+    90% 0,
+    100% 20%,
+    100% 80%,
     100% 100%,
     10% 100%,
-    0 70%
+    0 80%,
+    0% 20%
   );
+
+  $gradient-cyan: rgba(0, 255, 255, 0.1);
+  $gradient-black: rgba(0, 0, 0, 0.1);
+
+  @apply relative overflow-hidden border brightness-200 transition-all;
+  clip-path: $clip-shape;
 
   $self: &;
 
   &::after {
     content: "";
     @apply absolute inset-0 z-0 h-full w-full bg-black/90;
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% 30%,
-      100% 70%,
-      100% 100%,
-      10% 100%,
-      0 70%
-    );
+    clip-path: $clip-shape;
     background-size: 3px 3px;
     background-image: repeating-linear-gradient(
       0deg,
-      rgba(0, 255, 255, 0.1),
-      rgba(0, 255, 255, 0.1) 1px,
-      rgba(0, 0, 0, 0.1) 1px,
-      rgba(0, 0, 0, 0.1)
+      $gradient-cyan,
+      $gradient-cyan 1px,
+      $gradient-black 1px,
+      $gradient-black
     );
   }
 
   &__pseudo-border {
-    @apply absolute inset-0 -left-1 h-[calc(100%+1px)] w-[calc(100%+5px)];
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% 30%,
-      100% 70%,
-      100% 100%,
-      10% 100%,
-      0 70%
-    );
+    @apply absolute inset-0 -left-1 h-[calc(100%+10px)] w-[calc(100%+10px)];
+    clip-path: $clip-shape;
   }
 
   &__content {
@@ -88,10 +78,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
       @apply bg-black/90;
       background-image: repeating-linear-gradient(
         0deg,
-        rgba(0, 255, 255, 0.1),
-        rgba(0, 255, 255, 0.1) 1px,
-        rgba(0, 0, 0, 0.1) 1px,
-        rgba(0, 0, 0, 0.1)
+        $gradient-cyan,
+        $gradient-cyan 1px,
+        $gradient-black 1px,
+        $gradient-black
       );
     }
 
@@ -115,10 +105,10 @@ const props = withDefaults(defineProps<ButtonProps>(), {
         background-size: 5px 5px;
         background-image: repeating-linear-gradient(
           45deg,
-          rgba(0, 255, 255, 0.1),
-          rgba(0, 255, 255, 0.1) 1px,
+          $gradient-cyan,
+          $gradient-cyan 1px,
           rgba(255, 255, 255, 0.1) 1px,
-          rgba(0, 0, 0, 0.1) 50%
+          $gradient-black 50%
         );
       }
     }

@@ -6,25 +6,31 @@ interface UseTypeWriterProps {
   caretSymbol?: string;
   caretSpeed?: number;
   persistLines?: boolean[];
+  count?: number;
 }
 
 export const useTypeWriter = ({
   texts,
   delay,
   speed,
-  caretAnimation = true,
+  caretAnimation = false,
   caretSymbol = "|",
   caretSpeed = 500,
   persistLines = [],
+  count = 1,
 }: UseTypeWriterProps) => {
   const textRef = ref("");
   const isTyping = ref(false);
   const caret = ref("");
   const isCompleted = ref(false);
+  const currentCount = ref(0);
 
   // Manage the caret animation
   const startCaretAnimation = () => {
-    if (!caretAnimation) return;
+    if (!caretAnimation) {
+      caret.value = "";
+      return;
+    }
 
     const caretInterval = setInterval(() => {
       caret.value = caret.value === caretSymbol ? "" : caretSymbol;
@@ -37,23 +43,43 @@ export const useTypeWriter = ({
     isTyping.value = true;
     textRef.value = "";
     isCompleted.value = false;
+    currentCount.value = 0;
 
     const caretInterval = startCaretAnimation();
 
-    await new Promise((resolve) => setTimeout(resolve, delay));
+    while (currentCount.value < count) {
+      currentCount.value++;
 
-    for (let i = 0; i < texts.length; i++) {
-      const text = texts[i];
-      const shouldPersist = persistLines[i] || false;
-
-      for (let j = 0; j < text.length; j++) {
-        textRef.value += text[j];
-        await new Promise((resolve) => setTimeout(resolve, speed));
+      if (currentCount.value > 1) {
+        textRef.value = "";
+        await new Promise((resolve) => setTimeout(resolve, delay));
+      } else {
+        await new Promise((resolve) => setTimeout(resolve, delay));
       }
 
-      if (!shouldPersist) {
-        await new Promise((resolve) => setTimeout(resolve, delay));
-        textRef.value = "";
+      for (let i = 0; i < texts.length; i++) {
+        const text = texts[i];
+        const shouldPersist = persistLines[i] || false;
+
+        if (speed === 0) {
+          textRef.value += text;
+        } else {
+          for (let j = 0; j < text.length; j++) {
+            textRef.value += text[j];
+            await new Promise((resolve) => setTimeout(resolve, speed));
+          }
+        }
+
+        if (i < texts.length - 1 || !shouldPersist) {
+          await new Promise((resolve) => setTimeout(resolve, delay));
+          if (!shouldPersist) {
+            textRef.value = "";
+          }
+        }
+      }
+
+      if (currentCount.value < count) {
+        await new Promise((resolve) => setTimeout(resolve, delay * 2));
       }
     }
 
@@ -66,12 +92,18 @@ export const useTypeWriter = ({
     }
   };
 
-  const displayText = computed(() => `${textRef.value}${caret.value}`);
+  const displayText = computed(() => {
+    if (!caretAnimation) {
+      return textRef.value;
+    }
+    return `${textRef.value}${caret.value}`;
+  });
 
   return {
     text: displayText,
     isTyping,
     isCompleted,
     startTyping,
+    currentCount,
   };
 };
