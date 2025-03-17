@@ -4,34 +4,58 @@
       <p class="Onboarding__welcome-text">{{ welcomeText }}</p>
       <Transition name="fade">
         <div v-if="isSystemTyping" class="Onboarding__system-text">
-          <pre class="w-[300px]">
-      _______  _____  _______  ______  __________________  _______
-     / ___/\ \/ / _ \/ __/ _ \/ __/\ \/ / __/_  __/ __/  |/  / __/
-    / /__   \  / _  / _// , _/\ \   \  /\ \  / / / _// /|_/ /\ \  
-    \___/   /_/____/___/_/|_/___/   /_/___/ /_/ /___/_/  /_/___/
-    
-              All rights reserved | CyberSystems {{ new Date().getFullYear() }}
-          </pre>
+          <div class="flex gap-10">
+            <div>
+              <pre>
+  _______  _____  _______  ______  __________________  _______
+ / ___/\ \/ / _ \/ __/ _ \/ __/\ \/ / __/_  __/ __/  |/  / __/
+/ /__   \  / _  / _// , _/\ \   \  /\ \  / / / _// /|_/ /\ \  
+\___/   /_/____/___/_/|_/___/   /_/___/ /_/ /___/_/  /_/___/
+                
+          All rights reserved | CyberSystems {{ new Date().getFullYear() }}
+              </pre>
 
-          <div class="flex gap-2 pb-2">
-            <small
-              class="text-xs text-secondary/50"
-              v-for="(char, i) in startingSystemChars"
-              :key="char + i"
-            >
-              {{ char }}
-            </small>
+              <div class="flex gap-2 pb-2">
+                <small
+                  class="text-xs text-secondary/50 brightness-200"
+                  v-for="(char, i) in startingSystemChars"
+                  :key="char + i"
+                >
+                  {{ char }}
+                </small>
+              </div>
+
+              <pre>{{ systemText }}</pre>
+            </div>
+            <div class="flex hidden w-full flex-col gap-5 p-5 md:block">
+              <p class="Onboarding__systems-messages-initial-text">
+                {{ CYBERINFO.LEFT_SIDE_TEXT }}
+              </p>
+              <div class="grid grid-cols-3 pt-5">
+                <div
+                  v-for="(line, index) in systemAuxiliarTextInitial"
+                  :key="index"
+                >
+                  <OnboardingSystemsMessages
+                    :texts="[line]"
+                    @completed="onSystemAuxiliarCompleted(index)"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
-
-          <pre>{{ systemText }}</pre>
         </div>
       </Transition>
       <Transition name="fade">
         <div v-if="isFilesTyping" class="Onboarding__scanning-files">
           <div class="Onboarding__scanning-files__pseudo-border" />
           <div class="Onboarding__scanning-files__content">
-            <div class="absolute flex w-full justify-between gap-5 p-10">
-              <div class="flex flex-1 flex-col gap-1">
+            <div
+              class="absolute flex w-full flex-col justify-between gap-5 p-10 md:flex-row"
+            >
+              <div
+                class="absolute top-24 flex flex-1 flex-col gap-1 md:relative md:top-0"
+              >
                 <div class="flex gap-2">
                   <small
                     class="text-xs text-primary/50"
@@ -43,11 +67,13 @@
                 </div>
                 <pre class="Onboarding__files-list">{{ filesText }}</pre>
               </div>
-              <div class="flex w-full flex-1 flex-col gap-5 md:relative">
+              <div
+                class="absolute flex w-[60vw] flex-1 flex-col pb-20 md:relative md:w-full"
+              >
                 <!-- SCANNING BAR -->
                 <div class="Onboarding__scanning-bar">
                   <div
-                    class="absolute left-0 top-0 h-[10px] bg-secondarySoft"
+                    class="absolute left-0 top-1/2 h-[5px] -translate-y-1/2 bg-secondarySoft"
                     :style="{
                       width: `${
                         (filesText.split('\n').length /
@@ -73,7 +99,7 @@
           </div>
         </div>
       </Transition>
-      <p>{{ endingText }}</p>
+      <p class="Onboarding__ending-text">{{ endingText }}</p>
     </div>
   </div>
 </template>
@@ -180,6 +206,14 @@ const {
   persistLines: LOADING_SYSTEM_TEXT.map(Boolean),
 });
 
+const systemAuxiliarTextInitial = [
+  ...CYBERINFO.EXTERNAL_SIGNAL,
+  ...CYBERINFO.ENCRYPTION_CHECK,
+  ...CYBERINFO.BIOFEED_INTERFACE,
+  ...CYBERINFO.MALWARE_SCAN,
+  ...CYBERINFO.SECURITY_PROTOCOL,
+];
+
 const {
   text: filesText,
   startTyping: startFilesTyping,
@@ -210,8 +244,21 @@ watch(isWelcomeCompleted, (hasCompleted) => {
   }
 });
 
-watch(isSystemCompleted, (hasCompleted) => {
-  if (hasCompleted) {
+const auxiliarTextsCompleted = ref<number[]>([]);
+
+const isAllAuxiliarTextsCompleted = computed(() => {
+  return (
+    auxiliarTextsCompleted.value.length === systemAuxiliarTextInitial.length
+  );
+});
+
+const onSystemAuxiliarCompleted = (index: number) => {
+  auxiliarTextsCompleted.value.push(index);
+};
+
+watch([isSystemCompleted, isAllAuxiliarTextsCompleted], (hasCompleted) => {
+  console.log(hasCompleted);
+  if (hasCompleted.every(Boolean)) {
     setTimeout(() => {
       startFilesTyping();
     }, 1000);
@@ -226,16 +273,16 @@ watch(isFilesCompleted, (hasCompleted) => {
   }
 });
 
-// watch(isEndingCompleted, (hasCompleted) => {
-//   if (hasCompleted) {
-//     setTimeout(() => {
-//       router.push("/home");
-//     }, 1000);
-//   }
-// });
+watch(isEndingCompleted, (hasCompleted) => {
+  if (hasCompleted) {
+    setTimeout(() => {
+      router.push("/home");
+    }, 1000);
+  }
+});
 
 onMounted(() => {
-  startFilesTyping();
+  startSystemTyping();
 });
 </script>
 
@@ -258,7 +305,8 @@ onMounted(() => {
     opacity: 0.1;
   }
 
-  &__welcome-text {
+  &__welcome-text,
+  &__ending-text {
     @apply font-lucania text-sm font-bold text-secondary md:text-xl;
   }
 
@@ -272,6 +320,10 @@ onMounted(() => {
     pre {
       @apply text-[10px] text-secondary;
     }
+  }
+
+  &__systems-messages-initial-text {
+    @apply font-lucania text-[8px] text-secondary;
   }
 
   $clip-shape: polygon(
@@ -288,7 +340,7 @@ onMounted(() => {
   );
 
   &__scanning-files {
-    @apply relative h-[90vh] w-full overflow-hidden border-2 border-secondarySoft p-20;
+    @apply relative h-[70vh] w-[80vw] overflow-hidden border-2 border-secondarySoft p-20 md:h-[90vh] md:w-[60vw];
     clip-path: $clip-shape;
 
     &::after {
@@ -308,7 +360,7 @@ onMounted(() => {
   }
 
   &__files-list {
-    @apply p-5 text-[10px] text-primary/50;
+    @apply text-[10px] text-primary/50;
   }
 
   &__scanning-bar {

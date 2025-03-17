@@ -72,8 +72,7 @@
 }
 
 @mixin middle-side-effect {
-  $corner-color-light: #1a1a1a;
-  $corner-color-dark: #00ffe5;
+  $corner-color: #00ffe5;
   $line-length: 100px;
 
   @apply bg-no-repeat;
@@ -101,32 +100,32 @@
     linear-gradient(
       to bottom,
       transparent 20%,
-      $corner-color-dark 20%,
-      $corner-color-dark 80%,
+      $corner-color 20%,
+      $corner-color 80%,
       transparent 80%
     ),
     // Right side
     linear-gradient(
         to bottom,
         transparent 20%,
-        $corner-color-dark 20%,
-        $corner-color-dark 80%,
+        $corner-color 20%,
+        $corner-color 80%,
         transparent 80%
       ),
     // Top side
     linear-gradient(
         to right,
         transparent 20%,
-        $corner-color-dark 20%,
-        $corner-color-dark 80%,
+        $corner-color 20%,
+        $corner-color 80%,
         transparent 80%
       ),
     // Bottom side
     linear-gradient(
         to right,
         transparent 20%,
-        $corner-color-dark 20%,
-        $corner-color-dark 80%,
+        $corner-color 20%,
+        $corner-color 80%,
         transparent 80%
       );
 }
@@ -223,7 +222,7 @@
 
 // Info text
 @mixin mini-info-text {
-  @apply font-lucania text-[10px] text-stone-900 brightness-200 dark:text-primary;
+  @apply font-lucania text-[10px] text-primary text-stone-900 brightness-200;
 }
 
 .info-text {
@@ -232,7 +231,7 @@
 
 // Squares
 @mixin square-shape {
-  @apply h-2 w-2 bg-stone-900 brightness-200 dark:bg-primary;
+  @apply h-2 w-2 brightness-200;
 }
 
 .square {
