@@ -31,7 +31,7 @@
     </Suspense>
 
     <!-- Floor -->
-    <ThreejsObjectsFloor />
+    <ThreejsObjectsFloorWithLight />
   </TresCanvas>
 </template>
 
