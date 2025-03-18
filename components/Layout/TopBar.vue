@@ -3,13 +3,13 @@
     <div class="TopBar__code">
       <div class="flex flex-col">
         <div class="flex items-center justify-between">
-          <div class="triangle-shape-top-left" />
+          <div class="triangle-shape-top-left bg-primary" />
           <span class="info-text"
             >{{ visualDataBySection?.componentName }}
           </span>
         </div>
         <div class="flex items-center justify-between">
-          <div class="triangle-shape-top-left" />
+          <div class="triangle-shape-top-left bg-primary" />
           <span class="info-text">Zone: {{ visualDataBySection?.code }} </span>
         </div>
       </div>
@@ -31,7 +31,7 @@
           <span class="info-text"
             >{{ colorMode.value === "dark" ? "Dark mode on" : "Light mode on" }}
           </span>
-          <div class="triangle-shape-top-right" />
+          <div class="triangle-shape-top-right bg-primary" />
         </div>
         <ClientOnly>
           <div class="flex items-center justify-between">
@@ -42,7 +42,7 @@
               on-icon="i-heroicons-moon"
               off-icon="i-heroicons-sun"
             />
-            <div class="triangle-shape-top-right" />
+            <div class="triangle-shape-top-right bg-primary" />
           </div>
         </ClientOnly>
       </div>
@@ -86,7 +86,7 @@ const links = [
 @use "@/styles/fonts.scss" as *;
 
 .TopBar {
-  @apply fixed top-0 z-50 flex w-full justify-between p-5 brightness-200;
+  @apply fixed top-0 z-50 flex w-full justify-between p-1 brightness-200 md:p-5;
 
   &__code {
     @include corner-effect;
@@ -100,7 +100,7 @@ const links = [
   }
 
   &__links {
-    @apply hidden w-auto items-center justify-center gap-5 border-y border-y-stone-500/10 p-2 backdrop-blur md:flex;
+    @apply hidden items-center justify-center gap-5 md:flex;
   }
 
   &__link {

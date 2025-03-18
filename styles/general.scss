@@ -222,7 +222,7 @@
 
 // Info text
 @mixin mini-info-text {
-  @apply font-lucania text-[10px] text-primary text-stone-900 brightness-200;
+  @apply font-lucania text-[10px] text-secondary;
 }
 
 .info-text {

@@ -1,9 +1,9 @@
 <template>
-  <div class="Experience">
-    <div class="Summary__div" id="summary" ref="summaryRef">
+  <div class="ExperienceWrapper">
+    <div id="summary" ref="summaryRef">
       <SectionSummary />
     </div>
-    <div class="Experience__div" id="experience" ref="experienceRef">
+    <div id="experience" ref="experienceRef">
       <SectionExperience />
     </div>
   </div>
@@ -38,7 +38,7 @@ watch(visibleElement, (newVisibleElement) => {
 
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
-.Experience {
-  @apply flex flex-col;
+.ExperienceWrapper {
+  @apply mx-auto mt-40 flex max-w-4xl flex-col;
 }
 </style>

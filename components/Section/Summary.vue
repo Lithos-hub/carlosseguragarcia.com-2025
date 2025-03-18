@@ -1,26 +1,25 @@
 <template>
-  <div class="Summary">
-    <ul class="Summary__info">
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-Summary-title">Total experience:</h2>
-        <code class="Summary__info-Summary-value">
-          {{ totalSummary() }}
-        </code>
-      </li>
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-Summary-title">Most used technologies:</h2>
-        <code class="Summary__info-Summary-value">
-          {{ getMostUsedTech() }}
-        </code>
-      </li>
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-Summary-title">Main client fields:</h2>
-        <code class="Summary__info-Summary-value">
-          {{ getMainClientFields() }}
-        </code>
-      </li>
-    </ul>
-  </div>
+  <ul class="Summary__info">
+    <div class="Summary__info__decoration-shape" />
+    <li class="Summary__info-item">
+      <h2 class="Summary__info-item__title">Total experience:</h2>
+      <code class="Summary__info-item__value">
+        {{ totalSummary() }}
+      </code>
+    </li>
+    <li class="Summary__info-item">
+      <h2 class="Summary__info-item__title">Most used technologies:</h2>
+      <code class="Summary__info-item__value">
+        {{ getMostUsedTech() }}
+      </code>
+    </li>
+    <li class="Summary__info-item">
+      <h2 class="Summary__info-item__title">Main client fields:</h2>
+      <code class="Summary__info-item__value">
+        {{ getMainClientFields() }}
+      </code>
+    </li>
+  </ul>
 </template>
 
 <script setup lang="ts">
@@ -44,40 +43,23 @@ const totalSummary = () => {
 @use "@/styles/fonts.scss" as *;
 
 .Summary {
-  @apply relative mx-auto flex h-screen max-w-[90vw] flex-col items-center justify-center;
-
   &__info {
-    @apply grid max-w-[90vw] grid-cols-1 gap-5 lg:grid-cols-3;
-  }
+    @apply relative grid grid-cols-1 gap-5 border border-secondary bg-black/50 p-5 backdrop-blur lg:grid-cols-3;
 
-  &__info-item {
-    @apply flex h-[250px] flex-col items-center justify-center gap-5 p-4 text-center text-[24px] transition-all xl:h-[400px] xl:p-10 xl:text-[30px];
-    aspect-ratio: 1/1;
-    border-image: url("/svg/light-banner-square-1.svg") 0 0 fill;
-
-    .dark & {
-      border-image: url("/svg/dark-banner-square-1.svg") 0 0 fill;
-    }
-  }
-
-  &__info-developer-info {
-    @apply dark:text-primary font-extrabold uppercase text-stone-800;
-  }
-
-  &__info-Summary {
-    @apply font-bold text-stone-800 dark:text-white;
-
-    &__icon {
-      @apply text-primary dark:text-primary;
+    &__decoration-shape {
+      @apply absolute bottom-0 right-0 h-[20px] w-[199px] bg-secondary;
+      clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 50%);
     }
 
-    &-title {
-      @apply font-jetbrainsMono font-bold text-stone-800 dark:text-white;
-    }
-  }
+    &-item {
+      &__title {
+        @apply font-exo text-sm font-bold text-primary;
+      }
 
-  &__info-Summary-value {
-    @apply font-exo text-primary dark:text-primary font-bold;
+      &__value {
+        @apply font-lucania text-sm text-secondary;
+      }
+    }
   }
 }
 </style>

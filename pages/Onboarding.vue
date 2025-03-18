@@ -31,6 +31,9 @@
               <p class="Onboarding__systems-messages-initial-text">
                 {{ CYBERINFO.LEFT_SIDE_TEXT }}
               </p>
+              <small class="text-xs text-primary/50">
+                Tasks completed:{{ auxiliarTextsCompleted.length }}
+              </small>
               <div class="grid grid-cols-3 pt-5">
                 <div
                   v-for="(line, index) in systemAuxiliarTextInitial"
@@ -257,8 +260,7 @@ const onSystemAuxiliarCompleted = (index: number) => {
 };
 
 watch([isSystemCompleted, isAllAuxiliarTextsCompleted], (hasCompleted) => {
-  console.log(hasCompleted);
-  if (hasCompleted.every(Boolean)) {
+  if (hasCompleted.every((isCompleted) => isCompleted)) {
     setTimeout(() => {
       startFilesTyping();
     }, 1000);
@@ -282,7 +284,7 @@ watch(isEndingCompleted, (hasCompleted) => {
 });
 
 onMounted(() => {
-  startSystemTyping();
+  startWelcomeTyping();
 });
 </script>
 
@@ -315,7 +317,7 @@ onMounted(() => {
   }
 
   &__system-text {
-    @apply expand-animation z-50 h-full w-full overflow-hidden border border-secondary/50 p-5 backdrop-blur-sm;
+    @apply expand-animation h-full w-full overflow-hidden border border-secondary/50 p-1 backdrop-blur-sm md:p-5;
 
     pre {
       @apply text-[10px] text-secondary;
@@ -340,7 +342,7 @@ onMounted(() => {
   );
 
   &__scanning-files {
-    @apply relative h-[70vh] w-[80vw] overflow-hidden border-2 border-secondarySoft p-20 md:h-[90vh] md:w-[60vw];
+    @apply relative h-[70vh] w-full overflow-hidden border-2 border-secondarySoft p-2 md:h-[90vh] md:w-[60vw] md:p-20;
     clip-path: $clip-shape;
 
     &::after {

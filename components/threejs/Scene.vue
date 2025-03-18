@@ -44,9 +44,7 @@
 
     <!-- GLTF model (Triangle) -->
     <Suspense>
-      <Levioso :range="[0.1, 0.5]">
-        <ThreejsObjectsTriangle />
-      </Levioso>
+      <ThreejsObjectsTriangle />
     </Suspense>
 
     <!-- Plane (wall - top left) -->

@@ -1,20 +1,20 @@
 <template>
   <div class="BottomBar">
-    <div class="flex gap-5">
+    <div class="flex gap-1 md:gap-5">
       <div class="BottomBar__version">
         <span class="BottomBar__version-title">Version</span>
         <span class="BottomBar__version-number">{{ version }}</span>
       </div>
       <div class="BottomBar__developedBy">
         <div class="flex items-center gap-1">
-          <div class="square" />
+          <div class="square bg-primary" />
           <label class="BottomBar__developedBy-label"> Developed by </label>
         </div>
         <span class="BottomBar__developedBy-name">Carlos Segura García</span>
       </div>
       <div class="BottomBar__developedBy">
         <div class="flex items-center gap-1">
-          <div class="square" />
+          <div class="square bg-primary" />
           <label class="BottomBar__developedBy-label"> Location </label>
         </div>
         <span class="BottomBar__developedBy-location">Málaga - Spain</span>
@@ -63,11 +63,11 @@ import { version } from "~/package.json";
 @use "@/styles/fonts.scss" as *;
 
 .BottomBar {
-  @apply fixed bottom-0 z-50 flex w-full justify-between p-5 brightness-200;
+  @apply fixed bottom-0 z-50 flex w-full justify-between p-1 brightness-200 md:p-5;
 
   &__version {
     @include corner-effect;
-    @apply flex w-[80px] flex-col items-center justify-center border-y border-y-stone-500/10 pb-1 font-lucania text-xs text-stone-800 backdrop-blur;
+    @apply flex flex-col items-center justify-center border-y border-y-stone-500/10 px-2 pb-1 font-lucania text-xs text-stone-800 backdrop-blur;
 
     &-title {
       @apply font-lucania text-[9px] text-primary;
@@ -98,7 +98,7 @@ import { version } from "~/package.json";
 }
 
 .social-button-wrapper {
-  @apply cursor-pointer p-2 hover:bg-primary/10 hover:text-white dark:hover:bg-stone-500/10;
+  @apply cursor-pointer p-1 px-2 hover:bg-primary/10 hover:text-white md:p-2 dark:hover:bg-stone-500/10;
 
   &:hover :deep(span) {
     @apply text-white;

@@ -35,8 +35,8 @@ const {
   isCompleted: isSystemAuxiliarCompleted,
 } = useTypeWriter({
   texts: props.texts,
-  delay: Math.random() * 100,
-  speed: Math.random() * 200,
+  delay: 100,
+  speed: Math.random() * 100,
   persistLines: [true],
 });
 

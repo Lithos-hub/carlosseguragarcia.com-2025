@@ -8,49 +8,6 @@
         <h2 class="Hero__title">I'm a front-end developer.</h2>
 
         <BaseButton>View my work</BaseButton>
-        <!-- <p class="Hero__description">
-          I'm a front-end developer with a passion for creating beautiful and
-          functional web applications, <br />mainly focused on
-          <strong class="vue-gradient-text text-2xl">Vue</strong> ecosystem.
-        </p>
-        <div class="Hero__logos">
-          <div class="Hero__logo-container">
-            <img src="/tech-logos/vue.svg" alt="Vue" class="Hero__logo-image" />
-            <small class="Hero__logo-name">Vue</small>
-          </div>
-          <div class="Hero__logo-container">
-            <img
-              src="/tech-logos/nuxt.svg"
-              alt="Nuxt"
-              class="Hero__logo-image"
-            />
-            <small class="Hero__logo-name">Nuxt</small>
-          </div>
-          <div class="Hero__logo-container">
-            <img
-              src="/tech-logos/pinia.svg"
-              alt="Pinia"
-              class="Hero__logo-image"
-            />
-            <small class="Hero__logo-name">Pinia</small>
-          </div>
-          <div class="Hero__logo-container">
-            <img
-              src="/tech-logos/vite.svg"
-              alt="Vite"
-              class="Hero__logo-image"
-            />
-            <small class="Hero__logo-name">Vite</small>
-          </div>
-          <div class="Hero__logo-container">
-            <img
-              src="/tech-logos/typescript.svg"
-              alt="TypeScript"
-              class="Hero__logo-image"
-            />
-            <small class="Hero__logo-name">TypeScript</small>
-          </div>
-        </div> -->
       </div>
     </div>
   </section>
@@ -88,30 +45,6 @@ onMounted(() => {
 
   &__title {
     @apply font-exo text-lg font-light leading-none text-stone-900 lg:text-[80px] dark:text-white;
-  }
-
-  &__description {
-    @apply font-exo max-w-[80vw] text-wrap text-center text-sm text-stone-900 lg:text-base dark:text-white;
-  }
-
-  &__logos {
-    @apply flex w-[351px] flex-wrap items-center justify-center gap-5 p-5;
-  }
-
-  &__logo {
-    @apply border border-stone-700/10 p-2.5;
-
-    &-image {
-      @apply h-10 w-10 object-contain grayscale dark:grayscale-0;
-    }
-
-    &-container {
-      @apply flex flex-col items-center justify-center gap-5;
-    }
-
-    &-name {
-      @apply font-exo text-xs font-medium leading-none opacity-50 dark:text-white dark:opacity-100;
-    }
   }
 }
 </style>

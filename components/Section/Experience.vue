@@ -17,7 +17,7 @@
             :class="{
               'text-stone-900 dark:text-white':
                 getEndDate(experience) !== 'Present',
-              'text-primary font-bold': getEndDate(experience) === 'Present',
+              'font-bold text-primary': getEndDate(experience) === 'Present',
             }"
           >
             {{ getEndDate(experience) }}
@@ -111,7 +111,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 @use "@/styles/fonts.scss" as *;
 
 .Experience {
-  @apply relative mx-auto flex min-h-screen w-full max-w-4xl flex-col;
+  @apply relative flex flex-col;
 
   &__item {
     @include corner-effect;
@@ -123,11 +123,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__index {
-    @apply font-exo text-primary dark:text-primary/80 text-[100px] font-extrabold;
+    @apply font-exo text-[100px] font-extrabold text-primary dark:text-primary/80;
   }
 
   &__date {
-    @apply font-exo flex w-full items-center justify-end gap-1 text-xl;
+    @apply flex w-full items-center justify-end gap-1 font-exo text-xl;
 
     &-separator {
       @apply text-stone-900 dark:text-white;
@@ -139,11 +139,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__connector {
-    @apply bg-primary/50 absolute right-0 top-0 h-full w-[2px];
+    @apply absolute right-0 top-0 h-full w-[2px] bg-primary/50;
 
     &::before {
       content: "";
-      @apply bg-primary absolute right-[-6px] top-[30px] h-[14px] w-[14px] rounded-full;
+      @apply absolute right-[-6px] top-[30px] h-[14px] w-[14px] rounded-full bg-primary;
     }
 
     &--last {
@@ -152,7 +152,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__right-side {
-    @apply dark:border-primary flex-1 border-stone-900 bg-stone-100 md:pl-6 dark:bg-stone-800;
+    @apply flex-1 border-stone-900 bg-stone-100 md:pl-6 dark:border-primary dark:bg-stone-800;
   }
 
   &__item:not(:last-child) .Experience__right-side {
@@ -164,7 +164,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 
     &::after {
       content: "";
-      @apply bg-primary dark:bg-primary absolute right-0 top-0 h-[20px] w-[200px];
+      @apply absolute right-0 top-0 h-[20px] w-[200px] bg-primary dark:bg-primary;
       clip-path: polygon(
         0 0,
         100% 0,
@@ -190,7 +190,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__title {
-    @apply text-primary font-whiteRabbit text-xl font-bold;
+    @apply font-whiteRabbit text-xl font-bold text-primary;
   }
 
   &__company {
@@ -206,7 +206,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__label {
-    @apply font-exo text-primary text-sm font-bold;
+    @apply font-exo text-sm font-bold text-primary;
   }
 
   &__stack {
@@ -238,7 +238,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__task-item {
-    @apply font-exo mb-1 text-sm text-stone-900 dark:text-white;
+    @apply mb-1 font-exo text-sm text-stone-900 dark:text-white;
   }
 }
 </style>
