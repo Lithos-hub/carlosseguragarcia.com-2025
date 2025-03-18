@@ -1,24 +1,7 @@
 <template>
   <TresCanvas v-bind="gl" window-size shadows alpha preset="realistic">
     <!-- Camera -->
-    <TresPerspectiveCamera :fov="25" :position="[0, 0, TRIANGLE_SIZE * 10]" />
-
-    <!-- Grid -->
-    <!-- <Grid
-      :args="[100, 100]"
-      :position="[0, -3, 0]"
-      :rotation="[0, Math.PI / 2, 0]"
-      cell-color="green"
-      :cell-size="0.6"
-      :cell-thickness="0.5"
-      section-color="cyan"
-      :section-size="2"
-      :section-thickness="1.3"
-      :infinite-grid="true"
-      :fade-from="0"
-      :fade-distance="100"
-      :fade-strength="1"
-    /> -->
+    <TresPerspectiveCamera :fov="80" :position="[0, 0, TRIANGLE_SIZE * 10]" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -26,7 +9,7 @@
       <ChromaticAberrationPmndrs
         :offset
         radial-modulation
-        :modulation-offset="0"
+        :modulation-offset="0.5"
       />
       <!-- Bloom -->
       <BloomPmndrs
@@ -37,7 +20,7 @@
         mipmap-blur
       />
       <!-- Vignette -->
-      <VignettePmndrs :darkness="1" :offset="0.4" />
+      <VignettePmndrs :darkness="0.8" :offset="0.3" />
       <!-- Noise -->
       <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
@@ -47,60 +30,14 @@
       <ThreejsObjectsTriangle />
     </Suspense>
 
-    <!-- Plane (wall - top left) -->
-    <!-- <TresMesh :position="[-20.25, 10, 0]" :rotation="[0, 0, 0]">
-      <TresPlaneGeometry :args="[40, 15]" />
-      <TresMeshPhysicalMaterial
-        color="red"
-        :roughness="0.8"
-        :metalness="0.2"
-        :reflectivity="0.5"
-      />
-    </TresMesh> -->
-    <!-- Plane (wall - top right) -->
-    <!-- <TresMesh :position="[20.25, 10, 0]" :rotation="[0, 0, 0]">
-      <TresPlaneGeometry :args="[40, 15]" />
-      <TresMeshPhysicalMaterial
-        color="red"
-        :roughness="0.8"
-        :metalness="0.2"
-        :reflectivity="0.5"
-      />
-    </TresMesh> -->
-
-    <!-- Plane (wall - bottom) -->
-    <!-- <TresMesh :position="[0, -8, 0]" :rotation="[0, 0, 0]">
-      <TresPlaneGeometry :args="[50, 20]" />
-      <TresMeshPhysicalMaterial
-        color="red"
-        :roughness="0.8"
-        :metalness="0.2"
-        :reflectivity="0.5"
-      />
-    </TresMesh> -->
-
-    <!-- Plane (light - background) -->
-    <!-- <TresMesh :position="[0, 0, -20]" :rotation="[0, 0, 0]">
-      <TresPlaneGeometry :args="[100, 100]" />
-      <TresMeshBasicMaterial color="white" />
-    </TresMesh> -->
-
-    <!-- Oniric Building -->
-    <!-- <TresMesh
-      ref="buildingRef1"
-      :position="[0, -5, 0]"
-      :rotation="[0, 0, -Math.PI / 0.5]"
-    >
-      <TresBoxGeometry :args="[2, 10, 2]" />
-      <TresMeshPhysicalMaterial color="black" />
-    </TresMesh> -->
+    <!-- Floor -->
+    <ThreejsObjectsFloor />
   </TresCanvas>
 </template>
 
 <script setup lang="ts">
 import {
   BloomPmndrs,
-  ChromaticAberrationPmndrs,
   EffectComposerPmndrs,
   NoisePmndrs,
   VignettePmndrs,
