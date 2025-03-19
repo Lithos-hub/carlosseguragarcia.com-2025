@@ -1,7 +1,7 @@
 <template>
   <TresCanvas v-bind="gl" window-size shadows alpha preset="realistic">
     <!-- Camera -->
-    <TresPerspectiveCamera :fov="80" :position="[0, 0, TRIANGLE_SIZE * 10]" />
+    <TresPerspectiveCamera :fov="80" :position="[0, 0, 100]" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -26,12 +26,17 @@
     </EffectComposerPmndrs>
 
     <!-- GLTF model (Triangle) -->
-    <Suspense>
+    <!-- <Suspense>
       <ThreejsObjectsTriangle />
-    </Suspense>
+    </Suspense> -->
 
     <!-- Floor -->
-    <ThreejsObjectsFloorWithLight />
+    <!-- <ThreejsObjectsFloorWithLight /> -->
+
+    <!-- GLTF model (Geonodes) -->
+    <Suspense>
+      <ThreejsObjectsGeonodes />
+    </Suspense>
   </TresCanvas>
 </template>
 
@@ -45,14 +50,10 @@ import {
 import { BlendFunction } from "postprocessing";
 import { NoToneMapping, Vector2 } from "three";
 
-const TRIANGLE_SIZE = 5;
-
 const gl = {
   toneMapping: NoToneMapping,
   multisampling: 8,
 };
 
 const offset = new Vector2(0.002, 0.002);
-
-const { onLoop } = useRenderLoop();
 </script>
