@@ -1,6 +1,6 @@
 <template>
   <!-- Floating lights (now multiple) with changing shape -->
-  <template v-for="(light, index) in lights" :key="index">
+  <!-- <template v-for="(light, index) in lights" :key="index">
     <TresGroup
       :ref="
         (el) => {
@@ -8,20 +8,18 @@
         }
       "
     >
-      <!-- We use an additional TresGroup for the shape rotation -->
       <TresGroup
         :rotation="
           light.direction === 'horizontal' ? [0, 0, 0] : [0, 0, Math.PI / 2]
         "
       >
-        <!-- We use CapsuleGeometry for a more aerodynamic effect -->
         <TresMesh
           :position="[0, 0, 1]"
           :scale="
             light.direction === 'horizontal' ? [2, 0.8, 0.8] : [0.8, 2, 0.8]
           "
         >
-          <TresSphereGeometry :args="[1, 32, 32]" />
+          <TresSphereGeometry :args="[0.1, 32, 32]" />
           <TresMeshStandardMaterial
             :color="light.color"
             :emissive="light.color"
@@ -38,11 +36,17 @@
         :decay="2"
       />
     </TresGroup>
-  </template>
+  </template> -->
 
-  <TresMesh ref="planeRef" :position="[0, 0, 0]">
-    <TresPlaneGeometry :args="[width, height]" />
-    <TresMeshPhysicalMaterial color="black" />
+  <!-- Light emissive plane -->
+  <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
+    <TresPlaneGeometry :args="[width * 10, height * 10]" />
+    <TresMeshPhysicalMaterial
+      color="white"
+      emissive="cyan"
+      :emissive-intensity="10"
+    />
+    />
   </TresMesh>
 
   <TresInstancedMesh
@@ -51,8 +55,13 @@
     receive-shadow
     :args="[null!, null!, numberOfCubes]"
   >
-    <TresBoxGeometry :args="[cubeSize, cubeSize, cubeSize]" />
-    <TresMeshStandardMaterial color="black" />
+    <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
+    <!-- <TresMeshStandardMaterial
+      :map="instancedMeshTexture.map"
+      :roughness-map="instancedMeshTexture.roughnessMap"
+      :normal-map="instancedMeshTexture.normalMap"
+    /> -->
+    <TresMeshStandardMaterial :roughness="0.5" :metalness="0.5" color="black" />
   </TresInstancedMesh>
 </template>
 
@@ -60,10 +69,16 @@
 import type { InstancedMesh } from "three";
 import { Color, Matrix4, Vector3 } from "three";
 
+// const instancedMeshTexture = await useTexture({
+//   map: "/textures/metal/metal-44-dark_diffuse.jpg",
+//   roughnessMap: "/textures/metal/metal-44_metal-metal-44_roughness.png",
+//   normalMap: "/textures/metal/metal-44_normal.jpg",
+// });
+
 // Number of lights
 const numberOfLights = 5;
 // Plane state
-const height = ref(100);
+const height = ref(200);
 const width = ref(300);
 
 // References
@@ -72,9 +87,21 @@ const planeRef = shallowRef();
 const lightGroupRefs = ref<any[]>([]);
 
 // Configuration for cube distribution
-const cubeSize = 5; // Cube size
-const cubeSpacing = 5.3; // Cube spacing
+const cubeSize = 6; // Cube size
+const cubeSpacing = 6.001; // Cube spacing
 const numberOfCubes = 700; // Total number of cubes
+
+// Z movement configuration
+const cubeZConfig = ref(
+  Array(numberOfCubes)
+    .fill(null)
+    .map(() => ({
+      maxHeight: 0.5 + Math.random() * 0.55, // Max random height between 2 and 3
+      speed: 0.1 + Math.random() * 0.2, // Random speed between 0.1 and 1
+      currentOffset: 0, // Current offset
+      phase: Math.random() * Math.PI * 2, // Random phase for sinusoidal movement
+    })),
+);
 
 // Data structure for light parameters
 const lights = ref(
@@ -160,7 +187,17 @@ const distributeInstancesUniformly = () => {
       const xPos = startX + x * cubeSpacing;
       const yPos = startY + y * cubeSpacing;
 
-      matrix.setPosition(xPos, yPos, 0);
+      // Inicializar configuración Z si es necesario
+      if (!cubeZConfig.value[index]) {
+        cubeZConfig.value[index] = {
+          maxHeight: 0.5 + Math.random() * 2,
+          speed: 0.2 + Math.random() * 0.8,
+          currentOffset: 0,
+          phase: Math.random() * Math.PI * 2,
+        };
+      }
+
+      matrix.setPosition(xPos, yPos, cubeZConfig.value[index].currentOffset);
       mesh.setMatrixAt(index, matrix);
 
       // Optional: color cubes based on their position
@@ -232,6 +269,38 @@ onBeforeRender(({ delta }) => {
     if (newHeight !== height.value || newWidth !== width.value) {
       height.value = newHeight;
       width.value = newWidth;
+    }
+  }
+
+  // Actualizar posiciones Z de los cubos
+  if (instancesRef.value) {
+    const mesh = instancesRef.value;
+    const matrix = new Matrix4();
+    let needsUpdate = false;
+
+    // Para cada cubo, calculamos su nueva posición en Z
+    for (let i = 0; i < numberOfCubes; i++) {
+      // Obtener la matriz actual
+      mesh.getMatrixAt(i, matrix);
+
+      // Extraer la posición actual
+      const position = new Vector3();
+      position.setFromMatrixPosition(matrix);
+
+      // Calcular nueva posición Z usando movimiento senoidal
+      const config = cubeZConfig.value[i];
+      config.currentOffset =
+        config.maxHeight *
+        Math.sin(config.phase + Date.now() * 0.001 * config.speed);
+
+      // Actualizar posición manteniendo X e Y igual
+      matrix.setPosition(position.x, position.y, config.currentOffset);
+      mesh.setMatrixAt(i, matrix);
+      needsUpdate = true;
+    }
+
+    if (needsUpdate) {
+      mesh.instanceMatrix.needsUpdate = true;
     }
   }
 

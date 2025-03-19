@@ -1,7 +1,14 @@
 <template>
   <TresCanvas v-bind="gl" window-size shadows alpha preset="realistic">
     <!-- Camera -->
-    <TresPerspectiveCamera :fov="80" :position="[0, 0, 100]" />
+    <TresPerspectiveCamera
+      :fov="80"
+      :position="[0, 0, 30]"
+      :rotation="[0, 0, 0]"
+    />
+
+    <!-- Ambient Light -->
+    <TresAmbientLight :intensity="10" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -31,11 +38,8 @@
     </Suspense> -->
 
     <!-- Floor -->
-    <!-- <ThreejsObjectsFloorWithLight /> -->
-
-    <!-- GLTF model (Geonodes) -->
     <Suspense>
-      <ThreejsObjectsGeonodes />
+      <ThreejsObjectsFloorWithLight />
     </Suspense>
   </TresCanvas>
 </template>

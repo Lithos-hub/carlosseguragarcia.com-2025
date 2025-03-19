@@ -2,10 +2,12 @@
   <section class="Hero">
     <div class="Hero__content">
       <div class="Hero__content-wrapper">
-        <h1 class="Hero__name">
-          Hello, I'm <span class="text-primary">Carlos</span>.
-        </h1>
-        <h2 class="Hero__title">I'm a front-end developer.</h2>
+        <div class="flex flex-col">
+          <h1 class="Hero__name">
+            Hello, I'm <span class="text-primary">Carlos</span>.
+          </h1>
+          <h2 class="Hero__title">I'm a front-end developer.</h2>
+        </div>
 
         <BaseButton>View my work</BaseButton>
       </div>
@@ -32,10 +34,10 @@ onMounted(() => {
   @include section-wrapper;
 
   &__content {
-    @apply flex h-full flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;
+    @apply flex h-screen flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;
 
     &-wrapper {
-      @apply flex h-full flex-col items-center justify-center gap-5;
+      @apply flex h-full flex-col items-center justify-evenly;
     }
   }
 
