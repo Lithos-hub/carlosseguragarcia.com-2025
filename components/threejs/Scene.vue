@@ -2,7 +2,7 @@
   <TresCanvas v-bind="gl" window-size shadows alpha preset="realistic">
     <!-- Camera -->
     <TresPerspectiveCamera
-      :fov="80"
+      :fov="65"
       :position="[0, 0, 30]"
       :rotation="[0, 0, 0]"
     />
@@ -20,14 +20,19 @@
       />
       <!-- Bloom -->
       <BloomPmndrs
-        :radius="0.6"
-        :intensity="0.1"
-        :luminance-threshold="0.2"
+        :radius="0.2"
+        :intensity="0.4"
+        :luminance-threshold="0.5"
         :luminance-smoothing="1"
         mipmap-blur
       />
+
       <!-- Vignette -->
-      <VignettePmndrs :darkness="0.8" :offset="0.3" />
+      <VignettePmndrs
+        :darkness="0.6"
+        :offset="0.6"
+        :blend-function="BlendFunction.ALPHA"
+      />
       <!-- Noise -->
       <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
@@ -46,7 +51,6 @@
 
 <script setup lang="ts">
 import {
-  BloomPmndrs,
   EffectComposerPmndrs,
   NoisePmndrs,
   VignettePmndrs,

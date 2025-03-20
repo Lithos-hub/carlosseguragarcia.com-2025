@@ -25,26 +25,26 @@
         {{ link.name }}</NuxtLink
       >
     </div>
-    <div class="TopBar__dark-mode">
+    <div class="TopBar__language-selector">
       <div class="flex flex-col">
         <div class="flex items-center justify-between">
-          <span class="info-text"
-            >{{ colorMode.value === "dark" ? "Dark mode on" : "Light mode on" }}
-          </span>
+          <span class="info-text">Language: {{ selectedLanguage.name }}</span>
           <div class="triangle-shape-top-right bg-primary" />
         </div>
-        <ClientOnly>
-          <div class="flex items-center justify-between">
-            <UToggle
-              v-model="isDarkMode"
-              color="primary"
-              size="sm"
-              on-icon="i-heroicons-moon"
-              off-icon="i-heroicons-sun"
-            />
-            <div class="triangle-shape-top-right bg-primary" />
+        <div class="grid grid-cols-5 gap-2">
+          <div v-for="lang in availableLanguages" :key="lang.code">
+            <button
+              class="TopBar__language-selector__button"
+              :class="{
+                'TopBar__language-selector__button--active':
+                  lang.code === selectedLanguage.code,
+              }"
+              @click="changeLanguage(lang)"
+            >
+              <img :src="lang.flag" alt="Language flag" />
+            </button>
           </div>
-        </ClientOnly>
+        </div>
       </div>
     </div>
   </div>
@@ -53,11 +53,10 @@
 <script setup lang="ts">
 const { visualDataBySection } = storeToRefs(useUiStore());
 
-const colorMode = useColorMode();
-const isDarkMode = ref(colorMode.value === "dark");
-
-watch(isDarkMode, (newVal) => {
-  colorMode.preference = newVal ? "dark" : "light";
+const selectedLanguage = reactive({
+  name: "English",
+  code: "en",
+  flag: "/icons/gb.svg",
 });
 
 const links = [
@@ -78,6 +77,40 @@ const links = [
     path: "/cv",
   },
 ];
+
+const availableLanguages = [
+  {
+    name: "English",
+    code: "en",
+    flag: "/icons/gb.svg",
+  },
+  {
+    name: "Spanish",
+    code: "es",
+    flag: "/icons/es.svg",
+  },
+  {
+    name: "French",
+    code: "fr",
+    flag: "/icons/fr.svg",
+  },
+  {
+    name: "Italian",
+    code: "it",
+    flag: "/icons/it.svg",
+  },
+  {
+    name: "Portuguese",
+    code: "pt",
+    flag: "/icons/pt.svg",
+  },
+];
+
+const changeLanguage = (lang: any) => {
+  selectedLanguage.name = lang.name;
+  selectedLanguage.code = lang.code;
+  selectedLanguage.flag = lang.flag;
+};
 </script>
 
 <style lang="scss" scoped>
@@ -115,16 +148,16 @@ const links = [
     }
   }
 
-  &__dark-mode {
+  &__language-selector {
     @include corner-effect;
     @apply h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 font-lucania text-lg text-stone-900 backdrop-blur dark:text-primary;
 
-    :deep(button) {
-      @apply dark:bg-primary-500 bg-stone-500;
+    &__button {
+      @apply rounded-full outline outline-transparent brightness-50;
     }
 
-    :deep(.iconify) {
-      @apply text-stone-950 dark:text-white;
+    &__button--active {
+      @apply outline-primary;
     }
   }
 
