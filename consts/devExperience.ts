@@ -6,7 +6,7 @@ type Stack = {
 export interface Experience {
   id: number;
   image: string;
-  title: string;
+  role: string;
   company: string;
   companyFields: string[];
   subtitle: string;
@@ -32,7 +32,7 @@ export const DEV_EXPERIENCE = [
   {
     id: 1,
     image: "/company-logos/cgi.png",
-    title: "Front-end Developer",
+    role: "Front-end Developer",
     company: "CGI",
     companyFields: ["Consulting", "IT"],
     clients: ["BBVA"],
@@ -60,7 +60,7 @@ export const DEV_EXPERIENCE = [
   {
     id: 2,
     image: "/company-logos/cathedral_software.png",
-    title: "Front-end Developer",
+    role: "Front-end Developer",
     company: "Cathedral Software",
     companyFields: ["Consulting", "IT"],
     subtitle: "Cathedral Software",
@@ -102,7 +102,7 @@ export const DEV_EXPERIENCE = [
   {
     id: 3,
     image: "/company-logos/innoIT.png",
-    title: "Front-end Developer",
+    role: "Front-end Developer",
     company: "InnoIT",
     companyFields: ["Consulting", "IT"],
     subtitle: "InnoIT",
@@ -131,7 +131,7 @@ export const DEV_EXPERIENCE = [
   {
     id: 4,
     image: "/company-logos/photopills.png",
-    title: "Front-end Developer",
+    role: "Front-end Developer",
     company: "PhotoPills",
     companyFields: ["Product", "SaaS"],
     subtitle: "PhotoPills",
@@ -160,7 +160,7 @@ export const DEV_EXPERIENCE = [
   {
     id: 5,
     image: "/company-logos/knowmad_mood.jpg",
-    title: "Software Engineer",
+    role: "Software Engineer",
     company: "Knowmad Mood",
     companyFields: ["Consulting", "IT"],
     subtitle: "Knowmad Mood",
@@ -168,7 +168,7 @@ export const DEV_EXPERIENCE = [
     clientFields: ["E-commerce", "Fashion"],
     initialYear: 2025,
     endYear: null,
-    initialMonth: 1,
+    initialMonth: 2,
     endMonth: null,
     stack: [
       { techName: "Vue 3", imageUrl: "/tech-logos/vue.svg" },

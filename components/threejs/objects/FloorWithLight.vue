@@ -1,11 +1,11 @@
 <template>
   <!-- Light emissive plane -->
   <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
-    <TresPlaneGeometry :args="[width * 10, height * 10]" />
+    <TresPlaneGeometry :args="[width, height]" />
     <TresMeshPhysicalMaterial
       color="white"
       :emissive="sectionColor"
-      :emissive-intensity="10"
+      :emissive-intensity="5"
     />
     />
   </TresMesh>
@@ -17,7 +17,16 @@
     :args="[null!, null!, numberOfCubes]"
   >
     <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
-    <TresMeshStandardMaterial :roughness="0.5" :metalness="0.5" color="black" />
+    <TresMeshPhysicalMaterial
+      :roughness="0.1"
+      :metalness="0.2"
+      :transmission="0.9"
+      :thickness="1"
+      :ior="1.5"
+      :clearcoat="1.0"
+      :opacity="1"
+      color="black"
+    />
   </TresInstancedMesh>
 </template>
 
@@ -52,7 +61,7 @@ const cubeZConfig = ref(
   Array(numberOfCubes)
     .fill(null)
     .map(() => ({
-      maxHeight: 0.5 + Math.random() * 0.55, // Max random height between 2 and 3
+      maxHeight: 0.5 + Math.random() * 0.501, // Max random height between 2 and 3
       speed: 0.1 + Math.random() * 0.2, // Random speed between 0.1 and 1
       currentOffset: 0, // Current offset
       phase: Math.random() * Math.PI * 2, // Random phase for sinusoidal movement
@@ -105,7 +114,7 @@ const distributeInstancesUniformly = () => {
       // Initialize Z configuration if necessary
       if (!cubeZConfig.value[index]) {
         cubeZConfig.value[index] = {
-          maxHeight: 0.5 + Math.random() * 2,
+          maxHeight: 0.5 + Math.random() * 0.501,
           speed: 0.2 + Math.random() * 0.8,
           currentOffset: 0,
           phase: Math.random() * Math.PI * 2,
@@ -154,6 +163,15 @@ onBeforeRender(() => {
     const matrix = new Matrix4();
     let needsUpdate = false;
 
+    // Tiempo actual para la animación de olas
+    const time = Date.now() * 0.001;
+
+    // Velocidad de propagación de las olas
+    const waveSpeed = 1;
+
+    // Frecuencia de las olas
+    const waveFrequency = 0.5;
+
     // For each cube, calculate its new Z position
     for (let i = 0; i < numberOfCubes; i++) {
       // Get the current matrix
@@ -168,15 +186,18 @@ onBeforeRender(() => {
         position.x * position.x + position.y * position.y,
       );
 
-      // Calculate scale factor based on distance from center (más suave)
-      const maxDistance = Math.max(width.value, height.value) / 2;
-      const scaleZ = 1 + (distanceFromCenter / maxDistance) * 20; // Reducido a 0.5
+      // Efecto de ola desde el centro hacia afuera
+      // La fase depende de la distancia al centro
+      const wavePhase = distanceFromCenter * waveFrequency - time * waveSpeed;
 
-      // Calculate new Z position using sinusoidal movement
+      // Calculate new Z position using outward wave movement
       const config = cubeZConfig.value[i];
       config.currentOffset =
-        config.maxHeight *
-        Math.sin(config.phase + Date.now() * 0.001 * config.speed);
+        config.maxHeight * Math.sin(wavePhase + config.phase);
+
+      // Calculate scale factor based on distance from center (más suave)
+      const maxDistance = Math.max(width.value, height.value) / 2;
+      const scaleZ = 1 + (distanceFromCenter / maxDistance) * 20;
 
       // Set scale and position
       matrix.makeScale(1.05, 2, scaleZ);

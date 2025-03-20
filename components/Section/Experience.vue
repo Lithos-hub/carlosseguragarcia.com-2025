@@ -2,7 +2,7 @@
   <div class="Experience">
     <div
       v-for="experience in DEV_EXPERIENCE"
-      :key="`Experience-${experience.title}-${experience.subtitle}`"
+      :key="`Experience-${experience.role}-${experience.subtitle}`"
       class="Experience__item"
     >
       <div class="Experience__left-side">
@@ -15,20 +15,13 @@
           <div
             class="Experience__end-date"
             :class="{
-              'text-stone-900 dark:text-white':
-                getEndDate(experience) !== 'Present',
-              'font-bold text-primary': getEndDate(experience) === 'Present',
+              'text-white': getEndDate(experience) !== 'Present',
+              'font-bold text-secondary': getEndDate(experience) === 'Present',
             }"
           >
             {{ getEndDate(experience) }}
           </div>
         </div>
-        <div
-          class="Experience__connector"
-          :class="{
-            'Experience__connector--last': experience.id === 1,
-          }"
-        ></div>
       </div>
       <div class="Experience__right-side">
         <div class="Experience__card">
@@ -38,12 +31,11 @@
               :alt="experience.company"
               class="Experience__company-image"
               :class="{
-                'bg-stone-900 p-2.5 dark:bg-transparent':
-                  experience.subtitle === 'InnoIT',
+                'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
               }"
             />
-            <div class="Experience__title-container">
-              <h3 class="Experience__title">{{ experience.title }}</h3>
+            <div class="Experience__role-container">
+              <h3 class="Experience__role">{{ experience.role }}</h3>
               <p class="Experience__company">{{ experience.company }}</p>
             </div>
           </div>
@@ -81,7 +73,8 @@
                 :key="taskIndex"
                 class="Experience__task-item"
               >
-                {{ task }}
+                <div class="Experience__task-bullet" />
+                <p class="Experience__task-text">{{ task }}</p>
               </li>
             </ul>
           </div>
@@ -119,40 +112,27 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__left-side {
-    @apply relative hidden w-full flex-col items-end pr-5 md:flex md:w-[300px];
+    @apply relative hidden w-full flex-col items-end pr-5 backdrop-blur md:flex md:w-[300px];
   }
 
   &__index {
-    @apply font-exo text-[100px] font-extrabold text-primary dark:text-primary/80;
+    @apply font-exo text-[100px] font-extrabold text-secondary/80;
   }
 
   &__date {
     @apply flex w-full items-center justify-end gap-1 font-exo text-xl;
 
     &-separator {
-      @apply text-stone-900 dark:text-white;
+      @apply text-white;
     }
   }
 
   &__start-date {
-    @apply text-stone-900 dark:text-white;
-  }
-
-  &__connector {
-    @apply absolute right-0 top-0 h-full w-[2px] bg-primary/50;
-
-    &::before {
-      content: "";
-      @apply absolute right-[-6px] top-[30px] h-[14px] w-[14px] rounded-full bg-primary;
-    }
-
-    &--last {
-      @apply h-[60px];
-    }
+    @apply text-white;
   }
 
   &__right-side {
-    @apply flex-1 border-stone-900 bg-stone-100 md:pl-6 dark:border-primary dark:bg-stone-800;
+    @apply flex-1 border-secondary bg-black/50 backdrop-blur-lg md:pl-6;
   }
 
   &__item:not(:last-child) .Experience__right-side {
@@ -164,7 +144,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 
     &::after {
       content: "";
-      @apply absolute right-0 top-0 h-[20px] w-[200px] bg-primary dark:bg-primary;
+      @apply absolute right-0 top-0 h-[20px] w-[200px] bg-secondary;
       clip-path: polygon(
         0 0,
         100% 0,
@@ -172,7 +152,8 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
         100% 70%,
         100% 100%,
         5% 100%,
-        0 50%
+        0 60%,
+        0% 30%
       );
     }
   }
@@ -185,16 +166,16 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
     @apply h-[50px] w-[50px] object-contain;
   }
 
-  &__title-container {
+  &__role-container {
     @apply flex flex-col;
   }
 
-  &__title {
-    @apply font-whiteRabbit text-xl font-bold text-primary;
+  &__role {
+    @apply font-whiteRabbit text-xl font-bold text-secondary;
   }
 
   &__company {
-    @apply font-exo text-base text-stone-900 dark:text-white;
+    @apply font-exo text-base text-white;
   }
 
   &__clients {
@@ -202,11 +183,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__client-list {
-    @apply font-exo text-sm text-stone-900 dark:text-white;
+    @apply font-exo text-sm text-white;
   }
 
   &__label {
-    @apply font-exo text-sm font-bold text-primary;
+    @apply font-exo text-sm font-bold text-secondary;
   }
 
   &__stack {
@@ -214,11 +195,12 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__stack-items {
-    @apply flex flex-wrap gap-3;
+    @apply grid grid-cols-4 gap-1;
   }
 
   &__stack-item {
-    @apply flex items-center gap-1 bg-stone-100 p-2 dark:bg-stone-900;
+    @include corner-effect;
+    @apply flex w-full items-center gap-1 bg-stone-900/50 p-2;
   }
 
   &__stack-image {
@@ -226,7 +208,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__stack-name {
-    @apply font-jetbrainsMono text-xs text-stone-900 dark:text-white;
+    @apply font-jetbrainsMono text-[10px] text-white;
   }
 
   &__tasks {
@@ -234,11 +216,20 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__task-list {
-    @apply list-disc pl-5;
+    @apply list-none;
   }
 
   &__task-item {
-    @apply mb-1 font-exo text-sm text-stone-900 dark:text-white;
+    @apply flex items-center gap-2;
+  }
+
+  &__task-bullet {
+    @include corner-effect;
+    @apply h-2 w-2 bg-transparent p-1;
+  }
+
+  &__task-text {
+    @apply font-exo text-sm text-white;
   }
 }
 </style>

@@ -123,7 +123,7 @@ const changeLanguage = (lang: any) => {
 
   &__code {
     @include corner-effect;
-    @apply h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 font-lucania text-lg text-stone-800 backdrop-blur dark:text-primary;
+    @apply h-auto w-[150px] border-y border-y-stone-500/10 bg-black/90 px-10 px-2 pb-1 font-lucania text-lg text-primary backdrop-blur-lg;
 
     &-info {
       span {
@@ -133,12 +133,12 @@ const changeLanguage = (lang: any) => {
   }
 
   &__links {
-    @apply hidden items-center justify-center gap-5 md:flex;
+    @apply z-50 hidden items-center justify-center gap-5 md:flex;
   }
 
   &__link {
     @include corner-effect;
-    @apply relative py-2 font-jetbrainsMono text-[12px] md:px-5 lg:px-10;
+    @apply relative w-[250px] py-2 text-center font-jetbrainsMono text-[12px] backdrop-blur-lg;
 
     &:hover {
       @include corner-effect-secondary;
@@ -150,7 +150,7 @@ const changeLanguage = (lang: any) => {
 
   &__language-selector {
     @include corner-effect;
-    @apply h-auto w-[150px] border-y border-y-stone-500/10 px-10 px-2 pb-1 font-lucania text-lg text-stone-900 backdrop-blur dark:text-primary;
+    @apply h-auto w-[150px] border-y border-y-stone-500/10 bg-black/90 px-10 px-2 pb-1 font-lucania text-lg text-primary backdrop-blur-lg;
 
     &__button {
       @apply rounded-full outline outline-transparent brightness-50;

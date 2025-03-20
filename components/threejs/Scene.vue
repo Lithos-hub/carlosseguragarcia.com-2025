@@ -8,7 +8,7 @@
     />
 
     <!-- Ambient Light -->
-    <TresAmbientLight :intensity="10" />
+    <TresAmbientLight :intensity="1" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -31,20 +31,22 @@
       <VignettePmndrs
         :darkness="0.6"
         :offset="0.6"
-        :blend-function="BlendFunction.ALPHA"
+        :blend-function="BlendFunction.SCREEN"
       />
       <!-- Noise -->
       <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
-
     <!-- GLTF model (Triangle) -->
     <!-- <Suspense>
       <ThreejsObjectsTriangle />
     </Suspense> -->
 
     <!-- Floor -->
-    <Suspense>
+    <!-- <Suspense>
       <ThreejsObjectsFloorWithLight />
+    </Suspense> -->
+    <Suspense>
+      <ThreejsObjectsFloorWithCircuits />
     </Suspense>
   </TresCanvas>
 </template>

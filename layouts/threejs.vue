@@ -1,13 +1,15 @@
 <template>
   <div class="Experience">
     <div class="Experience__radial-gradient-background" />
-    <Suspense>
-      <ThreejsScene />
+    <ClientOnly>
+      <Suspense>
+        <ThreejsScene />
 
-      <template #fallback>
-        <div class="Experience__loading-experience">Loading...</div>
-      </template>
-    </Suspense>
+        <template #fallback>
+          <div class="Experience__loading-experience">Loading...</div>
+        </template>
+      </Suspense>
+    </ClientOnly>
 
     <LayoutTopBar />
     <slot />
