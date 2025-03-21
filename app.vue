@@ -1,5 +1,6 @@
 <template>
   <div class="App">
+    <WhiteNoise />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
