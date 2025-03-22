@@ -1,11 +1,30 @@
 <template>
   <div class="App">
     <WhiteNoise />
+    <RadialMenu v-if="isRadialMenuVisible" />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
   </div>
 </template>
+
+<script setup lang="ts">
+const { isRadialMenuVisible } = storeToRefs(useUiStore());
+
+const listenControlKey = (event: KeyboardEvent) => {
+  if (event.key === "Control") {
+    isRadialMenuVisible.value = !isRadialMenuVisible.value;
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keydown", listenControlKey);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", listenControlKey);
+});
+</script>
 
 <style lang="scss">
 @use "@/styles/main.scss" as *;
