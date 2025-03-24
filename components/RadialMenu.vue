@@ -2,14 +2,14 @@
   <Teleport to="body">
     <TransitionGroup name="blur">
       <div v-if="isRadialMenuVisible" class="overlay" />
+      <h2 v-if="isRadialMenuVisible" class="RadialMenu__title">Menu</h2>
       <div v-if="isRadialMenuVisible">
         <div class="RadialMenu">
-          <h2 class="RadialMenu__title">Menu</h2>
           <!-- Full -->
           <!-- <div class="absolute z-20 opacity-50 hue-rotate-180">
-            <img src="/svg/radial-menu-full.svg" alt="radial-menu-full" />
+            <img src="/svg/radial-menu/radial-menu-full.svg" alt="radial-menu-full" />
           </div> -->
-          <div class="RadialMenu__container opacity-100">
+          <div class="RadialMenu__container">
             <button
               v-for="(item, index) in radialMenuItems"
               :key="index"
@@ -23,65 +23,73 @@
             <!-- Connections -->
             <!-- <div class="RadialMenu__connections">
               <img
-                src="/svg/radial-menu-connections.svg"
+                src="/svg/radial-menu/radial-menu-connections.svg"
                 alt="radial-menu-connections"
               />
             </div> -->
             <div class="RadialMenu__connections">
               <!-- Center -->
-              <img
-                class="RadialMenu__connections--center"
-                src="/svg/radial-menu-connections-center.svg"
-                alt="radial-menu-connections-center"
-              />
+              <div class="RadialMenu__connections--center">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-center.svg"
+                  alt="radial-menu-connections-center"
+                />
+              </div>
               <!-- Center Chip -->
-              <img
-                class="RadialMenu__connections--center-chip"
-                src="/svg/radial-menu-connections-center-chip.svg"
-                alt="radial-menu-connections-center-chip"
-              />
+              <div class="RadialMenu__connections--center-chip">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-center-chip.svg"
+                  alt="radial-menu-connections-center-chip"
+                />
+              </div>
 
               <!-- Top Right -->
-              <img
-                class="RadialMenu__connections--top-right"
-                src="/svg/radial-menu-connections-top-right.svg"
-                alt="radial-menu-connections-top-right"
-              />
+              <div class="RadialMenu__connections--top-right">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-top-right.svg"
+                  alt="radial-menu-connections-top-right"
+                />
+              </div>
 
               <!-- Top -->
-              <img
-                class="RadialMenu__connections--top"
-                src="/svg/radial-menu-connections-top.svg"
-                alt="radial-menu-connections-top"
-              />
+              <div class="RadialMenu__connections--top">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-top.svg"
+                  alt="radial-menu-connections-top"
+                />
+              </div>
 
               <!-- Top Left -->
-              <img
-                class="RadialMenu__connections--top-left"
-                src="/svg/radial-menu-connections-top-left.svg"
-                alt="radial-menu-connections-top-left"
-              />
+              <div class="RadialMenu__connections--top-left">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-top-left.svg"
+                  alt="radial-menu-connections-top-left"
+                />
+              </div>
 
               <!-- Bottom Left -->
-              <img
-                class="RadialMenu__connections--bottom-left"
-                src="/svg/radial-menu-connections-bottom-left.svg"
-                alt="radial-menu-connections-bottom-left"
-              />
+              <div class="RadialMenu__connections--bottom-left">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-bottom-left.svg"
+                  alt="radial-menu-connections-bottom-left"
+                />
+              </div>
 
               <!-- Bottom -->
-              <img
-                class="RadialMenu__connections--bottom"
-                src="/svg/radial-menu-connections-bottom.svg"
-                alt="radial-menu-connections-bottom"
-              />
+              <div class="RadialMenu__connections--bottom">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-bottom.svg"
+                  alt="radial-menu-connections-bottom"
+                />
+              </div>
 
               <!-- Bottom Right -->
-              <img
-                class="RadialMenu__connections--bottom-right"
-                src="/svg/radial-menu-connections-bottom-right.svg"
-                alt="radial-menu-connections-bottom-right"
-              />
+              <div class="RadialMenu__connections--bottom-right">
+                <img
+                  src="/svg/radial-menu/radial-menu-connections-bottom-right.svg"
+                  alt="radial-menu-connections-bottom-right"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -105,42 +113,42 @@ const { isRadialMenuVisible } = storeToRefs(useUiStore());
 const radialMenuItems: RadialMenuItem[] = [
   {
     title: "Home",
-    svgPath: "/svg/radial-menu-top-left.svg",
+    svgPath: "/svg/radial-menu/radial-menu-top-left.svg",
     alt: "Radial Menu - Home",
     to: "/home",
     class: "RadialMenu__item--top-left",
   },
   {
     title: "About",
-    svgPath: "/svg/radial-menu-top.svg",
+    svgPath: "/svg/radial-menu/radial-menu-top.svg",
     alt: "Radial Menu - About",
     to: "/about",
     class: "RadialMenu__item--top",
   },
   {
     title: "Experience",
-    svgPath: "/svg/radial-menu-top-right.svg",
+    svgPath: "/svg/radial-menu/radial-menu-top-right.svg",
     alt: "Radial Menu - Experience",
     to: "/experience",
     class: "RadialMenu__item--top-right",
   },
   {
     title: "Projects",
-    svgPath: "/svg/radial-menu-bottom-left.svg",
+    svgPath: "/svg/radial-menu/radial-menu-bottom-left.svg",
     alt: "Radial Menu - Projects",
     to: "/projects",
     class: "RadialMenu__item--bottom-left",
   },
   {
     title: "Download CV",
-    svgPath: "/svg/radial-menu-bottom.svg",
+    svgPath: "/svg/radial-menu/radial-menu-bottom.svg",
     alt: "Radial Menu - Download CV",
     to: "/cv",
     class: "RadialMenu__item--bottom",
   },
   {
     title: "Contact",
-    svgPath: "/svg/radial-menu-bottom-right.svg",
+    svgPath: "/svg/radial-menu/radial-menu-bottom-right.svg",
     alt: "Radial Menu - Contact",
     to: "/contact",
     class: "RadialMenu__item--bottom-right",
@@ -154,13 +162,28 @@ const handleItemClick = (item: RadialMenuItem) => {
 </script>
 
 <style lang="scss" scoped>
+@use "@/styles/colors" as *;
+
+$radial-menu-size: 250px;
+
 .overlay {
-  @apply fixed inset-0 z-40 h-full w-full bg-gradient-to-b from-black to-stone-800/80 backdrop-blur-xl transition-all;
+  @apply fixed inset-0 z-40 h-full w-full transition-all;
+
+  background-color: $dark2;
+  opacity: 1;
+  background-size: 25px 25px;
+  background-image: radial-gradient(#ef444450 1px, rgba(0, 0, 0, 0.5) 1px);
+
+  &:before {
+    content: "";
+    @apply fixed inset-0 z-40 h-full w-full bg-gradient-to-br from-secondarySoft/50 via-black/50 to-black/50 transition-all;
+
+    opacity: 0.5;
+  }
 }
 
 .RadialMenu {
   @apply fixed left-1/2 top-1/2 z-50 h-full w-full -translate-x-1/2 -translate-y-1/2;
-  $radial-menu-size: 250px;
 
   // Desktop variables
   width: $radial-menu-size * 2.5;
@@ -177,7 +200,7 @@ const handleItemClick = (item: RadialMenuItem) => {
   }
 
   &__title {
-    @apply fixed left-5 top-5 z-50 font-exo text-xs text-secondarySoft md:text-4xl;
+    @apply fixed left-5 top-5 z-50 text-center font-exo text-xs text-secondarySoft md:text-4xl;
   }
 
   &__container {
@@ -199,19 +222,12 @@ const handleItemClick = (item: RadialMenuItem) => {
 
     &:hover {
       @apply cursor-pointer;
-
-      filter: brightness(2) hue-rotate(180deg)
-        drop-shadow(0 0 1px rgba(0, 255, 225, 0.5))
-        drop-shadow(0 0 3px rgba(0, 255, 225, 0.5))
-        drop-shadow(0 0 6px rgba(0, 255, 225, 0.5));
     }
 
-    // Título común para todos los elementos
     &-title {
       @apply absolute left-1/2 z-40 w-full -translate-x-1/2 text-center font-lucania text-xs text-secondarySoft md:text-lg;
     }
 
-    // Posicionamiento específico para cada elemento
     &--top-left {
       @apply absolute left-0 top-[90px] md:left-1 md:top-[57px];
 
@@ -220,10 +236,26 @@ const handleItemClick = (item: RadialMenuItem) => {
       }
 
       &:hover {
-        & ~ .RadialMenu__connections .RadialMenu__connections--top-left {
-          @apply transition-all;
+        &:before {
+          content: "";
+          @apply absolute inset-0 z-50 h-full w-full;
 
-          filter: brightness(2) hue-rotate(180deg);
+          background-image: url("/svg/radial-menu/radial-menu-top-left-active.svg");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--top-left {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-top-left-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
@@ -236,10 +268,26 @@ const handleItemClick = (item: RadialMenuItem) => {
       }
 
       &:hover {
-        & ~ .RadialMenu__connections .RadialMenu__connections--top {
-          @apply transition-all;
+        &:before {
+          content: "";
+          @apply absolute inset-0 z-50 h-full w-full;
 
-          filter: brightness(2) hue-rotate(180deg);
+          background-image: url("/svg/radial-menu/radial-menu-top-active.svg");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--top {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-top-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
@@ -252,10 +300,26 @@ const handleItemClick = (item: RadialMenuItem) => {
       }
 
       &:hover {
-        & ~ .RadialMenu__connections .RadialMenu__connections--top-right {
-          @apply transition-all;
+        &:before {
+          content: "";
+          @apply absolute inset-0 z-50 h-full w-full;
 
-          filter: brightness(2) hue-rotate(180deg);
+          background-image: url("/svg/radial-menu/radial-menu-top-right-active.svg");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--top-right {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-top-right-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
@@ -268,10 +332,26 @@ const handleItemClick = (item: RadialMenuItem) => {
       }
 
       &:hover {
-        & ~ .RadialMenu__connections .RadialMenu__connections--bottom-left {
-          @apply transition-all;
+        &:before {
+          content: "";
+          @apply absolute inset-0 z-50 h-full w-full;
 
-          filter: brightness(2) hue-rotate(180deg);
+          background-image: url("/svg/radial-menu/radial-menu-bottom-left-active.svg");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--bottom-left {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-10 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-bottom-left-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
@@ -284,10 +364,26 @@ const handleItemClick = (item: RadialMenuItem) => {
       }
 
       &:hover {
-        & ~ .RadialMenu__connections .RadialMenu__connections--bottom {
-          @apply transition-all;
+        &:before {
+          content: "";
+          @apply absolute inset-0 z-50 h-full w-full;
 
-          filter: brightness(2) hue-rotate(180deg);
+          background-image: url("/svg/radial-menu/radial-menu-bottom-active.svg");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--bottom {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-bottom-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
@@ -300,11 +396,69 @@ const handleItemClick = (item: RadialMenuItem) => {
       }
 
       &:hover {
-        & ~ .RadialMenu__connections .RadialMenu__connections--center-chip,
-        & ~ .RadialMenu__connections .RadialMenu__connections--bottom-right {
-          @apply transition-all;
+        &:before {
+          content: "";
+          @apply absolute inset-0 z-50 h-full w-full;
 
-          filter: hue-rotate(180deg);
+          background-image: url("/svg/radial-menu/radial-menu-bottom-right-active.svg");
+          background-size: contain;
+          background-position: center;
+          background-repeat: no-repeat;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--bottom-right {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-bottom-right-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+        }
+      }
+    }
+
+    &--top-left,
+    &--top,
+    &--top-right,
+    &--bottom-left,
+    &--bottom,
+    &--bottom-right {
+      &:hover {
+        // Image
+        img {
+          @apply opacity-0;
+        }
+
+        // Title
+        .RadialMenu__item-title {
+          @apply text-white;
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--center {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-center-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+        }
+
+        & ~ .RadialMenu__connections .RadialMenu__connections--center-chip {
+          &:before {
+            content: "";
+            @apply absolute inset-0 z-50 h-full w-full;
+
+            background-image: url("/svg/radial-menu/radial-menu-connections-center-chip-active.svg");
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+          }
         }
       }
     }
@@ -323,8 +477,19 @@ const handleItemClick = (item: RadialMenuItem) => {
       height: $radial-menu-size;
     }
 
-    img {
+    &--top-left,
+    &--top-right,
+    &--bottom-left,
+    &--bottom-right,
+    &--center,
+    &--center-chip,
+    &--top,
+    &--bottom {
       @apply absolute;
+
+      img {
+        @apply h-full w-full object-contain;
+      }
     }
 
     &--center {
