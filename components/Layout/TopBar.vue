@@ -119,7 +119,7 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/fonts.scss" as *;
 
 .TopBar {
-  @apply fixed top-0 z-50 flex w-full justify-between p-1 brightness-200 md:p-5;
+  @apply fixed top-0 z-20 flex w-full justify-between p-1 brightness-200 md:p-5;
 
   &__code {
     @include corner-effect;

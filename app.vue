@@ -1,7 +1,9 @@
 <template>
   <div class="App">
     <WhiteNoise />
-    <RadialMenu v-if="isRadialMenuVisible" />
+
+    <RadialMenu />
+
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -51,6 +53,7 @@ $bg-radial-end-color: rgba(0, 0, 0, 0.9);
   }
 }
 
+// Page transition
 .page-enter-active,
 .page-leave-active {
   transition: all 0.4s;

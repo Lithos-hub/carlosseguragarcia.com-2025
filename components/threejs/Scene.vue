@@ -29,25 +29,25 @@
 
       <!-- Vignette -->
       <VignettePmndrs
-        :darkness="0.6"
-        :offset="0.6"
+        :darkness="0.8"
+        :offset="0.4"
         :blend-function="BlendFunction.SCREEN"
       />
       <!-- Noise -->
       <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
     <!-- GLTF model (Triangle) -->
-    <!-- <Suspense>
+    <Suspense>
       <ThreejsObjectsTriangle />
-    </Suspense> -->
+    </Suspense>
 
     <!-- Floor -->
     <!-- <Suspense>
       <ThreejsObjectsFloorWithLight />
     </Suspense> -->
-    <Suspense>
+    <!-- <Suspense>
       <ThreejsObjectsFloorWithCircuits />
-    </Suspense>
+    </Suspense> -->
   </TresCanvas>
 </template>
 

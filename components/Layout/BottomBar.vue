@@ -66,7 +66,7 @@ import { version } from "~/package.json";
 @use "@/styles/fonts.scss" as *;
 
 .BottomBar {
-  @apply fixed bottom-0 z-50 flex w-full justify-between p-1 md:p-5;
+  @apply fixed bottom-0 z-20 flex w-full justify-between p-1 md:p-5;
 
   &__version {
     @include corner-effect;

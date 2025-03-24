@@ -16,7 +16,7 @@ const { scene } = await useGLTF("/gltf/triangle.gltf", { draco: true });
 
 const objectRef = shallowRef();
 
-const triangleSize = 35;
+const triangleSize = 45;
 
 // Rotation loop
 const { onBeforeRender } = useLoop();

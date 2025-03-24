@@ -15,17 +15,6 @@
   </section>
 </template>
 
-<script setup lang="ts">
-const startTime = ref(performance.now());
-
-const { mountedTimes, visibleSection, visualDataBySection } =
-  storeToRefs(useUiStore());
-
-onMounted(() => {
-  mountedTimes.value.hero = Math.round(performance.now() - startTime.value);
-});
-</script>
-
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
@@ -42,11 +31,11 @@ onMounted(() => {
   }
 
   &__name {
-    @apply font-exo text-3xl font-light leading-none text-stone-900 lg:text-[80px] dark:text-white;
+    @apply font-exo text-3xl font-light leading-none text-stone-900 lg:text-[60px] dark:text-white;
   }
 
   &__title {
-    @apply font-exo text-lg font-light leading-none text-stone-900 lg:text-[80px] dark:text-white;
+    @apply font-exo text-lg font-light leading-none text-stone-900 lg:text-[60px] dark:text-white;
   }
 }
 </style>

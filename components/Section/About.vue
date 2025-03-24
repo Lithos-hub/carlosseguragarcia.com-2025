@@ -54,16 +54,6 @@
   </div>
 </template>
 
-<script setup lang="ts">
-const startTime = ref(performance.now());
-
-const { mountedTimes } = storeToRefs(useUiStore());
-
-onMounted(() => {
-  mountedTimes.value.about = Math.round(performance.now() - startTime.value);
-});
-</script>
-
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
 .About {
