@@ -108,7 +108,14 @@ interface RadialMenuItem {
 }
 
 const router = useRouter();
+
 const { isRadialMenuVisible } = storeToRefs(useUiStore());
+const { closeRadialMenu, toggleRadialMenu } = useUiStore();
+const { width: windowWidth } = useWindowSize({ initialWidth: 0 });
+
+const getIsMobile = computed(() => {
+  return windowWidth.value < 768;
+});
 
 const radialMenuItems: RadialMenuItem[] = [
   {
@@ -157,8 +164,32 @@ const radialMenuItems: RadialMenuItem[] = [
 
 const handleItemClick = (item: RadialMenuItem) => {
   router.push(item.to);
-  isRadialMenuVisible.value = false;
+  closeRadialMenu();
 };
+
+const listenControlKey = (event: KeyboardEvent) => {
+  if (getIsMobile.value) {
+    return;
+  }
+
+  if (event.key === "Control") {
+    toggleRadialMenu();
+  }
+};
+
+onMounted(() => {
+  document.addEventListener("keydown", listenControlKey);
+});
+
+onUnmounted(() => {
+  document.removeEventListener("keydown", listenControlKey);
+});
+
+watch(getIsMobile, (newVal) => {
+  if (newVal) {
+    closeRadialMenu();
+  }
+});
 </script>
 
 <style lang="scss" scoped>
@@ -185,15 +216,8 @@ $radial-menu-size: 250px;
 .RadialMenu {
   @apply fixed left-1/2 top-1/2 z-50 h-full w-full -translate-x-1/2 -translate-y-1/2;
 
-  // Desktop variables
   width: $radial-menu-size * 2.5;
   height: $radial-menu-size * 2.5;
-
-  // Mobile variables
-  @media (max-width: 768px) {
-    width: $radial-menu-size * 1.58;
-    height: $radial-menu-size * 2;
-  }
 
   &__wrapper {
     @apply relative inset-0 z-50 h-screen w-screen overflow-hidden;
@@ -210,15 +234,8 @@ $radial-menu-size: 250px;
   &__item {
     @apply z-50 transition-all;
 
-    // Desktop variables
     width: $radial-menu-size - 10px;
     height: $radial-menu-size - 10px;
-
-    // Mobile variables
-    @media (max-width: 768px) {
-      width: $radial-menu-size - 100px;
-      height: $radial-menu-size - 100px;
-    }
 
     &:hover {
       @apply cursor-pointer;
@@ -293,7 +310,7 @@ $radial-menu-size: 250px;
     }
 
     &--top-right {
-      @apply absolute right-0 top-[90px] md:right-1 md:top-[57px];
+      @apply absolute right-0 top-[90px] z-50 md:right-1 md:top-[57px];
 
       .RadialMenu__item-title {
         @apply top-1/2 z-40 -translate-y-1/2 rotate-45;
@@ -302,7 +319,7 @@ $radial-menu-size: 250px;
       &:hover {
         &:before {
           content: "";
-          @apply absolute inset-0 z-50 h-full w-full;
+          @apply absolute inset-0 h-full w-full;
 
           background-image: url("/svg/radial-menu/radial-menu-top-right-active.svg");
           background-size: contain;
@@ -313,7 +330,7 @@ $radial-menu-size: 250px;
         & ~ .RadialMenu__connections .RadialMenu__connections--top-right {
           &:before {
             content: "";
-            @apply absolute inset-0 z-50 h-full w-full;
+            @apply absolute inset-0 h-full w-full;
 
             background-image: url("/svg/radial-menu/radial-menu-connections-top-right-active.svg");
             background-size: contain;
@@ -467,15 +484,8 @@ $radial-menu-size: 250px;
   &__connections {
     @apply absolute left-1/2 top-1/2 z-40 flex -translate-x-1/2 -translate-y-1/2;
 
-    // Desktop variables
     width: $radial-menu-size + 140px;
     height: $radial-menu-size + 140px;
-
-    // Mobile variables
-    @media (max-width: 768px) {
-      width: $radial-menu-size;
-      height: $radial-menu-size;
-    }
 
     &--top-left,
     &--top-right,
@@ -514,7 +524,7 @@ $radial-menu-size: 250px;
     }
 
     &--top {
-      @apply left-[120px] top-[-5px] z-20;
+      @apply left-[123px] top-[-8px] z-20;
 
       width: $radial-menu-size - 80px;
       height: $radial-menu-size - 80px;
@@ -535,7 +545,7 @@ $radial-menu-size: 250px;
     }
 
     &--bottom {
-      @apply bottom-[25px] left-[117px] z-50;
+      @apply bottom-[25px] left-[117px] z-20;
 
       width: $radial-menu-size - 100px;
       height: $radial-menu-size - 100px;
