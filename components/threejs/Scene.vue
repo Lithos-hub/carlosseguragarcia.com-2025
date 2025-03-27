@@ -42,9 +42,9 @@
     </Suspense>
 
     <!-- Floor -->
-    <!-- <Suspense>
+    <Suspense>
       <ThreejsObjectsFloorWithLight />
-    </Suspense> -->
+    </Suspense>
     <!-- <Suspense>
       <ThreejsObjectsFloorWithCircuits />
     </Suspense> -->

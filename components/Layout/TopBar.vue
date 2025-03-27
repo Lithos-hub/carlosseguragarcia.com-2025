@@ -14,6 +14,11 @@
         </div>
       </div>
     </div>
+    <div class="TopBar__radial-menu">
+      <button class="TopBar__radial-menu__button">
+        <img src="/icons/radial-menu.svg" alt="Radial menu" />
+      </button>
+    </div>
     <div class="TopBar__links">
       <NuxtLink
         v-for="link in links"
@@ -119,7 +124,7 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/fonts.scss" as *;
 
 .TopBar {
-  @apply fixed top-0 z-20 flex w-full justify-between p-1 brightness-200 md:p-5;
+  @apply fixed top-0 z-20 flex w-full justify-between p-1 md:p-5;
 
   &__code {
     @include corner-effect;
@@ -132,8 +137,20 @@ const changeLanguage = (lang: any) => {
     }
   }
 
+  &__radial-menu {
+    @apply z-50 flex items-center justify-center gap-5;
+
+    &__button {
+      @apply relative h-[30px] w-[30px] transition-all duration-300;
+
+      &:hover {
+        @apply scale-110;
+      }
+    }
+  }
+
   &__links {
-    @apply z-50 hidden items-center justify-center gap-5 md:flex;
+    @apply z-50 flex items-center justify-center gap-5 md:hidden;
   }
 
   &__link {

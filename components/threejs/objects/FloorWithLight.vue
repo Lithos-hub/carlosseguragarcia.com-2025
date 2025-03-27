@@ -62,7 +62,7 @@ const cubeZConfig = ref(
     .fill(null)
     .map(() => ({
       maxHeight: 0.5 + Math.random() * 0.501, // Max random height between 2 and 3
-      speed: 0.1 + Math.random() * 0.2, // Random speed between 0.1 and 1
+      speed: 0.01 + Math.random() * 0.05, // Random speed between 0.1 and 1
       currentOffset: 0, // Current offset
       phase: Math.random() * Math.PI * 2, // Random phase for sinusoidal movement
     })),
@@ -115,7 +115,7 @@ const distributeInstancesUniformly = () => {
       if (!cubeZConfig.value[index]) {
         cubeZConfig.value[index] = {
           maxHeight: 0.5 + Math.random() * 0.501,
-          speed: 0.2 + Math.random() * 0.8,
+          speed: 0.01 + Math.random() * 0.05,
           currentOffset: 0,
           phase: Math.random() * Math.PI * 2,
         };
@@ -167,7 +167,7 @@ onBeforeRender(() => {
     const time = Date.now() * 0.001;
 
     // Velocidad de propagación de las olas
-    const waveSpeed = 1;
+    const waveSpeed = 0.1;
 
     // Frecuencia de las olas
     const waveFrequency = 0.5;
@@ -197,7 +197,7 @@ onBeforeRender(() => {
 
       // Calculate scale factor based on distance from center (más suave)
       const maxDistance = Math.max(width.value, height.value) / 2;
-      const scaleZ = 1 + (distanceFromCenter / maxDistance) * 20;
+      const scaleZ = 1 + (distanceFromCenter / maxDistance) * 50;
 
       // Set scale and position
       matrix.makeScale(1.05, 2, scaleZ);

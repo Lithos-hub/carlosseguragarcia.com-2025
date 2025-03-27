@@ -482,7 +482,7 @@ $radial-menu-size: 250px;
   }
 
   &__connections {
-    @apply absolute left-1/2 top-1/2 z-40 flex -translate-x-1/2 -translate-y-1/2;
+    @apply absolute left-1/2 top-1/2 z-20 flex -translate-x-1/2 -translate-y-1/2;
 
     width: $radial-menu-size + 140px;
     height: $radial-menu-size + 140px;
