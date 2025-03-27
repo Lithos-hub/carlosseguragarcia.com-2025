@@ -3,9 +3,6 @@
     <div class="Home__div" id="hero" ref="heroRef">
       <SectionHero />
     </div>
-    <div class="Home__div" id="about" ref="aboutRef">
-      <SectionAbout />
-    </div>
   </div>
 </template>
 
@@ -18,12 +15,11 @@ definePageMeta({
 });
 
 const heroRef = useTemplateRef<HTMLElement | null>("heroRef");
-const aboutRef = useTemplateRef<HTMLElement | null>("aboutRef");
 
 const { visibleSection } = storeToRefs(useUiStore());
 
 const { visibleElement } = useIsVisible({
-  refs: [heroRef, aboutRef] as Ref<HTMLElement>[],
+  refs: [heroRef] as Ref<HTMLElement>[],
 });
 
 watch(visibleElement, (newVisibleElement) => {

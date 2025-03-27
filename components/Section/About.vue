@@ -1,5 +1,5 @@
 <template>
-  <div class="About">
+  <div class="About__container" id="about">
     <div class="About__inner">
       <div class="About__content">
         <p class="About__description">
@@ -57,7 +57,9 @@
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
 .About {
-  @apply relative flex h-screen w-full flex-col items-center justify-center bg-gradient-to-b from-transparent to-black;
+  &__container {
+    @apply relative flex h-screen w-full flex-col items-center justify-center bg-gradient-to-b from-transparent to-black;
+  }
 
   &__inner {
     @apply px-[10vw];

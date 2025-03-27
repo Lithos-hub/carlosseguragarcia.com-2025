@@ -3,93 +3,98 @@
     <TransitionGroup name="blur">
       <div v-if="isRadialMenuVisible" class="overlay" />
       <h2 v-if="isRadialMenuVisible" class="RadialMenu__title">Menu</h2>
-      <div v-if="isRadialMenuVisible">
-        <div class="RadialMenu">
-          <!-- Full -->
-          <!-- <div class="absolute z-20 opacity-50 hue-rotate-180">
+      <button
+        v-if="isRadialMenuVisible"
+        class="RadialMenu__close"
+        @click="closeRadialMenu"
+      >
+        <UIcon name="i-mdi-close" size="40" class="text-secondary" />
+      </button>
+      <div v-if="isRadialMenuVisible" class="RadialMenu">
+        <!-- Full -->
+        <!-- <div class="absolute z-20 opacity-50 hue-rotate-180">
             <img src="/svg/radial-menu/radial-menu-full.svg" alt="radial-menu-full" />
           </div> -->
-          <div class="RadialMenu__container">
-            <button
-              v-for="(item, index) in radialMenuItems"
-              :key="index"
-              :class="['RadialMenu__item', item.class]"
-              @click="handleItemClick(item)"
-            >
-              <h2 :class="`RadialMenu__item-title`">{{ item.title }}</h2>
-              <img :src="item.svgPath" :alt="item.alt" />
-            </button>
+        <div class="RadialMenu__container">
+          <button
+            v-for="(item, index) in radialMenuItems"
+            :key="index"
+            :class="['RadialMenu__item', item.class]"
+            @click="handleItemClick(item)"
+          >
+            <h2 :class="`RadialMenu__item-title`">{{ item.title }}</h2>
+            <img :src="item.svgPath" :alt="item.alt" />
+          </button>
 
-            <!-- Connections -->
-            <!-- <div class="RadialMenu__connections">
+          <!-- Connections -->
+          <!-- <div class="RadialMenu__connections">
               <img
                 src="/svg/radial-menu/radial-menu-connections.svg"
                 alt="radial-menu-connections"
               />
             </div> -->
-            <div class="RadialMenu__connections">
-              <!-- Center -->
-              <div class="RadialMenu__connections--center">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-center.svg"
-                  alt="radial-menu-connections-center"
-                />
-              </div>
-              <!-- Center Chip -->
-              <div class="RadialMenu__connections--center-chip">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-center-chip.svg"
-                  alt="radial-menu-connections-center-chip"
-                />
-              </div>
+          <div class="RadialMenu__connections">
+            <!-- Center -->
+            <div class="RadialMenu__connections--center">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-center.svg"
+                alt="radial-menu-connections-center"
+              />
+            </div>
+            <!-- Center Chip -->
+            <div class="RadialMenu__connections--center-chip">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-center-chip.svg"
+                alt="radial-menu-connections-center-chip"
+              />
+            </div>
 
-              <!-- Top Right -->
-              <div class="RadialMenu__connections--top-right">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-top-right.svg"
-                  alt="radial-menu-connections-top-right"
-                />
-              </div>
+            <!-- Top Right -->
+            <div class="RadialMenu__connections--top-right">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-top-right.svg"
+                alt="radial-menu-connections-top-right"
+              />
+            </div>
 
-              <!-- Top -->
-              <div class="RadialMenu__connections--top">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-top.svg"
-                  alt="radial-menu-connections-top"
-                />
-              </div>
+            <!-- Top -->
+            <div class="RadialMenu__connections--top">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-top.svg"
+                alt="radial-menu-connections-top"
+              />
+            </div>
 
-              <!-- Top Left -->
-              <div class="RadialMenu__connections--top-left">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-top-left.svg"
-                  alt="radial-menu-connections-top-left"
-                />
-              </div>
+            <!-- Top Left -->
+            <div class="RadialMenu__connections--top-left">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-top-left.svg"
+                alt="radial-menu-connections-top-left"
+              />
+            </div>
 
-              <!-- Bottom Left -->
-              <div class="RadialMenu__connections--bottom-left">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-bottom-left.svg"
-                  alt="radial-menu-connections-bottom-left"
-                />
-              </div>
+            <!-- Bottom Left -->
+            <div class="RadialMenu__connections--bottom-left">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-bottom-left.svg"
+                alt="radial-menu-connections-bottom-left"
+              />
+            </div>
 
-              <!-- Bottom -->
-              <div class="RadialMenu__connections--bottom">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-bottom.svg"
-                  alt="radial-menu-connections-bottom"
-                />
-              </div>
+            <!-- Bottom -->
+            <div class="RadialMenu__connections--bottom">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-bottom.svg"
+                alt="radial-menu-connections-bottom"
+              />
+            </div>
 
-              <!-- Bottom Right -->
-              <div class="RadialMenu__connections--bottom-right">
-                <img
-                  src="/svg/radial-menu/radial-menu-connections-bottom-right.svg"
-                  alt="radial-menu-connections-bottom-right"
-                />
-              </div>
+            <!-- Bottom Right -->
+            <div class="RadialMenu__connections--bottom-right">
+              <img
+                src="/svg/radial-menu/radial-menu-connections-bottom-right.svg"
+                alt="radial-menu-connections-bottom-right"
+              />
             </div>
           </div>
         </div>
@@ -111,11 +116,6 @@ const router = useRouter();
 
 const { isRadialMenuVisible } = storeToRefs(useUiStore());
 const { closeRadialMenu, toggleRadialMenu } = useUiStore();
-const { width: windowWidth } = useWindowSize({ initialWidth: 0 });
-
-const getIsMobile = computed(() => {
-  return windowWidth.value < 768;
-});
 
 const radialMenuItems: RadialMenuItem[] = [
   {
@@ -168,10 +168,6 @@ const handleItemClick = (item: RadialMenuItem) => {
 };
 
 const listenControlKey = (event: KeyboardEvent) => {
-  if (getIsMobile.value) {
-    return;
-  }
-
   if (event.key === "Control") {
     toggleRadialMenu();
   }
@@ -184,43 +180,37 @@ onMounted(() => {
 onUnmounted(() => {
   document.removeEventListener("keydown", listenControlKey);
 });
-
-watch(getIsMobile, (newVal) => {
-  if (newVal) {
-    closeRadialMenu();
-  }
-});
 </script>
 
 <style lang="scss" scoped>
-@use "@/styles/colors" as *;
+@use "@/styles/variables" as *;
 
 $radial-menu-size: 250px;
 
 .overlay {
-  @apply fixed inset-0 z-40 h-full w-full transition-all;
-
-  background-color: $dark2;
-  opacity: 1;
-  background-size: 25px 25px;
-  background-image: radial-gradient(#ef444450 1px, rgba(0, 0, 0, 0.5) 1px);
+  @apply fixed inset-0 z-40 hidden h-screen w-full overflow-hidden opacity-80 backdrop-blur transition-all md:block;
 
   &:before {
     content: "";
-    @apply fixed inset-0 z-40 h-full w-full bg-gradient-to-br from-secondarySoft/50 via-black/50 to-black/50 transition-all;
-
-    opacity: 0.5;
+    @apply fixed inset-0 z-40 h-screen w-full bg-gradient-to-br from-secondarySoft/50 via-black/50 to-black/50 transition-all;
+    background-color: $dark2;
+    background-size: 25px 25px;
+    background-image: radial-gradient(#ef444450 1px, rgba(0, 0, 0, 0.5) 1px);
   }
 }
 
+.RadialMenu__wrapper {
+  @apply fixed inset-0 z-40 hidden h-screen w-full overflow-hidden md:block;
+}
+
 .RadialMenu {
-  @apply fixed left-1/2 top-1/2 z-50 h-full w-full -translate-x-1/2 -translate-y-1/2;
+  @apply fixed left-1/2 top-1/2 z-50 hidden h-screen w-full -translate-x-1/2 -translate-y-1/2 md:block;
 
   width: $radial-menu-size * 2.5;
   height: $radial-menu-size * 2.5;
 
-  &__wrapper {
-    @apply relative inset-0 z-50 h-screen w-screen overflow-hidden;
+  &__close {
+    @apply fixed right-5 top-5 z-50 cursor-pointer;
   }
 
   &__title {
@@ -444,11 +434,6 @@ $radial-menu-size: 250px;
     &--bottom,
     &--bottom-right {
       &:hover {
-        // Image
-        img {
-          @apply opacity-0;
-        }
-
         // Title
         .RadialMenu__item-title {
           @apply text-white;

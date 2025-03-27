@@ -15,20 +15,21 @@
       </div>
     </div>
     <div class="TopBar__radial-menu">
-      <button class="TopBar__radial-menu__button">
-        <img src="/icons/radial-menu.svg" alt="Radial menu" />
-      </button>
+      <div class="flex flex-col items-center justify-center gap-2">
+        <button class="TopBar__radial-menu__button" @click="toggleRadialMenu">
+          <img src="/icons/radial-menu.svg" alt="Radial menu" />
+        </button>
+        <small class="text-xs text-secondary"
+          >Click here or press
+          <span class="font-bold text-secondarySoft">control / command</span> to
+          show the radial menu</small
+        >
+      </div>
     </div>
-    <div class="TopBar__links">
-      <NuxtLink
-        v-for="link in links"
-        :key="link.path"
-        :to="link.path"
-        class="TopBar__link neon-text-blue neon-text-blue-glow"
-        active-class="TopBar__link--active"
-      >
-        {{ link.name }}</NuxtLink
-      >
+    <div class="block md:hidden">
+      <button @click="toggleMobileMenu">
+        <UIcon name="i-mdi-menu" size="30" class="text-secondarySoft" />
+      </button>
     </div>
     <div class="TopBar__language-selector">
       <div class="flex flex-col">
@@ -56,7 +57,8 @@
 </template>
 
 <script setup lang="ts">
-const { visualDataBySection } = storeToRefs(useUiStore());
+const { visualDataBySection, isMobileMenuVisible } = storeToRefs(useUiStore());
+const { toggleRadialMenu, toggleMobileMenu } = useUiStore();
 
 const selectedLanguage = reactive({
   name: "English",
@@ -122,9 +124,19 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/main.scss" as *;
 @use "@/styles/general.scss" as *;
 @use "@/styles/fonts.scss" as *;
+@use "@/styles/variables.scss" as *;
+@use "@/styles/breakpoints.scss" as *;
 
 .TopBar {
-  @apply fixed top-0 z-20 flex w-full justify-between p-1 md:p-5;
+  @apply flex w-full items-center justify-between border-b border-secondarySoft;
+
+  @media mobile {
+    padding: $mobile-margin;
+  }
+
+  @media desktop {
+    padding: $desktop-margin;
+  }
 
   &__code {
     @include corner-effect;
@@ -138,10 +150,10 @@ const changeLanguage = (lang: any) => {
   }
 
   &__radial-menu {
-    @apply z-50 flex items-center justify-center gap-5;
+    @apply z-50 hidden items-center justify-center gap-5 md:flex;
 
     &__button {
-      @apply relative h-[30px] w-[30px] transition-all duration-300;
+      @apply relative h-[30px] w-[30px] text-secondary transition-all duration-300;
 
       &:hover {
         @apply scale-110;
@@ -150,7 +162,15 @@ const changeLanguage = (lang: any) => {
   }
 
   &__links {
-    @apply z-50 flex items-center justify-center gap-5 md:hidden;
+    @apply z-50 flex h-screen md:hidden;
+
+    &-overlay {
+      @apply fixed inset-0 z-40 hidden h-screen w-full bg-black/50 md:block;
+    }
+
+    &-container {
+      @apply absolute left-1/2 top-1/2 z-50 flex h-full w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-evenly gap-5 bg-gradient-to-br from-secondarySoft/50 via-black/50 to-black/50;
+    }
   }
 
   &__link {
@@ -170,7 +190,7 @@ const changeLanguage = (lang: any) => {
     @apply h-auto w-[150px] border-y border-y-stone-500/10 bg-black/90 px-10 px-2 pb-1 font-lucania text-lg text-primary backdrop-blur-lg;
 
     &__button {
-      @apply rounded-full outline outline-transparent brightness-50;
+      @apply rounded-full outline outline-transparent;
     }
 
     &__button--active {

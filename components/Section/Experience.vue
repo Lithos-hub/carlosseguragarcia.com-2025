@@ -1,5 +1,5 @@
 <template>
-  <div class="Experience">
+  <div class="Experience" id="experience">
     <div
       v-for="experience in DEV_EXPERIENCE"
       :key="`Experience-${experience.role}-${experience.subtitle}`"
@@ -108,11 +108,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 
   &__item {
     @include corner-effect;
-    @apply relative flex w-full;
+    @apply relative flex w-full bg-black;
   }
 
   &__left-side {
-    @apply relative hidden w-full flex-col items-end pr-5 backdrop-blur md:flex md:w-[300px];
+    @apply relative hidden w-full flex-col items-end pr-5 md:flex md:w-[300px];
   }
 
   &__index {
@@ -132,7 +132,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__right-side {
-    @apply flex-1 border-secondary bg-black/50 backdrop-blur-lg md:pl-6;
+    @apply flex-1 border-secondary bg-stone-950 backdrop-blur-lg md:pl-6;
   }
 
   &__item:not(:last-child) .Experience__right-side {

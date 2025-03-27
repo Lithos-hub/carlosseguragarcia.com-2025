@@ -1,5 +1,5 @@
 @use "./fonts.scss" as *;
-@use "./colors.scss" as *;
+@use "./variables.scss" as *;
 
 .vue-gradient-text {
   background: -webkit-linear-gradient(315deg, #42d392 25%, #647eff);

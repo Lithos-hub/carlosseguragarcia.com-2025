@@ -1,41 +1,44 @@
 <template>
-  <section class="Hero">
+  <section class="Hero__container" id="hero">
     <div class="Hero__content">
-      <div class="Hero__content-wrapper">
-        <div class="flex flex-col">
-          <h1 class="Hero__name">
-            Hello, I'm <span class="text-primary">Carlos</span>.
-          </h1>
-          <h2 class="Hero__title">I'm a front-end developer.</h2>
-        </div>
+      <h1 class="Hero__name">
+        Hello, I'm <strong class="text-primary">Carlos</strong>.
+      </h1>
+      <h2 class="Hero__title">I'm a front-end developer.</h2>
 
-        <BaseButton>View my work</BaseButton>
-      </div>
+      <BaseButton>View my work</BaseButton>
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+definePageMeta({
+  layout: "hero-layout",
+});
+</script>
 
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
 
+#hero {
+  @apply border-b border-secondarySoft;
+}
 .Hero {
-  @include section-wrapper;
+  &__container {
+    @include section-wrapper;
+  }
 
   &__content {
-    @apply flex h-screen flex-col items-center justify-between gap-5 px-2 text-center lg:px-5;
-
-    &-wrapper {
-      @apply flex h-full flex-col items-center justify-evenly;
-    }
+    @apply mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-10 border-x border-secondarySoft py-[120px] text-center;
   }
 
   &__name {
-    @apply font-exo text-3xl font-light leading-none text-stone-900 lg:text-[60px] dark:text-white;
+    @apply font-exo text-3xl font-light text-stone-900 lg:text-[30px] dark:text-white;
   }
 
   &__title {
-    @apply font-exo text-lg font-light leading-none text-stone-900 lg:text-[60px] dark:text-white;
+    @apply font-exo text-lg font-light text-stone-900 lg:text-[30px] dark:text-white;
   }
 }
 </style>

@@ -150,7 +150,7 @@ export const DEV_EXPERIENCE = [
       { techName: "SCSS", imageUrl: "/tech-logos/sass.svg" },
     ],
     tasks: [
-      "Developed as main developer a complex SPA SaaS from scratch using the latest frontend technologies",
+      "I developed as main developer a complex SPA SaaS from scratch using the latest frontend technologies",
       "I worked closely with the UX/UI team to implement pixel perfect on the frontend",
       "I implemented architectural improvements to more efficiently modularize the code",
       "I implemented numerous features in the context of 2D canvas, representing astronomical information",

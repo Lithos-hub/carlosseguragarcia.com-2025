@@ -39,6 +39,6 @@ watch(visibleElement, (newVisibleElement) => {
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
 .ExperienceWrapper {
-  @apply mx-auto flex max-w-6xl flex-col py-40;
+  @apply mx-auto flex max-w-6xl flex-col gap-5 py-40;
 }
 </style>

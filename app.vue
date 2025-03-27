@@ -1,10 +1,8 @@
 <template>
   <div class="App">
-    <ClientOnly>
-      <WhiteNoise />
-      <RadialMenu />
-    </ClientOnly>
-
+    <WhiteNoise />
+    <RadialMenu />
+    <MobileMenu />
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
@@ -22,9 +20,7 @@ $bg-radial-start-color: rgba(90, 189, 198, 0.1);
 $bg-radial-end-color: rgba(0, 0, 0, 0.9);
 
 .App {
-  @apply bg-white dark:bg-cyan-950/20;
-  position: relative;
-  overflow: hidden;
+  @apply bg-cyan-950/20;
 
   &__radial-gradient-background {
     background: radial-gradient(

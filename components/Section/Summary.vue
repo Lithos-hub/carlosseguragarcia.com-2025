@@ -1,33 +1,37 @@
 <template>
-  <div class="Summary">
-    <h1 class="Summary__title">Summary</h1>
-    <ul class="Summary__info">
-      <div class="Summary__info__decoration-shape" />
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-item__title">Main role:</h2>
-        <code class="Summary__info-item__value">
-          {{ "Front-end Developer" }}
-        </code>
-      </li>
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-item__title">Total experience:</h2>
-        <code class="Summary__info-item__value">
-          {{ totalSummary() }}
-        </code>
-      </li>
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-item__title">Most used technologies:</h2>
-        <code class="Summary__info-item__value">
-          {{ getMostUsedTech() }}
-        </code>
-      </li>
-      <li class="Summary__info-item">
-        <h2 class="Summary__info-item__title">Main client fields:</h2>
-        <code class="Summary__info-item__value">
-          {{ getMainClientFields() }}
-        </code>
-      </li>
-    </ul>
+  <div class="Summary__container" id="summary">
+    <div class="Summary">
+      <div class="Summary__pseudo-border"></div>
+      <h1 class="Summary__title">Summary</h1>
+      <ul class="Summary__info">
+        <li class="Summary__info-item">
+          <h2 class="Summary__info-item__title">Main role:</h2>
+          <code class="Summary__info-item__value">
+            {{ "Front-end Developer" }}
+          </code>
+        </li>
+        <li class="Summary__info-item">
+          <h2 class="Summary__info-item__title">Total experience:</h2>
+          <code class="Summary__info-item__value">
+            {{ totalSummary() }}
+          </code>
+        </li>
+        <li class="Summary__info-item">
+          <h2 class="Summary__info-item__title">Most used technologies:</h2>
+          <code class="Summary__info-item__value">
+            {{ getMostUsedTech() }}
+          </code>
+        </li>
+        <li class="Summary__info-item">
+          <h2 class="Summary__info-item__title">Main client fields:</h2>
+          <code class="Summary__info-item__value">
+            {{ getMainClientFields() }}
+          </code>
+        </li>
+      </ul>
+    </div>
+    <div class="Summary__decoration-shape-1" />
+    <div class="Summary__decoration-shape-2" />
   </div>
 </template>
 
@@ -52,38 +56,75 @@ const totalSummary = () => {
 @use "@/styles/fonts.scss" as *;
 
 .Summary {
-  @apply relative flex flex-col gap-5 border-b border-primary bg-black/50 p-5 backdrop-blur-lg;
+  &__container {
+    @apply relative h-[260px] overflow-hidden;
+  }
+
+  $clip-shape: polygon(
+    0 0,
+    95% 0,
+    100% 10%,
+    100% 70%,
+    100% 100%,
+    10% 100%,
+    0 85%,
+    0% 30%
+  );
+
+  $gradient-cyan: rgba(0, 255, 255, 0.1);
+  $gradient-black: rgba(0, 0, 0, 0.1);
+  $self: &;
+
+  @apply relative flex flex-col gap-5 border border-primary p-5 transition-all;
+  background-color: #0e0e0e;
+  clip-path: $clip-shape;
+
+  &::after {
+    content: "";
+    @apply absolute inset-0 z-0 h-full w-full bg-black/90;
+    clip-path: $clip-shape;
+    background-size: 3px 3px;
+    background-image: repeating-linear-gradient(
+      0deg,
+      $gradient-cyan,
+      $gradient-cyan 1px,
+      $gradient-black 1px,
+      $gradient-black
+    );
+  }
+
+  &__pseudo-border {
+    @apply absolute inset-0 -left-1 h-[calc(100%+10px)] w-[calc(100%+10px)];
+    background-color: rgb(0, 225, 255);
+    clip-path: $clip-shape;
+    z-index: -1;
+  }
 
   &__title {
-    @apply font-exo text-2xl font-bold text-primary;
+    @apply relative z-10 font-exo text-2xl font-bold text-primary;
   }
 
   &__info {
-    @apply grid grid-cols-1 gap-5 pb-5 lg:grid-cols-3;
-
-    &__decoration-shape {
-      @apply absolute bottom-0 right-0 h-[20px] w-[200px] bg-primary;
-      clip-path: polygon(
-        5% 0,
-        100% 0,
-        100% 30%,
-        100% 70%,
-        100% 100%,
-        0 100%,
-        0 60%,
-        0 40%
-      );
-    }
+    @apply relative z-10 grid grid-cols-1 gap-5 pb-5 lg:grid-cols-3;
 
     &-item {
       &__title {
-        @apply font-exo text-sm font-bold text-primary;
+        @apply font-exo text-sm font-bold text-white;
       }
 
       &__value {
-        @apply font-lucania text-sm text-secondary;
+        @apply font-lucania text-sm text-cyan-400;
       }
     }
+  }
+
+  &__decoration-shape-1 {
+    @apply absolute bottom-0 left-0 h-[45px] w-[110px] bg-primary;
+    clip-path: polygon(0 0, 100% 80%, 100% 100%, 0 100%, 0 85%, 0% 30%);
+  }
+
+  &__decoration-shape-2 {
+    @apply absolute bottom-0 left-[115px] h-[10px] w-full bg-primary;
   }
 }
 </style>

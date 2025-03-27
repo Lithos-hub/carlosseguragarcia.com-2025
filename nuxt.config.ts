@@ -15,11 +15,11 @@ export default defineNuxtConfig({
     preference: "system",
   },
 
-  routeRules: {
-    "/": {
-      redirect: "/onboarding",
-    },
-  },
+  // routeRules: {
+  //   "/": {
+  //     redirect: "/onboarding",
+  //   },
+  // },
 
   app: {
     pageTransition: {

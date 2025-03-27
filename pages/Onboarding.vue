@@ -291,7 +291,7 @@ onMounted(() => {
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
-@use "@/styles/colors.scss" as *;
+@use "@/styles/variables.scss" as *;
 
 .Onboarding {
   @apply h-screen bg-black;
