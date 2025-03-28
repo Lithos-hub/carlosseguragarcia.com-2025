@@ -1,5 +1,5 @@
 <template>
-  <section class="Hero__container" id="hero">
+  <div class="Hero__container">
     <div class="Hero__content">
       <Suspense>
         <div class="absolute inset-0 z-0">
@@ -15,30 +15,21 @@
         <BaseButton>View my work</BaseButton>
       </div>
     </div>
-  </section>
+  </div>
 </template>
-
-<script setup lang="ts">
-definePageMeta({
-  layout: "hero-layout",
-});
-</script>
 
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
 @use "@/styles/variables.scss" as *;
 
-#hero {
-  @apply border-secondarySubtle border-b;
-}
 .Hero {
   &__container {
-    @apply border-secondarySubtle border-b;
+    @apply border-b border-secondarySubtle;
   }
 
   &__content {
-    @apply border-secondarySubtle relative mx-auto flex max-w-[80vw] gap-10 overflow-hidden border-x border-b py-[140px];
+    @apply relative mx-auto flex max-w-[80vw] border-x border-secondarySubtle py-[200px];
   }
 
   &__text {

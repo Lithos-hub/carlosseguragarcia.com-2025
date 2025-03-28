@@ -1,5 +1,5 @@
 <template>
-  <section class="About__container" id="about">
+  <div class="About__container">
     <div class="About__content">
       <div class="About__text">
         <p class="About__description">
@@ -52,7 +52,7 @@
         </div>
       </div>
     </div>
-  </section>
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -60,18 +60,13 @@
 @use "@/styles/general.scss" as *;
 @use "@/styles/variables.scss" as *;
 
-#about {
-  @apply border-secondarySubtle border-b;
-}
-
 .About {
   &__container {
-    @include section-wrapper;
-    @apply border-secondarySubtle border-b;
+    @apply border-b border-secondarySubtle;
   }
 
   &__content {
-    @apply border-secondarySubtle relative mx-auto flex max-w-[80vw] gap-10 overflow-hidden border-x border-b py-[140px];
+    @apply relative mx-auto max-w-[80vw] border-x border-secondarySubtle p-20 py-[200px];
   }
 
   &__text {

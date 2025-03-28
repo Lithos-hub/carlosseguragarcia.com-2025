@@ -130,7 +130,7 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/breakpoints.scss" as *;
 
 .TopBar {
-  @apply border-secondarySubtle sticky top-0 z-50 flex h-[60px] w-full items-center justify-between border-b;
+  @apply sticky top-0 z-10 flex h-[60px] w-full items-center justify-between border-b border-secondarySubtle;
 
   @media mobile {
     padding: $mobile-margin;
@@ -151,7 +151,7 @@ const changeLanguage = (lang: any) => {
   }
 
   &__center {
-    @apply border-secondarySubtle mx-auto flex h-full w-full max-w-[80vw] items-center justify-center border-x backdrop-blur-lg;
+    @apply mx-auto flex h-full w-full max-w-[80vw] items-center justify-center border-x border-secondarySubtle backdrop-blur-lg;
   }
 
   &__radial-menu {

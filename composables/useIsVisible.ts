@@ -35,7 +35,7 @@ export const useIsVisible = ({ refs, options = {} }: UseIsVisibleProps) => {
 
   // Default configuration of the IntersectionObserver
   const defaultOptions: IntersectionObserverInit = {
-    threshold: 0.5, // The element is considered visible when 10% of it is in the viewport
+    threshold: [0, 0.25, 0.5, 0.75, 1],
     rootMargin: "0px",
     ...options,
   };
@@ -46,11 +46,23 @@ export const useIsVisible = ({ refs, options = {} }: UseIsVisibleProps) => {
 
     observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
+        // Determine if the element is near the center of the viewport
+        if (entry.isIntersecting && isCenteredInViewport(entry.target)) {
           visibleElement.value = entry.target.id;
         }
       });
     }, defaultOptions);
+  };
+
+  // Function to determine if an element is centered in the viewport
+  const isCenteredInViewport = (element: Element): boolean => {
+    const rect = element.getBoundingClientRect();
+    const elementCenter = rect.top + rect.height / 2;
+    const viewportCenter = window.innerHeight / 2;
+
+    // Consider the element is centered if it's within 20% of the viewport height
+    const tolerance = window.innerHeight * 0.2;
+    return Math.abs(elementCenter - viewportCenter) < tolerance;
   };
 
   // Observe the elements

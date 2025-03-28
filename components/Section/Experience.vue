@@ -1,82 +1,89 @@
 <template>
-  <div class="Experience" id="experience">
-    <div
-      v-for="experience in DEV_EXPERIENCE"
-      :key="`Experience-${experience.role}-${experience.subtitle}`"
-      class="Experience__item"
-    >
-      <div class="Experience__left-side">
-        <div class="Experience__index">#{{ experience.id }}</div>
-        <div class="Experience__date">
-          <div class="Experience__start-date">
-            {{ getStartDate(experience) }}
-          </div>
-          <div class="Experience__date-separator">-</div>
-          <div
-            class="Experience__end-date"
-            :class="{
-              'text-white': getEndDate(experience) !== 'Present',
-              'font-bold text-secondary': getEndDate(experience) === 'Present',
-            }"
-          >
-            {{ getEndDate(experience) }}
-          </div>
-        </div>
-      </div>
-      <div class="Experience__right-side">
-        <div class="Experience__card">
-          <div class="Experience__header">
-            <img
-              :src="experience.image"
-              :alt="experience.company"
-              class="Experience__company-image"
-              :class="{
-                'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
-              }"
-            />
-            <div class="Experience__role-container">
-              <h3 class="Experience__role">{{ experience.role }}</h3>
-              <p class="Experience__company">{{ experience.company }}</p>
-            </div>
-          </div>
-
-          <div class="Experience__clients" v-if="experience.clients.length">
-            <span class="Experience__label">Clients:</span>
-            <span class="Experience__client-list">{{
-              experience.clients.join(", ")
-            }}</span>
-          </div>
-
-          <div class="Experience__stack">
-            <span class="Experience__label">Stack:</span>
-            <div class="Experience__stack-items">
+  <div class="Experience__container">
+    <div class="Experience__content">
+      <div class="flex flex-col">
+        <div
+          v-for="experience in DEV_EXPERIENCE"
+          :key="`Experience-${experience.role}-${experience.subtitle}`"
+          class="Experience__item"
+        >
+          <div class="Experience__left-side">
+            <div class="Experience__index">#{{ experience.id }}</div>
+            <div class="Experience__date">
+              <div class="Experience__start-date">
+                {{ getStartDate(experience) }}
+              </div>
+              <div class="Experience__date-separator">-</div>
               <div
-                v-for="tech in experience.stack"
-                :key="tech.techName"
-                class="Experience__stack-item"
+                class="Experience__end-date"
+                :class="{
+                  'text-white': getEndDate(experience) !== 'Present',
+                  'font-bold text-secondary':
+                    getEndDate(experience) === 'Present',
+                }"
               >
-                <img
-                  :src="tech.imageUrl"
-                  :alt="tech.techName"
-                  class="Experience__stack-image"
-                />
-                <span class="Experience__stack-name">{{ tech.techName }}</span>
+                {{ getEndDate(experience) }}
               </div>
             </div>
           </div>
+          <div class="Experience__right-side">
+            <div class="Experience__card">
+              <div class="Experience__header">
+                <img
+                  :src="experience.image"
+                  :alt="experience.company"
+                  class="Experience__company-image"
+                  :class="{
+                    'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
+                  }"
+                />
+                <div class="Experience__role-container">
+                  <h3 class="Experience__role">{{ experience.role }}</h3>
+                  <p class="Experience__company">{{ experience.company }}</p>
+                </div>
+              </div>
 
-          <div class="Experience__tasks">
-            <span class="Experience__label">Tasks:</span>
-            <ul class="Experience__task-list">
-              <li
-                v-for="(task, taskIndex) in experience.tasks"
-                :key="taskIndex"
-                class="Experience__task-item"
-              >
-                <div class="Experience__task-bullet" />
-                <p class="Experience__task-text">{{ task }}</p>
-              </li>
-            </ul>
+              <div class="Experience__clients" v-if="experience.clients.length">
+                <span class="Experience__label">Clients:</span>
+                <span class="Experience__client-list">{{
+                  experience.clients.join(", ")
+                }}</span>
+              </div>
+
+              <div class="Experience__stack">
+                <span class="Experience__label">Stack:</span>
+                <div class="Experience__stack-items">
+                  <div
+                    v-for="tech in experience.stack"
+                    :key="tech.techName"
+                    class="Experience__stack-item"
+                  >
+                    <img
+                      :src="tech.imageUrl"
+                      :alt="tech.techName"
+                      class="Experience__stack-image"
+                    />
+                    <span class="Experience__stack-name">{{
+                      tech.techName
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="Experience__tasks">
+                <span class="Experience__label">Tasks:</span>
+                <ul class="Experience__task-list">
+                  <li
+                    v-for="(task, taskIndex) in experience.tasks"
+                    :key="taskIndex"
+                    class="Experience__task-item"
+                  >
+                    <div class="Experience__task-bullet" />
+                    <p class="Experience__task-text">{{ task }}</p>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -104,7 +111,13 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 @use "@/styles/fonts.scss" as *;
 
 .Experience {
-  @apply relative flex flex-col;
+  &__container {
+    @apply border-b border-secondarySubtle;
+  }
+
+  &__content {
+    @apply relative mx-auto max-w-[80vw] border-x border-secondarySubtle;
+  }
 
   &__item {
     @include corner-effect;
