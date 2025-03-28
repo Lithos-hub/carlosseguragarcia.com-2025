@@ -1,12 +1,19 @@
 <template>
   <section class="Hero__container" id="hero">
     <div class="Hero__content">
-      <h1 class="Hero__name">
-        Hello, I'm <strong class="text-primary">Carlos</strong>.
-      </h1>
-      <h2 class="Hero__title">I'm a front-end developer.</h2>
+      <Suspense>
+        <div class="absolute inset-0 z-0">
+          <ThreejsScene />
+        </div>
+      </Suspense>
+      <div class="Hero__text">
+        <h1 class="Hero__name">
+          Hello, I'm <strong class="text-primary">Carlos</strong>.
+        </h1>
+        <h2 class="Hero__title">I'm a front-end developer.</h2>
 
-      <BaseButton>View my work</BaseButton>
+        <BaseButton>View my work</BaseButton>
+      </div>
     </div>
   </section>
 </template>
@@ -20,25 +27,35 @@ definePageMeta({
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
+@use "@/styles/variables.scss" as *;
 
 #hero {
-  @apply border-b border-secondarySoft;
+  @apply border-secondarySubtle border-b;
 }
 .Hero {
   &__container {
-    @include section-wrapper;
+    @apply border-secondarySubtle border-b;
   }
 
   &__content {
-    @apply mx-auto flex max-w-[1120px] flex-col items-center justify-between gap-10 border-x border-secondarySoft py-[120px] text-center;
+    @apply border-secondarySubtle relative mx-auto flex max-w-[80vw] gap-10 overflow-hidden border-x border-b py-[140px];
+  }
+
+  &__text {
+    @apply z-10 flex w-full flex-col items-center justify-center gap-10;
+  }
+
+  &__name,
+  &__title {
+    @apply font-exo font-light text-white;
   }
 
   &__name {
-    @apply font-exo text-3xl font-light text-stone-900 lg:text-[30px] dark:text-white;
+    @apply text-3xl lg:text-[30px];
   }
 
   &__title {
-    @apply font-exo text-lg font-light text-stone-900 lg:text-[30px] dark:text-white;
+    @apply text-lg lg:text-[30px];
   }
 }
 </style>

@@ -24,30 +24,17 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 </script>
 
 <style lang="scss" scoped>
+@use "@/styles/variables.scss" as *;
 .Button {
-  $clip-shape: polygon(
-    0 0,
-    90% 0,
-    100% 20%,
-    100% 80%,
-    100% 100%,
-    10% 100%,
-    0 80%,
-    0% 20%
-  );
-
-  $gradient-cyan: rgba(0, 255, 255, 0.1);
-  $gradient-black: rgba(0, 0, 0, 0.1);
-
   @apply relative overflow-hidden border brightness-200 transition-all;
-  clip-path: $clip-shape;
+  clip-path: $clip-button;
 
   $self: &;
 
   &::after {
     content: "";
     @apply absolute inset-0 z-0 h-full w-full bg-black/90;
-    clip-path: $clip-shape;
+    clip-path: $clip-button;
     background-size: 3px 3px;
     background-image: repeating-linear-gradient(
       0deg,
@@ -60,7 +47,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 
   &__pseudo-border {
     @apply absolute inset-0 -left-1 h-[calc(100%+10px)] w-[calc(100%+10px)];
-    clip-path: $clip-shape;
+    clip-path: $clip-button;
   }
 
   &__content {

@@ -1,6 +1,7 @@
 $primary: #55ead4;
-$secondary: #c5003c;
+$secondary: #fb1543;
 $secondarySoft: #ef4444;
+$secondarySubtle: #ef444450;
 $dark1: #003554;
 $dark2: #242423;
 $light1: #f2f4f3;
@@ -9,3 +10,26 @@ $light2: #cfdbd5;
 // Margins
 $desktop-margin: 10px;
 $mobile-margin: 5px;
+
+// Gradients
+$gradient-cyan: rgba(0, 255, 255, 0.1);
+$gradient-black: rgba(0, 0, 0, 0.1);
+$gradient-radial-start-color: rgba(0, 234, 255, 0.175);
+$gradient-radial-end-color: rgb(0, 0, 0);
+
+// Dots background
+$dots-bg-size: 25px;
+$dots-color: #55ead430;
+$dots-background-color: transparent;
+
+// Clip paths
+$clip-button: polygon(
+  0 0,
+  90% 0,
+  100% 20%,
+  100% 80%,
+  100% 100%,
+  10% 100%,
+  0 80%,
+  0% 20%
+);

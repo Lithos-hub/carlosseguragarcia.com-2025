@@ -1,6 +1,6 @@
 <template>
-  <div class="TopBar">
-    <div class="TopBar__code">
+  <header class="TopBar">
+    <div class="TopBar__left">
       <div class="flex flex-col">
         <div class="flex items-center justify-between">
           <div class="triangle-shape-top-left bg-primary" />
@@ -14,16 +14,18 @@
         </div>
       </div>
     </div>
-    <div class="TopBar__radial-menu">
-      <div class="flex flex-col items-center justify-center gap-2">
-        <button class="TopBar__radial-menu__button" @click="toggleRadialMenu">
-          <img src="/icons/radial-menu.svg" alt="Radial menu" />
-        </button>
-        <small class="text-xs text-secondary"
-          >Click here or press
-          <span class="font-bold text-secondarySoft">control / command</span> to
-          show the radial menu</small
-        >
+    <div class="TopBar__center">
+      <div class="TopBar__radial-menu">
+        <div class="flex flex-col items-center justify-center gap-1">
+          <button class="TopBar__radial-menu__button" @click="toggleRadialMenu">
+            <img src="/icons/radial-menu.svg" alt="Radial menu" />
+          </button>
+          <small class="text-xs text-secondary"
+            >Click here or press
+            <span class="font-bold text-secondarySoft">control / command</span>
+            to show the radial menu</small
+          >
+        </div>
       </div>
     </div>
     <div class="block md:hidden">
@@ -31,7 +33,7 @@
         <UIcon name="i-mdi-menu" size="30" class="text-secondarySoft" />
       </button>
     </div>
-    <div class="TopBar__language-selector">
+    <div class="TopBar__right">
       <div class="flex flex-col">
         <div class="flex items-center justify-between">
           <span class="info-text">Language: {{ selectedLanguage.name }}</span>
@@ -40,9 +42,9 @@
         <div class="grid grid-cols-5 gap-2">
           <div v-for="lang in availableLanguages" :key="lang.code">
             <button
-              class="TopBar__language-selector__button"
+              class="TopBar__right__lang-button"
               :class="{
-                'TopBar__language-selector__button--active':
+                'TopBar__right__lang-button--active':
                   lang.code === selectedLanguage.code,
               }"
               @click="changeLanguage(lang)"
@@ -53,7 +55,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup lang="ts">
@@ -128,7 +130,7 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/breakpoints.scss" as *;
 
 .TopBar {
-  @apply flex w-full items-center justify-between border-b border-secondarySoft;
+  @apply border-secondarySubtle sticky top-0 z-50 flex h-[60px] w-full items-center justify-between border-b;
 
   @media mobile {
     padding: $mobile-margin;
@@ -138,9 +140,8 @@ const changeLanguage = (lang: any) => {
     padding: $desktop-margin;
   }
 
-  &__code {
-    @include corner-effect;
-    @apply h-auto w-[150px] border-y border-y-stone-500/10 bg-black/90 px-10 px-2 pb-1 font-lucania text-lg text-primary backdrop-blur-lg;
+  &__left {
+    @apply h-full w-[10vw] bg-black px-2 font-lucania text-lg brightness-200;
 
     &-info {
       span {
@@ -149,11 +150,15 @@ const changeLanguage = (lang: any) => {
     }
   }
 
+  &__center {
+    @apply border-secondarySubtle mx-auto flex h-full w-full max-w-[80vw] items-center justify-center border-x backdrop-blur-lg;
+  }
+
   &__radial-menu {
     @apply z-50 hidden items-center justify-center gap-5 md:flex;
 
     &__button {
-      @apply relative h-[30px] w-[30px] text-secondary transition-all duration-300;
+      @apply relative h-5 w-5 text-secondary transition-all duration-300;
 
       &:hover {
         @apply scale-110;
@@ -185,16 +190,15 @@ const changeLanguage = (lang: any) => {
     }
   }
 
-  &__language-selector {
-    @include corner-effect;
-    @apply h-auto w-[150px] border-y border-y-stone-500/10 bg-black/90 px-10 px-2 pb-1 font-lucania text-lg text-primary backdrop-blur-lg;
+  &__right {
+    @apply h-full w-[10vw] bg-black px-2 font-lucania text-lg brightness-200;
 
-    &__button {
-      @apply rounded-full outline outline-transparent;
+    &__lang-button {
+      @apply h-6 w-6 cursor-pointer rounded-full border-2 border-transparent brightness-50;
     }
 
-    &__button--active {
-      @apply outline-primary;
+    &__lang-button--active {
+      @apply border-primary;
     }
   }
 

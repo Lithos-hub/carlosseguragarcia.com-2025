@@ -2,9 +2,9 @@
   <div class="Site">
     <LayoutTopBar />
     <SectionHero />
-    <!-- <AboutSection />
-    <ExperienceSection />
-    <SummarySection /> -->
+    <SectionAbout />
+    <!-- <ExperienceSection /> -->
+    <!-- <SummarySection /> -->
   </div>
 </template>
 

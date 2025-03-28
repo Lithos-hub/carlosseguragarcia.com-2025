@@ -1,9 +1,9 @@
 <template>
-  <TresCanvas v-bind="gl" window-size shadows alpha preset="realistic">
+  <TresCanvas v-bind="gl" shadows alpha preset="realistic">
     <!-- Camera -->
     <TresPerspectiveCamera
-      :fov="65"
-      :position="[0, 0, 30]"
+      :fov="80"
+      :position="[0, 0, 10]"
       :rotation="[0, 0, 0]"
     />
 

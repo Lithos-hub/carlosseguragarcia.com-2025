@@ -1,13 +1,14 @@
 <template>
-  <div class="About__container" id="about">
-    <div class="About__inner">
-      <div class="About__content">
+  <section class="About__container" id="about">
+    <div class="About__content">
+      <div class="About__text">
         <p class="About__description">
           I'm a front-end developer with a passion for creating beautiful and
           functional web applications, <br />mainly focused on
-          <strong class="vue-gradient-text text-2xl">Vue</strong> ecosystem.
+          <strong class="vue-gradient-text text-2xl font-bold">VUE</strong>
+          ecosystem.
         </p>
-        <div class="About__logos mx-auto">
+        <div class="About__logos">
           <div class="About__logo-container">
             <img
               src="/tech-logos/vue.svg"
@@ -51,46 +52,51 @@
         </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <style lang="scss" scoped>
+@use "@/styles/fonts.scss" as *;
 @use "@/styles/general.scss" as *;
+@use "@/styles/variables.scss" as *;
+
+#about {
+  @apply border-secondarySubtle border-b;
+}
+
 .About {
   &__container {
-    @apply relative flex h-screen w-full flex-col items-center justify-center bg-gradient-to-b from-transparent to-black;
-  }
-
-  &__inner {
-    @apply px-[10vw];
+    @include section-wrapper;
+    @apply border-secondarySubtle border-b;
   }
 
   &__content {
-    @include corner-effect;
-    @apply p-10 text-center text-xl text-stone-900 dark:text-white;
+    @apply border-secondarySubtle relative mx-auto flex max-w-[80vw] gap-10 overflow-hidden border-x border-b py-[140px];
+  }
+
+  &__text {
+    @apply z-10 flex w-full flex-col items-center justify-center gap-10;
   }
 
   &__description {
-    @apply max-w-[80vw] text-wrap text-center font-exo text-sm text-stone-900 lg:text-base dark:text-white;
+    @apply text-center font-exo text-lg font-light text-white lg:text-[30px];
   }
 
   &__logos {
-    @apply flex w-[351px] flex-wrap items-center justify-center gap-5 p-5;
+    @apply flex w-full flex-wrap items-center justify-center gap-5;
   }
 
   &__logo {
-    @apply border border-stone-700/10 p-2.5;
-
-    &-image {
-      @apply h-10 w-10 object-contain grayscale dark:grayscale-0;
+    &-container {
+      @apply flex flex-col items-center justify-center gap-2;
     }
 
-    &-container {
-      @apply flex flex-col items-center justify-center gap-5;
+    &-image {
+      @apply h-12 w-12 object-contain;
     }
 
     &-name {
-      @apply font-exo text-xs font-medium leading-none opacity-50 dark:text-white dark:opacity-100;
+      @apply font-exo text-xs font-light text-primary;
     }
   }
 }

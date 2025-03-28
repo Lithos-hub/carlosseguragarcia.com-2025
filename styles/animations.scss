@@ -1,30 +1,30 @@
-$bg-size: 40px;
+$dots-bg-size: 40px;
 
 @keyframes floatingDots {
   0% {
     background-position:
       0 0,
-      $bg-size * 0.5 $bg-size * 0.5;
+      $dots-bg-size * 0.5 $dots-bg-size * 0.5;
   }
   25% {
     background-position:
-      $bg-size * 0.1 $bg-size * 0.2,
-      $bg-size * 0.6 $bg-size * 0.7;
+      $dots-bg-size * 0.1 $dots-bg-size * 0.2,
+      $dots-bg-size * 0.6 $dots-bg-size * 0.7;
   }
   50% {
     background-position:
-      $bg-size * 0.2 $bg-size * 0.4,
-      $bg-size * 0.7 $bg-size * 0.9;
+      $dots-bg-size * 0.2 $dots-bg-size * 0.4,
+      $dots-bg-size * 0.7 $dots-bg-size * 0.9;
   }
   75% {
     background-position:
-      $bg-size * 0.1 $bg-size * 0.2,
-      $bg-size * 0.6 $bg-size * 0.7;
+      $dots-bg-size * 0.1 $dots-bg-size * 0.2,
+      $dots-bg-size * 0.6 $dots-bg-size * 0.7;
   }
   100% {
     background-position:
       0 0,
-      $bg-size * 0.5 $bg-size * 0.5;
+      $dots-bg-size * 0.5 $dots-bg-size * 0.5;
   }
 }
 
