@@ -18,7 +18,7 @@
     @apply fixed inset-0;
     background: radial-gradient(
       circle,
-      $gradient-radial-start-color 0%,
+      $gradient-primary-radial-start-color 0%,
       $gradient-radial-end-color 100%
     );
     animation: pulseGradient 8s ease-in-out infinite;

@@ -1,6 +1,7 @@
 <template>
   <div class="Hero__container">
     <div class="Hero__content">
+      <ComponentName componentName="Hero.vue" />
       <Suspense>
         <div class="absolute inset-0 z-0">
           <ThreejsScene />
@@ -25,20 +26,20 @@
 
 .Hero {
   &__container {
-    @apply border-b border-secondarySubtle;
+    @apply relative border-b border-secondary;
   }
 
   &__content {
-    @apply relative mx-auto flex max-w-[80vw] border-x border-secondarySubtle py-[200px];
+    @apply relative w-full border-x border-secondary bg-black p-5 py-[200px] lg:mx-auto lg:max-w-[80vw];
   }
 
   &__text {
-    @apply z-10 flex w-full flex-col items-center justify-center gap-10;
+    @apply flex w-full flex-col items-center justify-center gap-10;
   }
 
   &__name,
   &__title {
-    @apply font-exo font-light text-white;
+    @apply z-10 font-rajdhaniMedium font-light text-white;
   }
 
   &__name {

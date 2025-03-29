@@ -33,36 +33,38 @@ export const useIsVisible = ({ refs, options = {} }: UseIsVisibleProps) => {
   const visibleElement = ref<string | null>(null);
   let observer: IntersectionObserver | null = null;
 
-  // Default configuration of the IntersectionObserver
   const defaultOptions: IntersectionObserverInit = {
     threshold: [0, 0.25, 0.5, 0.75, 1],
-    rootMargin: "0px",
+    rootMargin: "-45% 0px -45% 0px", // Ajustamos el margen para detectar mejor el centro
     ...options,
   };
 
-  // Create the observer only in the client
   const setupObserver = () => {
     if (typeof window === "undefined") return;
 
     observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        // Determine if the element is near the center of the viewport
-        if (entry.isIntersecting && isCenteredInViewport(entry.target)) {
-          visibleElement.value = entry.target.id;
-        }
-      });
+      // Filtramos las entradas que están intersectando
+      const visibleEntries = entries.filter((entry) => entry.isIntersecting);
+
+      if (visibleEntries.length > 0) {
+        // Encontramos la entrada más cercana al centro
+        const mostCentralEntry = visibleEntries.reduce((prev, current) => {
+          const prevDistance = getDistanceFromCenter(prev.target);
+          const currentDistance = getDistanceFromCenter(current.target);
+          return currentDistance < prevDistance ? current : prev;
+        });
+
+        visibleElement.value = mostCentralEntry.target.id;
+      }
     }, defaultOptions);
   };
 
-  // Function to determine if an element is centered in the viewport
-  const isCenteredInViewport = (element: Element): boolean => {
+  // Nueva función para calcular la distancia al centro
+  const getDistanceFromCenter = (element: Element): number => {
     const rect = element.getBoundingClientRect();
     const elementCenter = rect.top + rect.height / 2;
     const viewportCenter = window.innerHeight / 2;
-
-    // Consider the element is centered if it's within 20% of the viewport height
-    const tolerance = window.innerHeight * 0.2;
-    return Math.abs(elementCenter - viewportCenter) < tolerance;
+    return Math.abs(elementCenter - viewportCenter);
   };
 
   // Observe the elements

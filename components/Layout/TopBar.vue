@@ -1,17 +1,17 @@
 <template>
   <header class="TopBar">
     <div class="TopBar__left">
-      <div class="flex flex-col">
-        <div class="flex items-center justify-between">
-          <div class="triangle-shape-top-left bg-primary" />
-          <span class="info-text"
-            >{{ visualDataBySection?.componentName }}
-          </span>
-        </div>
-        <div class="flex items-center justify-between">
-          <div class="triangle-shape-top-left bg-primary" />
-          <span class="info-text">Zone: {{ visualDataBySection?.code }} </span>
-        </div>
+      <div class="flex w-full items-center justify-between">
+        <div class="triangle-shape-top-left bg-primary" />
+        <span class="info-text text-[10px]"
+          >{{ visualDataBySection?.componentName }}
+        </span>
+      </div>
+      <div class="flex w-full items-center justify-between">
+        <div class="triangle-shape-top-left bg-primary" />
+        <span class="info-text text-[10px]"
+          >Zone: {{ visualDataBySection?.code }}
+        </span>
       </div>
     </div>
     <div class="TopBar__center">
@@ -27,31 +27,29 @@
           >
         </div>
       </div>
-    </div>
-    <div class="block md:hidden">
-      <button @click="toggleMobileMenu">
-        <UIcon name="i-mdi-menu" size="30" class="text-secondarySoft" />
-      </button>
+      <div class="block lg:hidden">
+        <button @click="toggleMobileMenu">
+          <UIcon name="i-mdi-menu" size="30" class="text-secondarySoft" />
+        </button>
+      </div>
     </div>
     <div class="TopBar__right">
-      <div class="flex flex-col">
-        <div class="flex items-center justify-between">
-          <span class="info-text">Language: {{ selectedLanguage.name }}</span>
-          <div class="triangle-shape-top-right bg-primary" />
-        </div>
-        <div class="grid grid-cols-5 gap-2">
-          <div v-for="lang in availableLanguages" :key="lang.code">
-            <button
-              class="TopBar__right__lang-button"
-              :class="{
-                'TopBar__right__lang-button--active':
-                  lang.code === selectedLanguage.code,
-              }"
-              @click="changeLanguage(lang)"
-            >
-              <img :src="lang.flag" alt="Language flag" />
-            </button>
-          </div>
+      <div class="flex w-full items-center justify-between">
+        <span class="info-text">Language: {{ selectedLanguage.name }}</span>
+        <div class="triangle-shape-top-right bg-primary" />
+      </div>
+      <div class="flex flex-wrap gap-2">
+        <div v-for="lang in availableLanguages" :key="lang.code">
+          <button
+            class="TopBar__right__lang-button"
+            :class="{
+              'TopBar__right__lang-button--active':
+                lang.code === selectedLanguage.code,
+            }"
+            @click="changeLanguage(lang)"
+          >
+            <img :src="lang.flag" alt="Language flag" />
+          </button>
         </div>
       </div>
     </div>
@@ -130,7 +128,7 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/breakpoints.scss" as *;
 
 .TopBar {
-  @apply sticky top-0 z-10 flex h-[60px] w-full items-center justify-between border-b border-secondarySubtle;
+  @apply sticky top-0 z-40 flex h-[60px] w-full items-center justify-between border-b border-secondary;
 
   @media mobile {
     padding: $mobile-margin;
@@ -141,21 +139,15 @@ const changeLanguage = (lang: any) => {
   }
 
   &__left {
-    @apply h-full w-[10vw] bg-black px-2 font-lucania text-lg brightness-200;
-
-    &-info {
-      span {
-        @apply ml-auto;
-      }
-    }
+    @apply flex h-full w-[50vw] flex-col items-center justify-between bg-black p-2 font-lucania brightness-200 lg:w-[10vw];
   }
 
   &__center {
-    @apply mx-auto flex h-full w-full max-w-[80vw] items-center justify-center border-x border-secondarySubtle backdrop-blur-lg;
+    @apply mx-auto flex h-full w-full max-w-[80vw] items-center justify-center border-x border-secondary backdrop-blur-lg;
   }
 
   &__radial-menu {
-    @apply z-50 hidden items-center justify-center gap-5 md:flex;
+    @apply z-50 hidden items-center justify-center gap-5 lg:flex;
 
     &__button {
       @apply relative h-5 w-5 text-secondary transition-all duration-300;
@@ -167,10 +159,10 @@ const changeLanguage = (lang: any) => {
   }
 
   &__links {
-    @apply z-50 flex h-screen md:hidden;
+    @apply z-50 flex h-screen lg:hidden;
 
     &-overlay {
-      @apply fixed inset-0 z-40 hidden h-screen w-full bg-black/50 md:block;
+      @apply fixed inset-0 z-40 hidden h-screen w-full bg-black/50 lg:block;
     }
 
     &-container {
@@ -191,10 +183,10 @@ const changeLanguage = (lang: any) => {
   }
 
   &__right {
-    @apply h-full w-[10vw] bg-black px-2 font-lucania text-lg brightness-200;
+    @apply flex h-full w-[50vw] flex-col items-start justify-between bg-black p-2 font-lucania brightness-200 lg:w-[10vw];
 
     &__lang-button {
-      @apply h-6 w-6 cursor-pointer rounded-full border-2 border-transparent brightness-50;
+      @apply h-5 w-5 cursor-pointer rounded-full border-2 border-transparent brightness-50;
     }
 
     &__lang-button--active {

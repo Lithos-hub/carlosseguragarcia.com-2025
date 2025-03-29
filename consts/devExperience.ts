@@ -226,3 +226,106 @@ export const getMostUsedTech = () =>
 
 export const getMainClientFields = () =>
   getMostCommonFields(DEV_EXPERIENCE, (exp) => exp.clientFields);
+
+export const techSkills = [
+  {
+    image: "/tech-logos/html.svg",
+    name: "HTML",
+  },
+  {
+    image: "/tech-logos/css.svg",
+    name: "CSS",
+  },
+  {
+    image: "/tech-logos/javascript.svg",
+    name: "JavaScript",
+  },
+  {
+    image: "/tech-logos/typescript.svg",
+    name: "TypeScript",
+  },
+  {
+    image: "/tech-logos/vite.svg",
+    name: "Vite",
+  },
+  {
+    image: "/tech-logos/vue.svg",
+    name: "Vue",
+  },
+  {
+    image: "/tech-logos/react.svg",
+    name: "React",
+  },
+  {
+    image: "/tech-logos/next.svg",
+    name: "Next.js",
+  },
+  {
+    image: "/tech-logos/nuxt.svg",
+    name: "Nuxt",
+  },
+  {
+    image: "/tech-logos/pinia.svg",
+    name: "Pinia",
+  },
+  {
+    image: "/tech-logos/vuex.svg",
+    name: "Vuex",
+  },
+  {
+    image: "/tech-logos/redux.svg",
+    name: "Redux",
+  },
+  {
+    image: "/tech-logos/jest.svg",
+    name: "Jest",
+  },
+  {
+    image: "/tech-logos/vitest.svg",
+    name: "Vitest",
+  },
+  {
+    image: "/tech-logos/testing-library.svg",
+    name: "Testing Library",
+  },
+  {
+    image: "/tech-logos/sass.svg",
+    name: "SASS",
+  },
+  {
+    image: "/tech-logos/tailwind.svg",
+    name: "Tailwind CSS",
+  },
+  {
+    image: "/tech-logos/less.svg",
+    name: "Less",
+  },
+  {
+    image: "/tech-logos/three.svg",
+    name: "Three.js",
+  },
+  {
+    image: "/tech-logos/leaflet.svg",
+    name: "Leaflet.js",
+  },
+  {
+    image: "/tech-logos/git.svg",
+    name: "Git",
+  },
+  {
+    image: "/tech-logos/docker.svg",
+    name: "Docker",
+  },
+  {
+    image: "/tech-logos/node.svg",
+    name: "Node",
+  },
+  {
+    image: "/tech-logos/mongo.svg",
+    name: "MongoDB",
+  },
+  {
+    image: "/tech-logos/linux.svg",
+    name: "Linux",
+  },
+];

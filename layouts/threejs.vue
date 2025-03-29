@@ -20,21 +20,18 @@
 <style lang="scss">
 @use "@/styles/main.scss" as *;
 
-* {
-  @apply text-stone-700;
-}
 .Experience {
   @apply bg-cyan-950/20;
   position: relative;
   overflow: hidden;
 
-  $gradient-radial-start-color: rgba(90, 189, 198, 0.1);
+  $gradient-primary-radial-start-color: rgba(90, 189, 198, 0.1);
   $gradient-radial-end-color: rgba(0, 0, 0, 0.9);
 
   &__radial-gradient-background {
     background: radial-gradient(
       circle,
-      $gradient-radial-start-color 0%,
+      $gradient-primary-radial-start-color 0%,
       $gradient-radial-end-color 100%
     );
     animation: pulseGradient 8s ease-in-out infinite;

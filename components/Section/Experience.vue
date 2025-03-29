@@ -1,90 +1,117 @@
 <template>
   <div class="Experience__container">
     <div class="Experience__content">
-      <div class="flex flex-col">
-        <div
-          v-for="experience in DEV_EXPERIENCE"
-          :key="`Experience-${experience.role}-${experience.subtitle}`"
-          class="Experience__item"
-        >
-          <div class="Experience__left-side">
-            <div class="Experience__index">#{{ experience.id }}</div>
-            <div class="Experience__date">
-              <div class="Experience__start-date">
-                {{ getStartDate(experience) }}
-              </div>
-              <div class="Experience__date-separator">-</div>
-              <div
-                class="Experience__end-date"
-                :class="{
-                  'text-white': getEndDate(experience) !== 'Present',
-                  'font-bold text-secondary':
-                    getEndDate(experience) === 'Present',
-                }"
-              >
-                {{ getEndDate(experience) }}
-              </div>
-            </div>
-          </div>
-          <div class="Experience__right-side">
-            <div class="Experience__card">
-              <div class="Experience__header">
-                <img
-                  :src="experience.image"
-                  :alt="experience.company"
-                  class="Experience__company-image"
+      <img
+        src="/svg/decoration/decoration-11.svg"
+        alt="Decoration protocol image"
+        class="absolute left-5 top-5 h-[20px]"
+      />
+      <ComponentName componentName="Experience.vue" color="secondary" />
+      <div class="Experience__inner-container">
+        <img
+          src="/svg/decoration/decoration-13.svg"
+          alt="Decoration protocol image"
+          class="absolute left-0 top-[-40px] h-[30px]"
+        />
+        <img
+          src="/svg/decoration/decoration-10.svg"
+          alt="Decoration protocol image"
+          class="absolute right-0 top-[-60px] h-[50px]"
+        />
+        <h1 class="Experience__title">Experience</h1>
+        <div class="flex flex-col">
+          <article
+            v-for="experience in DEV_EXPERIENCE"
+            :key="`Experience-${experience.role}-${experience.subtitle}`"
+            class="Experience__item"
+          >
+            <div class="Experience__left-side">
+              <div class="Experience__index">#{{ experience.id }}</div>
+              <div class="Experience__date">
+                <div class="Experience__start-date">
+                  {{ getStartDate(experience) }}
+                </div>
+                <div class="Experience__date-separator">-</div>
+                <div
+                  class="Experience__end-date"
                   :class="{
-                    'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
+                    'text-white': getEndDate(experience) !== 'Present',
+                    'font-bold text-secondary':
+                      getEndDate(experience) === 'Present',
                   }"
-                />
-                <div class="Experience__role-container">
-                  <h3 class="Experience__role">{{ experience.role }}</h3>
-                  <p class="Experience__company">{{ experience.company }}</p>
+                >
+                  {{ getEndDate(experience) }}
                 </div>
               </div>
-
-              <div class="Experience__clients" v-if="experience.clients.length">
-                <span class="Experience__label">Clients:</span>
-                <span class="Experience__client-list">{{
-                  experience.clients.join(", ")
-                }}</span>
-              </div>
-
-              <div class="Experience__stack">
-                <span class="Experience__label">Stack:</span>
-                <div class="Experience__stack-items">
-                  <div
-                    v-for="tech in experience.stack"
-                    :key="tech.techName"
-                    class="Experience__stack-item"
-                  >
-                    <img
-                      :src="tech.imageUrl"
-                      :alt="tech.techName"
-                      class="Experience__stack-image"
-                    />
-                    <span class="Experience__stack-name">{{
-                      tech.techName
-                    }}</span>
+            </div>
+            <div class="Experience__right-side">
+              <div class="Experience__card">
+                <img
+                  src="/svg/decoration/decoration-18.svg"
+                  alt="Decoration protocol image"
+                  class="absolute bottom-0 right-0 h-[30px]"
+                />
+                <div class="Experience__header">
+                  <img
+                    :src="experience.image"
+                    :alt="experience.company"
+                    class="Experience__company-image"
+                    :class="{
+                      'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
+                    }"
+                  />
+                  <div class="Experience__role-container">
+                    <h3 class="Experience__role">{{ experience.role }}</h3>
+                    <p class="Experience__company">{{ experience.company }}</p>
                   </div>
                 </div>
-              </div>
 
-              <div class="Experience__tasks">
-                <span class="Experience__label">Tasks:</span>
-                <ul class="Experience__task-list">
-                  <li
-                    v-for="(task, taskIndex) in experience.tasks"
-                    :key="taskIndex"
-                    class="Experience__task-item"
-                  >
-                    <div class="Experience__task-bullet" />
-                    <p class="Experience__task-text">{{ task }}</p>
-                  </li>
-                </ul>
+                <div
+                  class="Experience__clients"
+                  v-if="experience.clients.length"
+                >
+                  <span class="Experience__label">Clients:</span>
+                  <span class="Experience__client-list">{{
+                    experience.clients.join(", ")
+                  }}</span>
+                </div>
+
+                <div class="Experience__stack">
+                  <span class="Experience__label">Stack:</span>
+                  <div class="Experience__stack-items">
+                    <div
+                      v-for="tech in experience.stack"
+                      :key="tech.techName"
+                      class="Experience__stack-item"
+                    >
+                      <img
+                        :src="tech.imageUrl"
+                        :alt="tech.techName"
+                        class="Experience__stack-image"
+                      />
+                      <span class="Experience__stack-name">{{
+                        tech.techName
+                      }}</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="Experience__tasks">
+                  <span class="Experience__label">Tasks:</span>
+                  <ul class="Experience__task-list">
+                    <li
+                      v-for="(task, taskIndex) in experience.tasks"
+                      :key="taskIndex"
+                      class="Experience__task-item"
+                    >
+                      <div class="Experience__task-bullet" />
+                      <p class="Experience__task-text">{{ task }}</p>
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </div>
@@ -109,14 +136,24 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 <style lang="scss" scoped>
 @use "@/styles/general.scss" as *;
 @use "@/styles/fonts.scss" as *;
+@use "@/styles/variables.scss" as *;
+@use "@/styles/mixins.scss" as *;
 
 .Experience {
   &__container {
-    @apply border-b border-secondarySubtle;
+    @include section-container;
   }
 
   &__content {
-    @apply relative mx-auto max-w-[80vw] border-x border-secondarySubtle;
+    @include section-content;
+  }
+
+  &__inner-container {
+    @include inner-container-secondary;
+  }
+
+  &__title {
+    @include section-title-secondary;
   }
 
   &__item {
@@ -129,11 +166,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__index {
-    @apply font-exo text-[100px] font-extrabold text-secondary/80;
+    @apply font-orbitron text-[100px] font-extrabold text-secondary/80;
   }
 
   &__date {
-    @apply flex w-full items-center justify-end gap-1 font-exo text-xl;
+    @apply flex w-full items-center justify-end gap-1 font-rajdhaniSemiBold text-xl;
 
     &-separator {
       @apply text-white;
@@ -153,22 +190,22 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__card {
-    @apply relative flex h-full w-full flex-col gap-5 p-5;
+    @apply relative flex h-full w-full flex-col gap-5 p-5 pb-10;
 
-    &::after {
-      content: "";
-      @apply absolute right-0 top-0 h-[20px] w-[200px] bg-secondary;
-      clip-path: polygon(
-        0 0,
-        100% 0,
-        100% 30%,
-        100% 70%,
-        100% 100%,
-        5% 100%,
-        0 60%,
-        0% 30%
-      );
-    }
+    // &::after {
+    //   content: "";
+    //   @apply absolute bottom-0 right-0 h-[20px] w-[200px] bg-secondary;
+    //   clip-path: polygon(
+    //     10% 0,
+    //     100% 0,
+    //     100% 30%,
+    //     100% 70%,
+    //     100% 100%,
+    //     0 100%,
+    //     0% 70%,
+    //     0 50%
+    //   );
+    // }
   }
 
   &__header {
@@ -184,11 +221,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__role {
-    @apply font-whiteRabbit text-xl font-bold text-secondary;
+    @apply font-rajdhaniSemiBold text-xl font-bold text-secondary;
   }
 
   &__company {
-    @apply font-exo text-base text-white;
+    @apply font-rajdhaniLight text-base text-white;
   }
 
   &__clients {
@@ -196,11 +233,11 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__client-list {
-    @apply font-exo text-sm text-white;
+    @apply font-rajdhaniMedium text-sm text-white;
   }
 
   &__label {
-    @apply font-exo text-sm font-bold text-secondary;
+    @apply font-orbitron text-sm font-bold text-secondary;
   }
 
   &__stack {
@@ -221,7 +258,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__stack-name {
-    @apply font-jetbrainsMono text-[10px] text-white;
+    @apply font-exo text-[10px] text-white;
   }
 
   &__tasks {
@@ -242,7 +279,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__task-text {
-    @apply font-exo text-sm text-white;
+    @apply font-rajdhaniMedium text-sm text-white;
   }
 }
 </style>

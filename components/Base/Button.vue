@@ -26,20 +26,20 @@ const props = withDefaults(defineProps<ButtonProps>(), {
 <style lang="scss" scoped>
 @use "@/styles/variables.scss" as *;
 .Button {
-  @apply relative overflow-hidden border brightness-200 transition-all;
+  @apply relative z-0 overflow-hidden border brightness-200 transition-all;
   clip-path: $clip-button;
 
   $self: &;
 
   &::after {
     content: "";
-    @apply absolute inset-0 z-0 h-full w-full bg-black/90;
+    @apply absolute inset-0 -z-0 h-full w-full bg-black/90;
     clip-path: $clip-button;
     background-size: 3px 3px;
     background-image: repeating-linear-gradient(
       0deg,
-      $gradient-cyan,
-      $gradient-cyan 1px,
+      $gradient-primary,
+      $gradient-primary 1px,
       $gradient-black 1px,
       $gradient-black
     );
@@ -65,8 +65,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
       @apply bg-black/90;
       background-image: repeating-linear-gradient(
         0deg,
-        $gradient-cyan,
-        $gradient-cyan 1px,
+        $gradient-primary,
+        $gradient-primary 1px,
         $gradient-black 1px,
         $gradient-black
       );
@@ -92,8 +92,8 @@ const props = withDefaults(defineProps<ButtonProps>(), {
         background-size: 5px 5px;
         background-image: repeating-linear-gradient(
           45deg,
-          $gradient-cyan,
-          $gradient-cyan 1px,
+          $gradient-primary,
+          $gradient-primary 1px,
           rgba(255, 255, 255, 0.1) 1px,
           $gradient-black 50%
         );
