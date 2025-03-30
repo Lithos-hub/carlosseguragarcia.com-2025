@@ -47,14 +47,27 @@
             </div>
           </div>
           <p class="About__description">
-            Since I was a child, my main vocation has been
-            <span class="font-bold text-primary">music</span>. <br /><br />
-            In 2020 I discovered the world of
-            <span class="font-bold text-primary">programming</span> and the
-            enormous possibilities it offers at a creative and professional
-            level. <br /><br />
-            Since then, I work and keep learning in what has become a new
-            passion.
+            Since I was a child, my greatest passion has been
+            <span class="font-bold text-primary">music</span>. I worked as a
+            composer and producer for several years, with a musical journey
+            spanning <span class="font-bold text-primary">19 years</span> - from
+            classical conservatory to modern music schools, Jazz studies, and
+            ultimately earning a degree in
+            <span class="font-bold text-primary"
+              >Music History, Science, and Music Technology</span
+            >. However, faced with limited career opportunities in Spain, I
+            decided to explore a different path. <br /><br />
+            During my final year of studies, I discovered the world of
+            <span class="font-bold text-primary">web development</span>, which
+            eventually evolved into both my primary profession and cherished
+            hobby. <br /><br />
+            Throughout these years, I've not only worked with various companies
+            on exciting projects but have also delved deep into multiple
+            technologies. My curiosity has led me beyond just web and frontend
+            development, exploring areas like
+            <span class="font-bold text-primary">backend</span>,
+            <span class="font-bold text-primary">UX/UI design</span>, and
+            <span class="font-bold text-primary">cybersecurity</span>.
           </p>
         </div>
       </div>
@@ -109,7 +122,7 @@ const techLogos: TechLogo[] = [
   }
 
   &__content {
-    @include section-content;
+    @include section-content-secondary;
   }
 
   &__inner-container {
@@ -125,7 +138,7 @@ const techLogos: TechLogo[] = [
   }
 
   &__description {
-    @apply text-center font-rajdhaniMedium text-lg font-light leading-relaxed text-secondary;
+    @apply text-center font-rajdhaniSemiBold text-xl leading-relaxed text-secondary;
   }
 
   &__logos {

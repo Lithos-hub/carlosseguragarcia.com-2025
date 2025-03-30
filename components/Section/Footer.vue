@@ -1,9 +1,20 @@
 <template>
   <footer class="Footer">
-    <div class="Footer__container">
+    <div class="Footer__left">
+      <div class="Footer__developedBy">
+        <div class="flex items-center gap-1">
+          <div class="square bg-primary" />
+          <label class="Footer__developedBy-label"> Developed by </label>
+        </div>
+        <span class="Footer__developedBy-name">Carlos Segura García</span>
+      </div>
+    </div>
+
+    <div class="Footer__center">
       <div class="Footer__content">
         <p class="Footer__title">
-          Made with ❤️ and <span class="text-green-500">Nuxt</span>
+          Made with ❤️ and
+          <strong class="font-bold text-green-500">Nuxt</strong>
         </p>
         <div class="Footer__socials">
           <a href="https://github.com/Lithos-hub" class="Footer__social">
@@ -18,6 +29,16 @@
         </div>
       </div>
     </div>
+
+    <div class="Footer__right">
+      <div class="Footer__location">
+        <div class="flex items-center gap-1">
+          <div class="square bg-primary" />
+          <label class="Footer__location-label"> Location </label>
+        </div>
+        <span class="Footer__location-location">Málaga - Spain</span>
+      </div>
+    </div>
   </footer>
 </template>
 
@@ -25,17 +46,25 @@
 
 <style lang="scss" scoped>
 .Footer {
-  @apply border-t border-secondary bg-black;
+  @apply flex w-full items-center justify-between border-t border-secondary bg-black;
 
-  &__container {
-    @apply relative w-full border-x border-secondary p-5 lg:mx-auto lg:max-w-[80vw];
+  &__left,
+  &__right {
+    @apply flex h-full w-[50vw] items-center bg-black p-2 lg:w-[10vw];
+  }
+
+  &__right {
+    @apply justify-end;
+  }
+
+  &__center {
+    @apply flex h-full w-full max-w-[80vw] items-center justify-center border-x border-secondary;
   }
 
   &__content {
-    @apply flex items-center justify-between gap-10;
+    @apply flex h-[49px] items-center justify-between gap-10;
   }
 
-  &__copyright,
   &__title {
     @apply text-center font-exo text-sm text-white;
   }
@@ -46,6 +75,24 @@
 
   &__social :deep(*) {
     @apply text-white;
+  }
+
+  &__location,
+  &__developedBy {
+    @apply flex flex-col items-start justify-center font-lucania text-xs;
+
+    &-label {
+      @apply font-lucania text-[9px] text-primary;
+    }
+
+    &-name,
+    &-location {
+      @apply font-exo text-[11px] text-secondary;
+    }
+  }
+
+  &__location {
+    @apply items-end;
   }
 }
 </style>

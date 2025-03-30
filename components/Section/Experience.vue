@@ -1,114 +1,123 @@
 <template>
-  <div class="Experience__container">
-    <div class="Experience__content">
+  <div class="experience">
+    <div class="experience__content">
       <img
         src="/svg/decoration/decoration-11.svg"
-        alt="Decoration protocol image"
-        class="absolute left-5 top-5 h-[20px]"
+        alt="Decorative element for the experience section top left corner"
+        class="experience__decoration experience__decoration--top-left"
       />
       <ComponentName componentName="Experience.vue" color="secondary" />
-      <div class="Experience__inner-container">
+      <div class="experience__inner-container">
         <img
           src="/svg/decoration/decoration-13.svg"
-          alt="Decoration protocol image"
+          alt="Decorative element above experience section"
           class="absolute left-0 top-[-40px] h-[30px]"
         />
         <img
           src="/svg/decoration/decoration-10.svg"
-          alt="Decoration protocol image"
-          class="absolute right-0 top-[-60px] h-[50px]"
+          alt="Decorative element for the experience section top right corner"
+          class="experience__decoration experience__decoration--top-right"
         />
-        <h1 class="Experience__title">Experience</h1>
-        <div class="flex flex-col">
+        <h1 class="experience__title">Experience</h1>
+        <div class="experience__list">
           <article
             v-for="experience in DEV_EXPERIENCE"
             :key="`Experience-${experience.role}-${experience.subtitle}`"
-            class="Experience__item"
+            class="experience-card"
           >
-            <div class="Experience__left-side">
-              <div class="Experience__index">#{{ experience.id }}</div>
-              <div class="Experience__date">
-                <div class="Experience__start-date">
-                  {{ getStartDate(experience) }}
-                </div>
-                <div class="Experience__date-separator">-</div>
-                <div
-                  class="Experience__end-date"
+            <div class="experience-card__index-and-date">
+              <img
+                src="/svg/decoration/decoration-22.svg"
+                alt="Decorative border element at the bottom of experience card"
+                class="absolute bottom-0 right-0 h-[20px] w-auto object-cover lg:w-full"
+              />
+              <img
+                src="/svg/decoration/decoration-23.svg"
+                alt="Decorative vertical border element for experience card"
+                class="absolute bottom-[22px] right-0 h-[calc(100%-22px)] w-auto object-contain"
+              />
+              <div class="experience-card__index">#{{ experience.id }}</div>
+              <div class="experience-card__date">
+                <span class="experience-card__date-start">{{
+                  getStartDate(experience)
+                }}</span>
+                <span class="experience-card__date-separator">-</span>
+                <span
+                  class="experience-card__date-end"
                   :class="{
-                    'text-white': getEndDate(experience) !== 'Present',
-                    'font-bold text-secondary':
+                    'experience-card__date-end--current':
                       getEndDate(experience) === 'Present',
                   }"
                 >
                   {{ getEndDate(experience) }}
-                </div>
+                </span>
               </div>
             </div>
-            <div class="Experience__right-side">
-              <div class="Experience__card">
+            <div class="experience-card__content">
+              <img
+                src="/svg/decoration/decoration-18.svg"
+                alt="Decorative element at the bottom of experience card content"
+                class="absolute bottom-0 right-0 h-[30px]"
+              />
+              <div class="experience-card__header">
                 <img
-                  src="/svg/decoration/decoration-18.svg"
-                  alt="Decoration protocol image"
-                  class="absolute bottom-0 right-0 h-[30px]"
+                  :src="experience.image"
+                  :alt="experience.company"
+                  class="experience-card__company-image"
+                  :class="{
+                    'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
+                  }"
                 />
-                <div class="Experience__header">
-                  <img
-                    :src="experience.image"
-                    :alt="experience.company"
-                    class="Experience__company-image"
-                    :class="{
-                      'bg-transparent p-2.5': experience.subtitle === 'InnoIT',
-                    }"
-                  />
-                  <div class="Experience__role-container">
-                    <h3 class="Experience__role">{{ experience.role }}</h3>
-                    <p class="Experience__company">{{ experience.company }}</p>
+                <div class="experience-card__role-container">
+                  <h3 class="experience-card__role">{{ experience.role }}</h3>
+                  <p class="experience-card__company">
+                    {{ experience.company }}
+                  </p>
+                </div>
+              </div>
+
+              <div
+                class="experience-card__clients"
+                v-if="experience.clients.length"
+              >
+                <span class="experience-card__label">Clients:</span>
+                <span class="experience-card__client-list">{{
+                  experience.clients.join(", ")
+                }}</span>
+              </div>
+
+              <div class="experience-card__stack">
+                <span class="experience-card__label">Stack:</span>
+                <div class="experience-card__stack-items">
+                  <div
+                    v-for="tech in experience.stack"
+                    :key="tech.techName"
+                    class="experience-card__stack-item"
+                  >
+                    <img
+                      :src="tech.imageUrl"
+                      :alt="tech.techName"
+                      class="experience-card__stack-image"
+                    />
+                    <span class="experience-card__stack-name">{{
+                      tech.techName
+                    }}</span>
                   </div>
                 </div>
+              </div>
 
-                <div
-                  class="Experience__clients"
-                  v-if="experience.clients.length"
-                >
-                  <span class="Experience__label">Clients:</span>
-                  <span class="Experience__client-list">{{
-                    experience.clients.join(", ")
-                  }}</span>
-                </div>
-
-                <div class="Experience__stack">
-                  <span class="Experience__label">Stack:</span>
-                  <div class="Experience__stack-items">
-                    <div
-                      v-for="tech in experience.stack"
-                      :key="tech.techName"
-                      class="Experience__stack-item"
-                    >
-                      <img
-                        :src="tech.imageUrl"
-                        :alt="tech.techName"
-                        class="Experience__stack-image"
-                      />
-                      <span class="Experience__stack-name">{{
-                        tech.techName
-                      }}</span>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="Experience__tasks">
-                  <span class="Experience__label">Tasks:</span>
-                  <ul class="Experience__task-list">
-                    <li
-                      v-for="(task, taskIndex) in experience.tasks"
-                      :key="taskIndex"
-                      class="Experience__task-item"
-                    >
-                      <div class="Experience__task-bullet" />
-                      <p class="Experience__task-text">{{ task }}</p>
-                    </li>
-                  </ul>
-                </div>
+              <div class="experience-card__tasks">
+                <span class="experience-card__label">Tasks:</span>
+                <ul class="experience-card__task-list">
+                  <li
+                    v-for="(task, taskIndex) in experience.tasks"
+                    :key="taskIndex"
+                    class="experience-card__task-item"
+                  >
+                    <div class="experience-card__task-bullet" />
+                    <p class="experience-card__task-text">{{ task }}</p>
+                  </li>
+                </ul>
               </div>
             </div>
           </article>
@@ -139,13 +148,27 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 @use "@/styles/variables.scss" as *;
 @use "@/styles/mixins.scss" as *;
 
-.Experience {
-  &__container {
-    @include section-container;
-  }
+.experience {
+  @include section-container;
 
   &__content {
-    @include section-content;
+    @include section-content-secondary;
+  }
+
+  &__decoration {
+    position: absolute;
+
+    &--top-left {
+      left: 1.25rem;
+      top: 1.25rem;
+      height: 20px;
+    }
+
+    &--top-right {
+      right: 0;
+      top: -60px;
+      height: 50px;
+    }
   }
 
   &__inner-container {
@@ -156,56 +179,45 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
     @include section-title-secondary;
   }
 
-  &__item {
-    @include corner-effect;
-    @apply relative flex w-full bg-black;
+  &__list {
+    @apply flex flex-col gap-5;
   }
+}
 
-  &__left-side {
-    @apply relative hidden w-full flex-col items-end pr-5 md:flex md:w-[300px];
+.experience-card {
+  @apply relative flex w-full flex-col bg-black/50 lg:flex-row;
+
+  &__index-and-date {
+    @apply relative flex w-full flex-col p-5 font-orbitron font-extrabold text-secondary/80 lg:w-[300px] lg:gap-10;
   }
 
   &__index {
-    @apply font-orbitron text-[100px] font-extrabold text-secondary/80;
+    @apply font-orbitron text-4xl font-extrabold text-secondary/80 lg:py-[20px] lg:text-[100px];
   }
 
   &__date {
-    @apply flex w-full items-center justify-end gap-1 font-rajdhaniSemiBold text-xl;
+    @apply flex w-full items-center gap-1 font-rajdhaniSemiBold;
 
+    &-start,
     &-separator {
       @apply text-white;
     }
+
+    &-end {
+      @apply text-white;
+
+      &--current {
+        @apply font-bold text-secondary;
+      }
+    }
   }
 
-  &__start-date {
-    @apply text-white;
-  }
+  &__content {
+    @apply flex flex-1 flex-col gap-5 border-secondary bg-stone-950 p-5 backdrop-blur-lg;
 
-  &__right-side {
-    @apply flex-1 border-secondary bg-stone-950 backdrop-blur-lg md:pl-6;
-  }
-
-  &__item:not(:last-child) .Experience__right-side {
-    @apply border-b;
-  }
-
-  &__card {
-    @apply relative flex h-full w-full flex-col gap-5 p-5 pb-10;
-
-    // &::after {
-    //   content: "";
-    //   @apply absolute bottom-0 right-0 h-[20px] w-[200px] bg-secondary;
-    //   clip-path: polygon(
-    //     10% 0,
-    //     100% 0,
-    //     100% 30%,
-    //     100% 70%,
-    //     100% 100%,
-    //     0 100%,
-    //     0% 70%,
-    //     0 50%
-    //   );
-    // }
+    &:not(:last-child) {
+      @apply border-b;
+    }
   }
 
   &__header {

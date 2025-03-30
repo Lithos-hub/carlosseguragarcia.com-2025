@@ -13,7 +13,9 @@
     <section ref="experienceRef" id="experience">
       <SectionExperience />
     </section>
-    <!-- <SummarySection /> -->
+    <section ref="portfolioRef" id="portfolio">
+      <SectionPortfolio />
+    </section>
     <SectionFooter />
   </div>
 </template>
@@ -26,11 +28,18 @@ const heroRef = useTemplateRef<HTMLElement | null>("heroRef");
 const aboutRef = useTemplateRef<HTMLElement | null>("aboutRef");
 const summaryRef = useTemplateRef<HTMLElement | null>("summaryRef");
 const experienceRef = useTemplateRef<HTMLElement | null>("experienceRef");
+const portfolioRef = useTemplateRef<HTMLElement | null>("portfolioRef");
 
 const { visibleSection } = storeToRefs(useUiStore());
 
 const { visibleElement } = useIsVisible({
-  refs: [heroRef, aboutRef, summaryRef, experienceRef] as Ref<HTMLElement>[],
+  refs: [
+    heroRef,
+    aboutRef,
+    summaryRef,
+    experienceRef,
+    portfolioRef,
+  ] as Ref<HTMLElement>[],
 });
 
 const debouncedVisibleSection = refDebounced(visibleElement, 100);

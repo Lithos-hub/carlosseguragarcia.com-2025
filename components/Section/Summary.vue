@@ -105,7 +105,7 @@ const totalSummary = () => {
   }
 
   &__content {
-    @include section-content;
+    @include section-content-primary;
   }
 
   &__inner-container {
@@ -121,11 +121,11 @@ const totalSummary = () => {
 
     &-item {
       &__title {
-        @apply font-orbitron text-sm font-bold text-white;
+        @apply font-orbitron text-xl font-bold text-white;
       }
 
       &__value {
-        @apply font-rajdhaniSemiBold text-sm text-cyan-400;
+        @apply font-rajdhaniSemiBold text-xl text-cyan-400;
       }
 
       &--tech {

@@ -3,15 +3,11 @@
     <div class="TopBar__left">
       <div class="flex w-full items-center justify-between">
         <div class="triangle-shape-top-left bg-primary" />
-        <span class="info-text text-[10px]"
-          >{{ visualDataBySection?.componentName }}
-        </span>
+        <span class="info-text">{{ visualDataBySection?.componentName }} </span>
       </div>
       <div class="flex w-full items-center justify-between">
         <div class="triangle-shape-top-left bg-primary" />
-        <span class="info-text text-[10px]"
-          >Zone: {{ visualDataBySection?.code }}
-        </span>
+        <span class="info-text">Zone: {{ visualDataBySection?.code }} </span>
       </div>
     </div>
     <div class="TopBar__center">
@@ -33,26 +29,7 @@
         </button>
       </div>
     </div>
-    <div class="TopBar__right">
-      <div class="flex w-full items-center justify-between">
-        <span class="info-text">Language: {{ selectedLanguage.name }}</span>
-        <div class="triangle-shape-top-right bg-primary" />
-      </div>
-      <div class="flex flex-wrap gap-2">
-        <div v-for="lang in availableLanguages" :key="lang.code">
-          <button
-            class="TopBar__right__lang-button"
-            :class="{
-              'TopBar__right__lang-button--active':
-                lang.code === selectedLanguage.code,
-            }"
-            @click="changeLanguage(lang)"
-          >
-            <img :src="lang.flag" alt="Language flag" />
-          </button>
-        </div>
-      </div>
-    </div>
+    <div class="TopBar__right"></div>
   </header>
 </template>
 
@@ -139,7 +116,7 @@ const changeLanguage = (lang: any) => {
   }
 
   &__left {
-    @apply flex h-full w-[50vw] flex-col items-center justify-between bg-black p-2 font-lucania brightness-200 lg:w-[10vw];
+    @apply flex h-full w-[50vw] flex-col items-center justify-between bg-black p-2 font-lucania lg:w-[10vw];
   }
 
   &__center {
@@ -183,19 +160,7 @@ const changeLanguage = (lang: any) => {
   }
 
   &__right {
-    @apply flex h-full w-[50vw] flex-col items-start justify-between bg-black p-2 font-lucania brightness-200 lg:w-[10vw];
-
-    &__lang-button {
-      @apply h-5 w-5 cursor-pointer rounded-full border-2 border-transparent brightness-50;
-    }
-
-    &__lang-button--active {
-      @apply border-primary;
-    }
-  }
-
-  &__link-zone {
-    @apply absolute -bottom-7 left-1/2 -translate-x-1/2 font-lucania text-[8px] text-stone-800 dark:text-primary;
+    @apply h-full w-[50vw] bg-black lg:w-[10vw];
   }
 }
 </style>
