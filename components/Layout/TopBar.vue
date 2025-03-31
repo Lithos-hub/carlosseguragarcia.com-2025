@@ -10,30 +10,37 @@
         <span class="info-text">Zone: {{ visualDataBySection?.code }} </span>
       </div>
     </div>
-    <div class="TopBar__center">
-      <div class="TopBar__radial-menu">
-        <div class="flex flex-col items-center justify-center gap-1">
-          <button class="TopBar__radial-menu__button" @click="toggleRadialMenu">
-            <img src="/icons/radial-menu.svg" alt="Radial menu" />
-          </button>
-          <small class="text-xs text-secondary"
-            >Click here or press
-            <span class="font-bold text-secondarySoft">control / command</span>
-            to show the radial menu</small
-          >
-        </div>
-      </div>
-      <div class="block lg:hidden">
+    <nav class="TopBar__center">
+      <ul class="TopBar__links">
+        <li
+          v-for="link in sections"
+          :key="link.title"
+          class="TopBar__link"
+          @click="scrollToSection(link.path)"
+        >
+          {{ link.title }}
+        </li>
+      </ul>
+      <div class="TopBar__mobile-menu-button">
         <button @click="toggleMobileMenu">
           <UIcon name="i-mdi-menu" size="30" class="text-secondarySoft" />
         </button>
       </div>
+    </nav>
+    <div class="TopBar__right">
+      <button @click="toggleRadialMenu">
+        <UIcon
+          name="i-mdi-translate"
+          size="30"
+          class="text-white transition-all duration-300 hover:text-secondary"
+        />
+      </button>
     </div>
-    <div class="TopBar__right"></div>
   </header>
 </template>
 
 <script setup lang="ts">
+import { sections } from "@/consts/sections";
 const { visualDataBySection, isMobileMenuVisible } = storeToRefs(useUiStore());
 const { toggleRadialMenu, toggleMobileMenu } = useUiStore();
 
@@ -42,25 +49,6 @@ const selectedLanguage = reactive({
   code: "en",
   flag: "/icons/gb.svg",
 });
-
-const links = [
-  {
-    name: "<Home />",
-    path: "/home",
-  },
-  {
-    name: "<Experience />",
-    path: "/experience",
-  },
-  {
-    name: "<Projects />",
-    path: "/projects",
-  },
-  {
-    name: "<CV />",
-    path: "/cv",
-  },
-];
 
 const availableLanguages = [
   {
@@ -95,6 +83,13 @@ const changeLanguage = (lang: any) => {
   selectedLanguage.code = lang.code;
   selectedLanguage.flag = lang.flag;
 };
+
+const scrollToSection = (section: string) => {
+  const element = document.querySelector(section);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -105,7 +100,7 @@ const changeLanguage = (lang: any) => {
 @use "@/styles/breakpoints.scss" as *;
 
 .TopBar {
-  @apply sticky top-0 z-40 flex h-[60px] w-full items-center justify-between border-b border-secondary;
+  @apply sticky top-0 z-20 flex h-[60px] w-full items-center justify-between border-b border-secondary;
 
   @media mobile {
     padding: $mobile-margin;
@@ -135,8 +130,12 @@ const changeLanguage = (lang: any) => {
     }
   }
 
+  &__mobile-menu-button {
+    @apply block lg:hidden;
+  }
+
   &__links {
-    @apply z-50 flex h-screen lg:hidden;
+    @apply z-50 hidden gap-5 lg:flex;
 
     &-overlay {
       @apply fixed inset-0 z-40 hidden h-screen w-full bg-black/50 lg:block;
@@ -149,7 +148,7 @@ const changeLanguage = (lang: any) => {
 
   &__link {
     @include corner-effect;
-    @apply relative w-[250px] py-2 text-center font-jetbrainsMono text-[12px] backdrop-blur-lg;
+    @apply relative cursor-pointer px-4 py-2 text-center font-rajdhaniMedium text-xs backdrop-blur-lg;
 
     &:hover {
       @include corner-effect-secondary;
@@ -160,7 +159,7 @@ const changeLanguage = (lang: any) => {
   }
 
   &__right {
-    @apply h-full w-[50vw] bg-black lg:w-[10vw];
+    @apply flex h-full w-[50vw] flex-col items-center justify-center bg-black transition-all duration-300 lg:w-[10vw];
   }
 }
 </style>

@@ -24,6 +24,18 @@
 import { refDebounced } from "@vueuse/core";
 import type { Section } from "~/consts/sections";
 
+// SEO metadata
+useHead({
+  title: "Carlos Segura Garcia - Software Engineer",
+  meta: [
+    {
+      name: "description",
+      content:
+        "Carlos Segura Garcia is a software engineer with a passion for building web applications.",
+    },
+  ],
+});
+
 const heroRef = useTemplateRef<HTMLElement | null>("heroRef");
 const aboutRef = useTemplateRef<HTMLElement | null>("aboutRef");
 const summaryRef = useTemplateRef<HTMLElement | null>("summaryRef");

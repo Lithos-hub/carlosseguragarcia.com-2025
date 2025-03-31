@@ -8,14 +8,14 @@
         </button>
         <div class="MobileMenu__links">
           <NuxtLink
-            v-for="link in links"
+            v-for="link in sections"
             :key="link.path"
             :to="link.path"
             class="MobileMenu__link neon-text-blue neon-text-blue-glow"
             active-class="MobileMenu__link--active"
             @click="closeMobileMenu"
           >
-            {{ link.name }}
+            {{ link.title }}
           </NuxtLink>
         </div>
       </div>
@@ -24,27 +24,9 @@
 </template>
 
 <script setup lang="ts">
+import { sections } from "@/consts/sections";
 const { isMobileMenuVisible } = storeToRefs(useUiStore());
 const { closeMobileMenu } = useUiStore();
-
-const links = [
-  {
-    name: "<Home />",
-    path: "/home",
-  },
-  {
-    name: "<Experience />",
-    path: "/experience",
-  },
-  {
-    name: "<Projects />",
-    path: "/projects",
-  },
-  {
-    name: "<CV />",
-    path: "/cv",
-  },
-];
 </script>
 
 <style lang="scss" scoped>

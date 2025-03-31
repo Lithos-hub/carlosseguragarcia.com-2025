@@ -1,23 +1,33 @@
 <template>
   <div class="Hero__container">
     <div class="Hero__content">
-      <ComponentName componentName="Hero.vue" />
+      <ComponentName componentName="Hero.vue" color="primary" />
       <Suspense>
         <div class="absolute inset-0 z-0">
           <ThreejsScene />
         </div>
       </Suspense>
       <div class="Hero__text">
-        <h1 class="Hero__name">
-          Hello, I'm <strong class="text-primary">Carlos</strong>.
-        </h1>
-        <h2 class="Hero__title">I'm a front-end developer.</h2>
+        <!-- This text is already displayed in the TresJS canvas, but we need to keep it for SEO -->
+        <div class="opacity-0">
+          <h1>Carlos Segura Garcia</h1>
+          <h2>Software Engineer</h2>
+        </div>
 
-        <BaseButton>View my work</BaseButton>
+        <BaseButton @click="scrollToPortfolio">View my work</BaseButton>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+const scrollToPortfolio = () => {
+  const portfolioSection = document.getElementById("portfolio");
+  if (portfolioSection) {
+    portfolioSection.scrollIntoView({ behavior: "smooth" });
+  }
+};
+</script>
 
 <style lang="scss" scoped>
 @use "@/styles/fonts.scss" as *;
@@ -30,24 +40,19 @@
   }
 
   &__content {
-    @apply relative w-full border-x border-secondary bg-black p-5 py-[200px] lg:mx-auto lg:max-w-[80vw];
+    @apply relative h-[80vh] w-full border-x border-secondary bg-black p-5 lg:mx-auto lg:max-w-[80vw];
   }
 
   &__text {
-    @apply flex w-full flex-col items-center justify-center gap-10;
-  }
+    @apply absolute inset-0 flex flex-col items-center justify-between gap-10 p-20 font-rajdhaniLight text-secondary;
 
-  &__name,
-  &__title {
-    @apply z-10 font-rajdhaniMedium font-light text-white;
-  }
+    h1 {
+      @apply text-3xl lg:text-[60px];
+    }
 
-  &__name {
-    @apply text-3xl lg:text-[30px];
-  }
-
-  &__title {
-    @apply text-lg lg:text-[30px];
+    h2 {
+      @apply text-lg lg:text-[40px];
+    }
   }
 }
 </style>

@@ -20,10 +20,10 @@
       />
       <!-- Bloom -->
       <BloomPmndrs
-        :radius="0.2"
-        :intensity="0.4"
+        :radius="0.5"
+        :intensity="0.1"
         :luminance-threshold="0.5"
-        :luminance-smoothing="1"
+        :luminance-smoothing="0.1"
         mipmap-blur
       />
 
@@ -45,6 +45,12 @@
     <Suspense>
       <ThreejsObjectsFloorWithLight />
     </Suspense>
+
+    <!-- Hero Text -->
+    <Suspense>
+      <ThreejsObjectsHeroText />
+    </Suspense>
+
     <!-- <Suspense>
       <ThreejsObjectsFloorWithCircuits />
     </Suspense> -->

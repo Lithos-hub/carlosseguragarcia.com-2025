@@ -188,7 +188,7 @@ onUnmounted(() => {
 $radial-menu-size: 250px;
 
 .overlay {
-  @apply fixed inset-0 z-40 hidden h-screen w-full overflow-hidden opacity-80 backdrop-blur transition-all md:block;
+  @apply fixed inset-0 z-40 hidden h-screen w-full overflow-hidden backdrop-blur transition-all md:block;
 
   &:before {
     content: "";

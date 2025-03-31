@@ -4,7 +4,7 @@
     <TresPlaneGeometry :args="[width, height]" />
     <TresMeshPhysicalMaterial
       color="white"
-      :emissive="sectionColor"
+      emissive="red"
       :emissive-intensity="5"
     />
     />
@@ -36,12 +36,6 @@ import { Matrix4, Vector3 } from "three";
 
 const route = useRoute();
 
-const sectionColor = computed(() => {
-  if (route.path.includes("home")) return "#55ead4";
-  if (route.path.includes("experience")) return "#c5003c";
-  return "white";
-});
-
 // Plane state
 const height = ref(200);
 const width = ref(300);
@@ -62,7 +56,7 @@ const cubeZConfig = ref(
     .fill(null)
     .map(() => ({
       maxHeight: 0.5 + Math.random() * 0.501, // Max random height between 2 and 3
-      speed: 0.01 + Math.random() * 0.05, // Random speed between 0.1 and 1
+      speed: 0.01 + Math.random() * 1, // Random speed between 0.1 and 1
       currentOffset: 0, // Current offset
       phase: Math.random() * Math.PI * 2, // Random phase for sinusoidal movement
     })),
@@ -115,7 +109,7 @@ const distributeInstancesUniformly = () => {
       if (!cubeZConfig.value[index]) {
         cubeZConfig.value[index] = {
           maxHeight: 0.5 + Math.random() * 0.501,
-          speed: 0.01 + Math.random() * 0.05,
+          speed: 0.01 + Math.random() * 0.5,
           currentOffset: 0,
           phase: Math.random() * Math.PI * 2,
         };

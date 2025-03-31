@@ -54,6 +54,11 @@
               Technology stack I have worked with:
             </h2>
             <div class="Summary__tech-container">
+              <img
+                src="/svg/decoration/decoration-24.svg"
+                alt="Decoration protocol image"
+                class="absolute bottom-0 left-0 h-auto w-full object-cover"
+              />
               <div
                 v-for="tech in techSkills"
                 :key="tech.name"
@@ -120,6 +125,7 @@ const totalSummary = () => {
     @apply relative z-10 flex flex-col gap-5 pb-5 lg:grid lg:grid-cols-3;
 
     &-item {
+      @apply flex flex-col gap-2;
       &__title {
         @apply font-orbitron text-xl font-bold text-white;
       }
@@ -136,14 +142,25 @@ const totalSummary = () => {
 
   &__tech {
     &-container {
-      @apply flex flex-wrap items-center justify-center gap-5 pt-5;
+      @apply relative flex flex-wrap items-center justify-center gap-5 bg-black p-10;
+
+      clip-path: polygon(
+        0 0,
+        100% 0,
+        100% 30%,
+        100% 95%,
+        99% 100%,
+        0 100%,
+        0% 70%,
+        0% 30%
+      );
     }
 
     &-item {
       @apply flex flex-col items-center gap-2;
 
       &__image {
-        @apply h-10 w-10 object-contain;
+        @apply h-5 w-5 object-contain lg:h-10 lg:w-10;
       }
 
       &__name {

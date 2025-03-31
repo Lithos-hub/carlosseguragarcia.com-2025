@@ -27,14 +27,19 @@
           >
             <div class="experience-card__index-and-date">
               <img
-                src="/svg/decoration/decoration-22.svg"
+                :src="'/svg/decoration/decoration-22.svg'"
                 alt="Decorative border element at the bottom of experience card"
-                class="absolute bottom-0 right-0 h-[20px] w-auto object-cover lg:w-full"
+                class="absolute bottom-0 right-0 hidden h-[20px] w-auto object-cover lg:block lg:w-full"
               />
               <img
-                src="/svg/decoration/decoration-23.svg"
+                :src="'/svg/decoration/decoration-23.svg'"
                 alt="Decorative vertical border element for experience card"
-                class="absolute bottom-[22px] right-0 h-[calc(100%-22px)] w-auto object-contain"
+                class="absolute bottom-[22px] right-0 hidden h-[calc(100%-22px)] w-auto object-contain lg:block"
+              />
+              <img
+                :src="'/svg/decoration/decoration-25.svg'"
+                alt="Decorative vertical border element for experience card"
+                class="absolute bottom-0 right-0 w-full object-contain lg:hidden"
               />
               <div class="experience-card__index">#{{ experience.id }}</div>
               <div class="experience-card__date">
@@ -55,7 +60,7 @@
             </div>
             <div class="experience-card__content">
               <img
-                src="/svg/decoration/decoration-18.svg"
+                :src="'/svg/decoration/decoration-18.svg'"
                 alt="Decorative element at the bottom of experience card content"
                 class="absolute bottom-0 right-0 h-[30px]"
               />
