@@ -31,7 +31,7 @@
       <button @click="toggleRadialMenu">
         <UIcon
           name="i-mdi-translate"
-          size="30"
+          size="20"
           class="text-white transition-all duration-300 hover:text-secondary"
         />
       </button>
@@ -116,18 +116,6 @@ const scrollToSection = (section: string) => {
 
   &__center {
     @apply mx-auto flex h-full w-full max-w-[80vw] items-center justify-center border-x border-secondary backdrop-blur-lg;
-  }
-
-  &__radial-menu {
-    @apply z-50 hidden items-center justify-center gap-5 lg:flex;
-
-    &__button {
-      @apply relative h-5 w-5 text-secondary transition-all duration-300;
-
-      &:hover {
-        @apply scale-110;
-      }
-    }
   }
 
   &__mobile-menu-button {

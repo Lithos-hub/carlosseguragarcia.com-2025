@@ -1,6 +1,12 @@
 <template>
   <div class="Onboarding">
-    <div class="Onboarding__first-block">
+    <div ref="firstBlockRef" class="Onboarding__first-block">
+      <img
+        ref="attentionImageRef"
+        src="/svg/decoration/onboarding/onboarding-attention.svg"
+        alt="Onboarding attention"
+        class="Onboarding__first-block__attention"
+      />
       <img
         src="/svg/decoration/onboarding/onboarding-1.svg"
         alt="Onboarding left separator in the first block"
@@ -19,7 +25,9 @@
 </template>
 
 <script setup lang="ts">
-const welcomeTextInitial = ["Starting systems"];
+const attentionImageRef = useTemplateRef("attentionImageRef");
+const firstBlockRef = useTemplateRef("firstBlockRef");
+const welcomeTextInitial = ["Starting systems", "Please wait..."];
 
 const {
   text: welcomeText,
@@ -34,7 +42,12 @@ const {
 });
 
 onMounted(() => {
-  startWelcomeTyping();
+  setTimeout(() => {
+    attentionImageRef.value?.classList.add("animation--dissapear");
+  }, 3000);
+  setTimeout(() => {
+    startWelcomeTyping();
+  }, 4000);
 });
 </script>
 
@@ -65,9 +78,15 @@ onMounted(() => {
       $secondary10
     );
 
-    animation: expand-block 2s cubic-bezier(0.25, 0.1, 0.25, 1);
-    animation-delay: 1s;
+    animation: expand-block-initial 2s cubic-bezier(0.25, 0.1, 0.25, 1);
     animation-fill-mode: forwards;
+
+    &__attention {
+      @apply absolute h-[150px] w-[150px] object-cover opacity-0;
+      animation: rapidPulseAndSlideToLeft 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+      animation-delay: 1s;
+      animation-fill-mode: forwards;
+    }
 
     &__left-separator {
       @apply absolute h-full object-cover;
@@ -95,12 +114,28 @@ onMounted(() => {
   }
 }
 
-@keyframes expand-block {
+.animation--expand-block-initial {
+  animation: expand-block 2s cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-fill-mode: forwards;
+}
+
+.animation--dissapear {
+  animation: dissapear 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-fill-mode: forwards;
+}
+
+@keyframes expand-block-initial {
   0% {
     opacity: 0;
     overflow: hidden;
     height: 10px;
     width: 10px;
+  }
+  10% {
+    opacity: 0;
+    overflow: hidden;
+    height: 10px;
+    width: 1000px;
   }
   25% {
     overflow: hidden;
@@ -144,6 +179,39 @@ onMounted(() => {
   100% {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes rapidPulseAndSlideToLeft {
+  0% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(-100px);
+  }
+  20% {
+    opacity: 0;
+    transform: translateY(-100px);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes dissapear {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
   }
 }
 </style>

@@ -24,6 +24,7 @@ export const useTypeWriter = ({
   const caret = ref("");
   const isCompleted = ref(false);
   const currentCount = ref(0);
+  const showCaret = ref(true);
 
   // Manage the caret animation
   const startCaretAnimation = () => {
@@ -33,7 +34,11 @@ export const useTypeWriter = ({
     }
 
     const caretInterval = setInterval(() => {
-      caret.value = caret.value === caretSymbol ? "" : caretSymbol;
+      caret.value = showCaret.value
+        ? caret.value === caretSymbol
+          ? ""
+          : caretSymbol
+        : "";
     }, caretSpeed);
 
     return caretInterval;
@@ -44,6 +49,7 @@ export const useTypeWriter = ({
     textRef.value = "";
     isCompleted.value = false;
     currentCount.value = 0;
+    showCaret.value = true;
 
     const caretInterval = startCaretAnimation();
 
@@ -52,6 +58,7 @@ export const useTypeWriter = ({
 
       if (currentCount.value > 1) {
         textRef.value = "";
+        showCaret.value = true;
         await new Promise((resolve) => setTimeout(resolve, delay));
       } else {
         await new Promise((resolve) => setTimeout(resolve, delay));
@@ -61,6 +68,8 @@ export const useTypeWriter = ({
         const text = texts[i];
         const shouldPersist = persistLines[i] || false;
 
+        showCaret.value = true;
+
         if (speed === 0) {
           textRef.value += text;
         } else {
@@ -69,6 +78,8 @@ export const useTypeWriter = ({
             await new Promise((resolve) => setTimeout(resolve, speed));
           }
         }
+
+        showCaret.value = false;
 
         if (i < texts.length - 1 || !shouldPersist) {
           await new Promise((resolve) => setTimeout(resolve, delay));
@@ -85,6 +96,7 @@ export const useTypeWriter = ({
 
     isTyping.value = false;
     isCompleted.value = true;
+    showCaret.value = false;
 
     if (caretInterval) {
       clearInterval(caretInterval);

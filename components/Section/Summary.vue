@@ -142,7 +142,7 @@ const totalSummary = () => {
 
   &__tech {
     &-container {
-      @apply relative flex flex-wrap items-center justify-center gap-5 bg-black p-10;
+      @apply relative flex flex-wrap items-center justify-center gap-5 bg-black p-14;
 
       clip-path: polygon(
         0 0,

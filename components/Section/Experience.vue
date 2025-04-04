@@ -190,7 +190,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
 }
 
 .experience-card {
-  @apply relative flex w-full flex-col bg-black/50 lg:flex-row;
+  @apply relative flex min-h-[600px] w-full flex-col bg-black/50 lg:flex-row;
 
   &__index-and-date {
     @apply relative flex w-full flex-col p-5 font-orbitron font-extrabold text-secondary/80 lg:w-[300px] lg:gap-10;
@@ -218,7 +218,7 @@ const getEndDate = ({ endYear, endMonth }: Experience) => {
   }
 
   &__content {
-    @apply flex flex-1 flex-col gap-5 border-secondary bg-stone-950 p-5 backdrop-blur-lg;
+    @apply flex flex-1 flex-col gap-5 border-secondary bg-stone-950 p-5 pb-10 backdrop-blur-lg;
 
     &:not(:last-child) {
       @apply border-b;
