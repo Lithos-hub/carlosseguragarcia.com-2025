@@ -1,40 +1,74 @@
 <template>
   <!-- Light emissive plane -->
-  <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
+  <!-- <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
     <TresPlaneGeometry :args="[width, height]" />
     <TresMeshPhysicalMaterial
       color="white"
       emissive="red"
       :emissive-intensity="5"
     />
-    />
-  </TresMesh>
+  </TresMesh> -->
 
-  <TresInstancedMesh
-    ref="instancesRef"
-    cast-shadow
-    receive-shadow
-    :args="[null!, null!, numberOfCubes]"
+  <!-- Interactive white light plane -->
+  <!-- <TresMesh
+    ref="whiteLightPlaneRef"
+    :position="[lightPlanePosition.x, lightPlanePosition.y, -10]"
   >
-    <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
+    <TresPlaneGeometry :args="[10, 10]" />
     <TresMeshPhysicalMaterial
-      :roughness="0.1"
-      :metalness="0.2"
-      :transmission="0.9"
-      :thickness="1"
-      :ior="1.5"
-      :clearcoat="1.0"
-      :opacity="1"
-      color="black"
+      color="white"
+      emissive="white"
+      :emissive-intensity="3"
     />
-  </TresInstancedMesh>
+  </TresMesh> -->
+
+  <!-- <Suspense>
+    <TresInstancedMesh
+      ref="instancesRef"
+      cast-shadow
+      receive-shadow
+      :args="[null!, null!, numberOfCubes]"
+    >
+      <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
+      <TresMeshPhysicalMaterial
+        :roughness="0.2"
+        :metalness="0.8"
+        :transmission="0.5"
+        :thickness="1"
+        :ior="1.5"
+        :clearcoat="1.0"
+        color="black"
+      />
+    </TresInstancedMesh>
+  </Suspense> -->
+
+  <!-- <Suspense>
+    <TresInstancedMesh
+      ref="instancesRef"
+      cast-shadow
+      receive-shadow
+      :args="[null!, null!, numberOfCubes]"
+    >
+      <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
+      <TresMeshPhysicalMaterial
+        :roughness="0.2"
+        :metalness="0.8"
+        :transmission="0.5"
+        :thickness="1"
+        :ior="1.5"
+        :clearcoat="1.0"
+        color="black"
+      />
+    </TresInstancedMesh>
+  </Suspense> -->
+  <Suspense>
+    <ThreejsObjectsSurrealistCube />
+  </Suspense>
 </template>
 
 <script lang="ts" setup>
 import type { InstancedMesh } from "three";
 import { Matrix4, Vector3 } from "three";
-
-const route = useRoute();
 
 // Plane state
 const height = ref(200);
@@ -44,11 +78,44 @@ const width = ref(300);
 const instancesRef = shallowRef<InstancedMesh>();
 const planeRef = shallowRef();
 const lightEmissivePlaneRef = shallowRef();
+const whiteLightPlaneRef = shallowRef();
+
+// Interactive white light plane position
+const lightPlanePosition = reactive({
+  x: 0,
+  y: 0,
+  targetX: 0,
+  targetY: 0,
+});
+
+// Interpolation factor for smooth movement (lower = smoother but slower)
+const movementSmoothness = 0.5;
+
+// Set up mouse move event listener
+onMounted(() => {
+  window.addEventListener("mousemove", handleMouseMove);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("mousemove", handleMouseMove);
+});
+
+// Convert mouse position to scene coordinates
+const handleMouseMove = (event: MouseEvent) => {
+  // Normalizar las coordenadas del ratón al rango [-1, 1]
+  const x = (event.clientX / window.innerWidth) * 2 - 1;
+  const y = -((event.clientY / window.innerHeight) * 2 - 1);
+
+  // Escalar a coordenadas de la escena 3D con un factor adecuado
+  const cameraFactor = 1; // Aumentamos el factor para que sea visible en la escena
+  lightPlanePosition.targetX = x * width.value * 0.1 * cameraFactor;
+  lightPlanePosition.targetY = y * height.value * 0.1 * cameraFactor;
+};
 
 // Configuration for cube distribution
-const cubeSize = 1; // Cube size
-const cubeSpacing = 1.001; // Cube spacing
-const numberOfCubes = 5000; // Total number of cubes
+const cubeSize = 0.5; // Cube size
+const cubeSpacing = 0.501; // Cube spacing
+const numberOfCubes = 8000; // Total number of cubes
 
 // Z movement configuration
 const cubeZConfig = ref(
@@ -56,7 +123,7 @@ const cubeZConfig = ref(
     .fill(null)
     .map(() => ({
       maxHeight: 0.5 + Math.random() * 0.501, // Max random height between 2 and 3
-      speed: 0.01 + Math.random() * 1, // Random speed between 0.1 and 1
+      speed: 0.01 + Math.random() * 0.5, // Random speed between 0.1 and 1
       currentOffset: 0, // Current offset
       phase: Math.random() * Math.PI * 2, // Random phase for sinusoidal movement
     })),
@@ -150,6 +217,12 @@ onBeforeRender(() => {
       width.value = newWidth;
     }
   }
+
+  // Update white light plane position with smooth interpolation
+  lightPlanePosition.x +=
+    (lightPlanePosition.targetX - lightPlanePosition.x) * movementSmoothness;
+  lightPlanePosition.y +=
+    (lightPlanePosition.targetY - lightPlanePosition.y) * movementSmoothness;
 
   // Update Z positions of the cubes
   if (instancesRef.value) {

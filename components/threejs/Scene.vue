@@ -7,8 +7,8 @@
       :rotation="[0, 0, 0]"
     />
 
-    <!-- Ambient Light -->
-    <TresAmbientLight :intensity="1" />
+    <!-- Directional Light -->
+    <TresDirectionalLight :position="[0, 10, 0]" :intensity="1" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -20,10 +20,10 @@
       />
       <!-- Bloom -->
       <BloomPmndrs
-        :radius="0.5"
-        :intensity="0.1"
-        :luminance-threshold="0.5"
-        :luminance-smoothing="0.1"
+        :radius="1"
+        :intensity="1"
+        :luminance-threshold="0.1"
+        :luminance-smoothing="1"
         mipmap-blur
       />
 
@@ -36,20 +36,19 @@
       <!-- Noise -->
       <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
-    <!-- GLTF model (Triangle) -->
+
+    <!-- GLTF model (Surface Triangle) -->
     <Suspense>
-      <ThreejsObjectsTriangle />
+      <ThreejsObjectsSurfaceTriangle />
     </Suspense>
 
     <!-- Floor -->
-    <Suspense>
-      <ThreejsObjectsFloorWithLight />
-    </Suspense>
+    <ThreejsObjectsSurfaceFloor />
 
     <!-- Hero Text -->
-    <Suspense>
+    <!-- <Suspense>
       <ThreejsObjectsHeroText />
-    </Suspense>
+    </Suspense> -->
 
     <!-- <Suspense>
       <ThreejsObjectsFloorWithCircuits />

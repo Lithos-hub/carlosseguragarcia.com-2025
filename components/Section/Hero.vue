@@ -7,6 +7,7 @@
           <ThreejsScene />
         </div>
       </Suspense>
+
       <div class="Hero__text">
         <!-- This text is already displayed in the TresJS canvas, but we need to keep it for SEO -->
         <div class="opacity-0">

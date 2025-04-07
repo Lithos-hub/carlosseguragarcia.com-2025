@@ -7,7 +7,7 @@
     :bevel-size="0.00001"
     :size="1"
   >
-    <TresMeshStandardMaterial color="#EF4444" />
+    <TresMeshBasicMaterial color="#EF4444" />
   </Text3D>
   <Text3D
     text="Front-end Developer"
@@ -17,7 +17,7 @@
     :bevel-size="0.00001"
     :size="0.4"
   >
-    <TresMeshStandardMaterial color="#FB1543" />
+    <TresMeshBasicMaterial color="#FB1543" />
   </Text3D>
 </template>
 
