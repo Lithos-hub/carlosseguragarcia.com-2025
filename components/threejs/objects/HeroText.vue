@@ -2,22 +2,22 @@
   <Text3D
     text="Carlos Segura García"
     font="/threejs-fonts/Rajdhani_Regular.json"
-    :position="[0, 3, 2]"
+    :position="[0, 1, 2]"
     :bevel-thickness="0.0001"
     :bevel-size="0.00001"
     :size="1"
   >
-    <TresMeshBasicMaterial color="#EF4444" />
+    <TresMeshBasicMaterial color="white" />
   </Text3D>
   <Text3D
     text="Front-end Developer"
     font="/threejs-fonts/Rajdhani_Regular.json"
-    :position="[0, 1, 2]"
+    :position="[0, -1, 2]"
     :bevel-thickness="0.0001"
     :bevel-size="0.00001"
     :size="0.4"
   >
-    <TresMeshBasicMaterial color="#FB1543" />
+    <TresMeshBasicMaterial color="white" />
   </Text3D>
 </template>
 

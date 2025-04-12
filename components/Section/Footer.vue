@@ -4,7 +4,9 @@
       <div class="Footer__developedBy">
         <div class="flex items-center gap-1">
           <div class="square bg-primary" />
-          <label class="Footer__developedBy-label"> Developed by </label>
+          <label class="Footer__developedBy-label">
+            Developed and designed by
+          </label>
         </div>
         <span class="Footer__developedBy-name">Carlos Segura García</span>
       </div>
@@ -46,7 +48,7 @@
 
 <style lang="scss" scoped>
 .Footer {
-  @apply flex w-full items-center justify-between border-t border-secondary bg-black;
+  @apply flex h-full w-full justify-between bg-black;
 
   &__left,
   &__right {
@@ -58,7 +60,7 @@
   }
 
   &__center {
-    @apply flex h-full w-full max-w-[80vw] items-center justify-center border-x border-secondary;
+    @apply flex h-auto w-full max-w-[80vw] items-center justify-center border-x border-secondary;
   }
 
   &__content {

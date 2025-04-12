@@ -8,7 +8,7 @@
     />
 
     <!-- Directional Light -->
-    <TresDirectionalLight :position="[0, 10, 0]" :intensity="1" />
+    <TresDirectionalLight :position="[0, -15, 5]" :intensity="1" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -29,7 +29,7 @@
 
       <!-- Vignette -->
       <VignettePmndrs
-        :darkness="0.8"
+        :darkness="1"
         :offset="0.4"
         :blend-function="BlendFunction.SCREEN"
       />
@@ -37,22 +37,14 @@
       <NoisePmndrs premultiply :blend-function="BlendFunction.SCREEN" />
     </EffectComposerPmndrs>
 
-    <!-- GLTF model (Surface Triangle) -->
+    <!-- Hero Text -->
     <Suspense>
-      <ThreejsObjectsSurfaceTriangle />
+      <ThreejsObjectsHeroText />
     </Suspense>
 
-    <!-- Floor -->
-    <ThreejsObjectsSurfaceFloor />
-
-    <!-- Hero Text -->
-    <!-- <Suspense>
-      <ThreejsObjectsHeroText />
-    </Suspense> -->
-
-    <!-- <Suspense>
-      <ThreejsObjectsFloorWithCircuits />
-    </Suspense> -->
+    <Suspense>
+      <ThreejsObjectsFloorWithLight />
+    </Suspense>
   </TresCanvas>
 </template>
 

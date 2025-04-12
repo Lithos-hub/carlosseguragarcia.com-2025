@@ -3,7 +3,7 @@ export const sectionsOptions = [
   "about",
   "summary",
   "experience",
-  "projects",
+  "portfolio",
 ] as const;
 export type Section = (typeof sectionsOptions)[number];
 
@@ -44,7 +44,7 @@ export const sections: Record<Section, SectionData> = {
     componentName: "Experience.vue",
     path: "#experience",
   },
-  projects: {
+  portfolio: {
     id: "portfolio",
     code: "C1",
     title: "<Portfolio />",

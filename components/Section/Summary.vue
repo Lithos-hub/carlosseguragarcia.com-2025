@@ -95,7 +95,7 @@ const totalSummary = () => {
     (currentDate.getMonth() - firstSummary.getMonth());
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
-  return `${years} years, ${months} months`;
+  return `${years} years, ${months} ${months === 1 ? "month" : "months"}`;
 };
 </script>
 

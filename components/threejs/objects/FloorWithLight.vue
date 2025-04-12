@@ -1,74 +1,41 @@
 <template>
   <!-- Light emissive plane -->
-  <!-- <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
+  <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
     <TresPlaneGeometry :args="[width, height]" />
     <TresMeshPhysicalMaterial
-      color="white"
-      emissive="red"
+      color="#EF4444"
+      emissive="#EF4444"
       :emissive-intensity="5"
     />
-  </TresMesh> -->
+  </TresMesh>
 
-  <!-- Interactive white light plane -->
-  <!-- <TresMesh
-    ref="whiteLightPlaneRef"
-    :position="[lightPlanePosition.x, lightPlanePosition.y, -10]"
-  >
-    <TresPlaneGeometry :args="[10, 10]" />
-    <TresMeshPhysicalMaterial
-      color="white"
-      emissive="white"
-      :emissive-intensity="3"
+  <!-- Instances with GLTF model -->
+  <Suspense v-if="modelLoaded">
+    <TresInstancedMesh
+      ref="instancesRef"
+      cast-shadow
+      receive-shadow
+      :scale="cubeSize"
+      :args="[gltfGeometry!, gltfMaterial!, numberOfCubes]"
     />
-  </TresMesh> -->
-
-  <!-- <Suspense>
-    <TresInstancedMesh
-      ref="instancesRef"
-      cast-shadow
-      receive-shadow
-      :args="[null!, null!, numberOfCubes]"
-    >
-      <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
-      <TresMeshPhysicalMaterial
-        :roughness="0.2"
-        :metalness="0.8"
-        :transmission="0.5"
-        :thickness="1"
-        :ior="1.5"
-        :clearcoat="1.0"
-        color="black"
-      />
-    </TresInstancedMesh>
-  </Suspense> -->
-
-  <!-- <Suspense>
-    <TresInstancedMesh
-      ref="instancesRef"
-      cast-shadow
-      receive-shadow
-      :args="[null!, null!, numberOfCubes]"
-    >
-      <TresBoxGeometry :args="[cubeSize, cubeSize, 0.1]" />
-      <TresMeshPhysicalMaterial
-        :roughness="0.2"
-        :metalness="0.8"
-        :transmission="0.5"
-        :thickness="1"
-        :ior="1.5"
-        :clearcoat="1.0"
-        color="black"
-      />
-    </TresInstancedMesh>
-  </Suspense> -->
-  <Suspense>
-    <ThreejsObjectsSurrealistCube />
   </Suspense>
 </template>
 
 <script lang="ts" setup>
-import type { InstancedMesh } from "three";
-import { Matrix4, Vector3 } from "three";
+import { useLoop } from "@tresjs/core";
+import {
+  BufferGeometry,
+  Euler,
+  type InstancedMesh,
+  Material,
+  Matrix4,
+  Mesh,
+  Quaternion,
+  Vector3,
+} from "three";
+import type { GLTF } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
+import { onMounted, reactive, ref, shallowRef, watch } from "vue";
 
 // Plane state
 const height = ref(200);
@@ -77,56 +44,90 @@ const width = ref(300);
 // References
 const instancesRef = shallowRef<InstancedMesh>();
 const planeRef = shallowRef();
-const lightEmissivePlaneRef = shallowRef();
-const whiteLightPlaneRef = shallowRef();
 
-// Interactive white light plane position
-const lightPlanePosition = reactive({
-  x: 0,
-  y: 0,
-  targetX: 0,
-  targetY: 0,
-});
+// GLTF model state
+const modelLoaded = ref(false);
+const gltfGeometry = shallowRef<BufferGeometry | null>(null);
+const gltfMaterial = shallowRef<Material | null>(null);
+const gltfLoader = new GLTFLoader();
 
 // Interpolation factor for smooth movement (lower = smoother but slower)
 const movementSmoothness = 0.5;
 
-// Set up mouse move event listener
-onMounted(() => {
-  window.addEventListener("mousemove", handleMouseMove);
+// Set up mouse move event listener and load GLTF
+onMounted(async () => {
+  // Load the GLTF model
+  try {
+    const gltf = await new Promise<GLTF>((resolve, reject) => {
+      gltfLoader.load(
+        "/gltf/textured-cube/textured-cube.gltf",
+        resolve,
+        undefined,
+        reject,
+      );
+    });
+
+    // Search for the first available mesh
+    let mesh: Mesh | null = null;
+    gltf.scene.traverse((object) => {
+      if (object instanceof Mesh && !mesh) {
+        mesh = object;
+      }
+    });
+
+    if (mesh) {
+      // Save references to the geometry and material
+      gltfGeometry.value = (mesh as Mesh).geometry;
+      gltfMaterial.value = (mesh as Mesh).material as Material;
+      modelLoaded.value = true;
+
+      // Distribute cubes once the model is loaded
+      // We need to give time for the DOM to update
+      setTimeout(() => {
+        if (instancesRef.value) {
+          distributeInstancesUniformly();
+        }
+      }, 100);
+    } else {
+      console.error("No Mesh found in the GLTF model");
+    }
+  } catch (error) {
+    console.error("Error loading the GLTF model:", error);
+  }
 });
-
-onUnmounted(() => {
-  window.removeEventListener("mousemove", handleMouseMove);
-});
-
-// Convert mouse position to scene coordinates
-const handleMouseMove = (event: MouseEvent) => {
-  // Normalizar las coordenadas del ratón al rango [-1, 1]
-  const x = (event.clientX / window.innerWidth) * 2 - 1;
-  const y = -((event.clientY / window.innerHeight) * 2 - 1);
-
-  // Escalar a coordenadas de la escena 3D con un factor adecuado
-  const cameraFactor = 1; // Aumentamos el factor para que sea visible en la escena
-  lightPlanePosition.targetX = x * width.value * 0.1 * cameraFactor;
-  lightPlanePosition.targetY = y * height.value * 0.1 * cameraFactor;
-};
 
 // Configuration for cube distribution
 const cubeSize = 0.5; // Cube size
-const cubeSpacing = 0.501; // Cube spacing
-const numberOfCubes = 8000; // Total number of cubes
+const cubeSpacing = 0.8; // Cube spacing
+const numberOfCubes = 7000; // Total number of cubes
 
 // Z movement configuration
 const cubeZConfig = ref(
   Array(numberOfCubes)
     .fill(null)
-    .map(() => ({
-      maxHeight: 0.5 + Math.random() * 0.501, // Max random height between 2 and 3
-      speed: 0.01 + Math.random() * 0.5, // Random speed between 0.1 and 1
-      currentOffset: 0, // Current offset
-      phase: Math.random() * Math.PI * 2, // Random phase for sinusoidal movement
-    })),
+    .map(() => {
+      // Random rotation values in increments of 90 degrees (PI/2)
+      const rotationX =
+        Math.floor(Math.random() * 5) *
+        (Math.PI / 2) *
+        (Math.random() > 0.5 ? 1 : -1);
+      const rotationY =
+        Math.floor(Math.random() * 5) *
+        (Math.PI / 2) *
+        (Math.random() > 0.5 ? 1 : -1);
+      const rotationZ =
+        Math.floor(Math.random() * 5) *
+        (Math.PI / 2) *
+        (Math.random() > 0.5 ? 1 : -1);
+
+      return {
+        maxHeight: 0.5 + Math.random() * 0.501,
+        speed: 0.1 + Math.random() * 0.5,
+        currentOffset: 0,
+        phase: Math.random() * Math.PI * 2,
+        rotation: { x: rotationX, y: rotationY, z: rotationZ },
+      };
+    }),
 );
 
 // Grid state
@@ -174,17 +175,45 @@ const distributeInstancesUniformly = () => {
 
       // Initialize Z configuration if necessary
       if (!cubeZConfig.value[index]) {
+        const rotationX =
+          Math.floor(Math.random() * 5) *
+          (Math.PI / 2) *
+          (Math.random() > 0.5 ? 1 : -1);
+        const rotationY =
+          Math.floor(Math.random() * 5) *
+          (Math.PI / 2) *
+          (Math.random() > 0.5 ? 1 : -1);
+        const rotationZ =
+          Math.floor(Math.random() * 5) *
+          (Math.PI / 2) *
+          (Math.random() > 0.5 ? 1 : -1);
+
         cubeZConfig.value[index] = {
-          maxHeight: 0.5 + Math.random() * 0.501,
+          maxHeight: 0.5 + Math.random() * 1,
           speed: 0.01 + Math.random() * 0.5,
           currentOffset: 0,
           phase: Math.random() * Math.PI * 2,
+          rotation: { x: rotationX, y: rotationY, z: rotationZ },
         };
       }
 
-      matrix.setPosition(xPos, yPos, cubeZConfig.value[index].currentOffset);
-      mesh.setMatrixAt(index, matrix);
+      const config = cubeZConfig.value[index];
 
+      const quaternion = new Quaternion().setFromEuler(
+        new Euler(
+          config.rotation.x,
+          config.rotation.y,
+          config.rotation.z,
+          "XYZ",
+        ),
+      );
+      matrix.compose(
+        new Vector3(xPos, yPos, config.currentOffset),
+        quaternion,
+        new Vector3(cubeSize, cubeSize, cubeSize),
+      );
+
+      mesh.setMatrixAt(index, matrix);
       index++;
     }
   }
@@ -218,26 +247,20 @@ onBeforeRender(() => {
     }
   }
 
-  // Update white light plane position with smooth interpolation
-  lightPlanePosition.x +=
-    (lightPlanePosition.targetX - lightPlanePosition.x) * movementSmoothness;
-  lightPlanePosition.y +=
-    (lightPlanePosition.targetY - lightPlanePosition.y) * movementSmoothness;
-
   // Update Z positions of the cubes
   if (instancesRef.value) {
     const mesh = instancesRef.value;
     const matrix = new Matrix4();
     let needsUpdate = false;
 
-    // Tiempo actual para la animación de olas
+    // Current time for wave animation
     const time = Date.now() * 0.001;
 
-    // Velocidad de propagación de las olas
-    const waveSpeed = 0.1;
+    // Wave propagation speed
+    const waveSpeed = 0.01;
 
-    // Frecuencia de las olas
-    const waveFrequency = 0.5;
+    // Wave frequency
+    const waveFrequency = 1;
 
     // For each cube, calculate its new Z position
     for (let i = 0; i < numberOfCubes; i++) {
@@ -253,8 +276,8 @@ onBeforeRender(() => {
         position.x * position.x + position.y * position.y,
       );
 
-      // Efecto de ola desde el centro hacia afuera
-      // La fase depende de la distancia al centro
+      // Wave effect from center outward
+      // The phase depends on the distance from the center
       const wavePhase = distanceFromCenter * waveFrequency - time * waveSpeed;
 
       // Calculate new Z position using outward wave movement
@@ -262,13 +285,23 @@ onBeforeRender(() => {
       config.currentOffset =
         config.maxHeight * Math.sin(wavePhase + config.phase);
 
-      // Calculate scale factor based on distance from center (más suave)
-      const maxDistance = Math.max(width.value, height.value) / 2;
-      const scaleZ = 1 + (distanceFromCenter / maxDistance) * 50;
+      // Calculate scale factor based on distance from center (smoother)
+      const maxDistance = Math.max(width.value, height.value) / 4;
+      const scaleZ = cubeSize + distanceFromCenter / maxDistance;
 
-      // Set scale and position
-      matrix.makeScale(1.05, 2, scaleZ);
-      matrix.setPosition(position.x, position.y, config.currentOffset);
+      const quaternion = new Quaternion().setFromEuler(
+        new Euler(
+          config.rotation.x,
+          config.rotation.y,
+          config.rotation.z,
+          "XYZ",
+        ),
+      );
+      matrix.compose(
+        new Vector3(position.x, position.y, config.currentOffset),
+        quaternion,
+        new Vector3(cubeSize, cubeSize, cubeSize * scaleZ),
+      );
 
       // Update the instance matrix
       mesh.setMatrixAt(i, matrix);

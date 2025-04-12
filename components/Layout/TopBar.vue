@@ -41,7 +41,7 @@
 
 <script setup lang="ts">
 import { sections } from "@/consts/sections";
-const { visualDataBySection, isMobileMenuVisible } = storeToRefs(useUiStore());
+const { visualDataBySection } = storeToRefs(useUiStore());
 const { toggleRadialMenu, toggleMobileMenu } = useUiStore();
 
 const selectedLanguage = reactive({
