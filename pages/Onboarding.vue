@@ -12,14 +12,22 @@
         class="Onboarding__phase-one-block__attention"
       />
       <img
+        ref="leftPhaseOneSeparatorRef"
         src="/svg/decoration/onboarding/onboarding-1.svg"
         alt="Onboarding left separator in the first block"
         class="Onboarding__phase-one-block__left-separator"
       />
+      <div class="Onboarding__phase-one-block__memory">
+        <pre class="text-[15px] font-bold text-secondary/50">{{
+          memoryText
+        }}</pre>
+        <pre class="text-[10px] text-secondarySoft">{{ dataStreamText }}</pre>
+      </div>
       <div class="Onboarding__phase-one-block__text-container">
         <p class="Onboarding__machine-text">{{ phaseOneText }}</p>
       </div>
       <img
+        ref="rightPhaseOneSeparatorRef"
         src="/svg/decoration/onboarding/onboarding-2.svg"
         alt="Onboarding right separator in the first block"
         class="Onboarding__phase-one-block__right-separator"
@@ -77,6 +85,13 @@
                 />
               </div>
             </div>
+            <div class="absolute bottom-5 right-5">
+              <img
+                src="/svg/decoration/onboarding/onboarding-3.svg"
+                alt="Onboarding floating image"
+                class="w-[450px]"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -92,6 +107,8 @@ const router = useRouter();
 
 const firstBlockRef = useTemplateRef("firstBlockRef");
 const attentionImageRef = useTemplateRef("attentionImageRef");
+const leftPhaseOneSeparatorRef = useTemplateRef("leftPhaseOneSeparatorRef");
+const rightPhaseOneSeparatorRef = useTemplateRef("rightPhaseOneSeparatorRef");
 
 // First phase
 const firstPhaseTypedResult = ["Starting systems", "Please wait..."];
@@ -158,14 +175,27 @@ const scanningFilesChars = [
   "]",
 ];
 
+const { text: memoryText, startTyping: startMemoryTyping } = useTypeWriter({
+  texts: CYBERINFO.MEMORY_GRID.map((text) => `${text}\n`),
+  delay: 10,
+  speed: 15,
+});
+
+const { text: dataStreamText, startTyping: startDataStreamText } =
+  useTypeWriter({
+    texts: CYBERINFO.DATA_STREAM.map((text) => `${text}\n`),
+    delay: 20,
+    speed: 10,
+    persistLines: CYBERINFO.DATA_STREAM.map(Boolean),
+  });
+
 const {
   text: phaseOneText,
   startTyping: startPhaseOne,
   isCompleted: isPhaseOneCompleted,
-  isTyping: isPhaseOneTyping,
 } = useTypeWriter({
   texts: firstPhaseTypedResult,
-  delay: 1000,
+  delay: 500,
   speed: 25,
 });
 
@@ -217,7 +247,7 @@ watch(isPhaseOneCompleted, (isCompleted) => {
   if (isCompleted) {
     setTimeout(() => {
       startPhaseTwo();
-    }, 1000);
+    }, 2000);
   }
 });
 
@@ -225,7 +255,7 @@ watch([isPhaseTwoCompleted, isAllAuxiliarTextsCompleted], (hasCompleted) => {
   if (hasCompleted.every((isCompleted) => isCompleted)) {
     setTimeout(() => {
       startPhaseThree();
-    }, 1000);
+    }, 2000);
   }
 });
 
@@ -235,6 +265,20 @@ onMounted(() => {
       "animation--atention-icon-dissapear",
     );
   }, 3000);
+  setTimeout(() => {
+    leftPhaseOneSeparatorRef.value?.classList.add(
+      "animation--move-left-separator-to-bottom",
+    );
+    rightPhaseOneSeparatorRef.value?.classList.add(
+      "animation--move-right-separator-to-top",
+    );
+  }, 7000);
+
+  setTimeout(() => {
+    startMemoryTyping();
+    startDataStreamText();
+  }, 3000);
+
   setTimeout(() => {
     startPhaseOne();
   }, 5000);
@@ -257,7 +301,7 @@ onMounted(() => {
   }
 
   &__phase-one-block {
-    @apply relative flex h-[10px] w-[10px] max-w-[90vw] items-center justify-center bg-stone-950;
+    @apply relative flex h-[10px] w-[10px] max-w-[90vw] items-center justify-center border border-transparent;
 
     background-size: 5px 5px;
     background-image: repeating-linear-gradient(
@@ -271,6 +315,14 @@ onMounted(() => {
     animation: expand-block-to-first-phase 2s cubic-bezier(0.25, 0.1, 0.25, 1);
     animation-fill-mode: forwards;
 
+    &__memory {
+      @apply absolute right-5 top-5 flex flex-col items-center justify-center p-5 text-right font-exo;
+
+      pre {
+        @apply text-[10px] text-secondarySoft;
+      }
+    }
+
     &__attention {
       @apply absolute h-[150px] w-[150px] object-cover opacity-0;
       animation: rapidPulseAndSlideToLeft 1s cubic-bezier(0.25, 0.1, 0.25, 1);
@@ -282,7 +334,8 @@ onMounted(() => {
       @apply absolute h-full object-cover;
       left: -10px;
       opacity: 0;
-      animation: move-left-separator 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      animation: move-left-separator-to-initial 0.5s
+        cubic-bezier(0.25, 0.1, 0.25, 1);
       animation-delay: 3s;
       animation-fill-mode: forwards;
     }
@@ -291,7 +344,8 @@ onMounted(() => {
       @apply absolute h-full object-cover;
       right: -10px;
       opacity: 0;
-      animation: move-right-separator 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+      animation: move-right-separator-to-initial 0.5s
+        cubic-bezier(0.25, 0.1, 0.25, 1);
       animation-delay: 3s;
       animation-fill-mode: forwards;
     }
@@ -304,7 +358,7 @@ onMounted(() => {
   }
 
   &__phase-two-block {
-    @apply flex h-[90vh] w-[90vw] items-center justify-center overflow-hidden border border-secondarySoft bg-stone-950 p-10;
+    @apply relative flex h-[500px] w-[1000px] items-center justify-center overflow-hidden border border-transparent p-10;
 
     background-size: 5px 5px;
     background-image: repeating-linear-gradient(
@@ -315,7 +369,7 @@ onMounted(() => {
       $secondary10
     );
 
-    animation: expand-block-to-second-phase 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation: expand-block-to-second-phase 3s cubic-bezier(0.25, 0.1, 0.25, 1);
     animation-fill-mode: forwards;
 
     &__system-text {
@@ -341,6 +395,16 @@ onMounted(() => {
 
 .animation--atention-icon-dissapear {
   animation: dissapear-and-scale-to-zero 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-fill-mode: forwards;
+}
+
+.animation--move-left-separator-to-bottom {
+  animation: move-left-separator-to-bottom 1s cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation-fill-mode: forwards;
+}
+
+.animation--move-right-separator-to-top {
+  animation: move-right-separator-to-top 1s cubic-bezier(0.25, 0.1, 0.25, 1);
   animation-fill-mode: forwards;
 }
 
@@ -371,27 +435,26 @@ onMounted(() => {
 
 @keyframes expand-block-to-second-phase {
   0% {
-    overflow: hidden;
     height: 500px;
     width: 1000px;
   }
-  10% {
-    overflow: hidden;
-    height: 1000px;
+  50% {
+    height: 500px;
     width: 1000px;
   }
-  25% {
-    overflow: hidden;
+  75% {
+    border-color: $secondarySoft;
     height: 90vh;
     width: 1000px;
   }
   100% {
+    border-color: $secondarySoft;
     height: 90vh;
     width: 90vw;
   }
 }
 
-@keyframes move-left-separator {
+@keyframes move-left-separator-to-initial {
   0% {
     opacity: 0;
     top: -200px;
@@ -402,7 +465,7 @@ onMounted(() => {
   }
 }
 
-@keyframes move-right-separator {
+@keyframes move-right-separator-to-initial {
   0% {
     opacity: 0;
     bottom: -200px;
@@ -410,6 +473,28 @@ onMounted(() => {
   100% {
     opacity: 1;
     bottom: 0;
+  }
+}
+
+@keyframes move-left-separator-to-bottom {
+  0% {
+    opacity: 1;
+    top: 0px;
+  }
+  100% {
+    top: 200px;
+    opacity: 0;
+  }
+}
+
+@keyframes move-right-separator-to-top {
+  0% {
+    opacity: 1;
+    bottom: 0px;
+  }
+  100% {
+    bottom: 200px;
+    opacity: 0;
   }
 }
 
