@@ -17,14 +17,28 @@
         alt="Onboarding left separator in the first block"
         class="Onboarding__phase-one-block__left-separator"
       />
-      <div class="Onboarding__phase-one-block__memory">
+      <div
+        class="absolute right-5 top-5 flex flex-col items-end gap-2 text-right font-exo"
+      >
         <pre class="text-[15px] font-bold text-secondary/50">{{
-          memoryText
+          memoryTextTop
         }}</pre>
-        <pre class="text-[10px] text-secondarySoft">{{ dataStreamText }}</pre>
+        <pre class="text-[10px] text-secondarySoft">{{
+          dataStreamTextTop
+        }}</pre>
       </div>
       <div class="Onboarding__phase-one-block__text-container">
         <p class="Onboarding__machine-text">{{ phaseOneText }}</p>
+      </div>
+      <div
+        class="absolute bottom-5 left-5 flex min-h-[100px] flex-col items-start gap-2 overflow-hidden text-left font-rajdhaniMedium"
+      >
+        <pre class="text-[15px] font-bold text-secondary/50">{{
+          memoryTextBottom
+        }}</pre>
+        <pre class="text-[10px] text-secondarySoft">{{
+          dataStreamTextBottom
+        }}</pre>
       </div>
       <img
         ref="rightPhaseOneSeparatorRef"
@@ -41,7 +55,7 @@
       <div v-if="isPhaseTwoTyping" class="Onboarding__system-text">
         <div class="flex gap-10">
           <div>
-            <pre>
+            <pre class="text-secondary">
   _______  _____  _______  ______  __________________  _______
  / ___/\ \/ / _ \/ __/ _ \/ __/\ \/ / __/_  __/ __/  |/  / __/
 / /__   \  / _  / _// , _/\ \   \  /\ \  / / / _// /|_/ /\ \  
@@ -50,16 +64,6 @@
           All rights reserved | CyberSystems {{ new Date().getFullYear() }}
               </pre
             >
-
-            <div class="flex gap-2 pb-2">
-              <small
-                class="text-xs text-secondarySoft brightness-200"
-                v-for="(char, i) in startingSystemChars"
-                :key="char + i"
-              >
-                {{ char }}
-              </small>
-            </div>
 
             <pre class="h-[60vh] max-h-[60vh] overflow-hidden text-[10px]">{{
               phaseTwoText
@@ -96,6 +100,34 @@
         </div>
       </div>
     </div>
+    <div
+      v-if="isPhaseTwoCompleted && !isPhaseThreeCompleted"
+      class="Onboarding__phase-three-block flex w-full justify-center gap-5"
+    >
+      <div class="flex flex-1 flex-col gap-5">
+        <div class="p-5 font-rajdhaniMedium text-lg text-primary">
+          L O A D I N G // F I L E S
+        </div>
+        <pre class="h-auto overflow-hidden p-5 text-[10px] text-primary">{{
+          phaseThreeText
+        }}</pre>
+      </div>
+      <div class="flex flex-1 flex-col gap-5">
+        <div class="p-5 font-rajdhaniMedium text-lg text-primary">
+          B O O T I N G // S Y S T E M
+        </div>
+        <pre class="h-auto overflow-hidden p-5 text-[10px] text-primary">{{
+          phaseFourText
+        }}</pre>
+      </div>
+      <div class="flex h-full flex-col items-end justify-end">
+        <img
+          src="/svg/decoration/onboarding/onboarding-phase-four-1.svg"
+          alt="Onboarding floating image"
+          class="w-[700px]"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -114,79 +146,34 @@ const rightPhaseOneSeparatorRef = useTemplateRef("rightPhaseOneSeparatorRef");
 const firstPhaseTypedResult = ["Starting systems", "Please wait..."];
 
 // Second phase
-const startingSystemChars = [
-  "[",
-  "S",
-  " ",
-  "T",
-  " ",
-  "A",
-  " ",
-  "R",
-  " ",
-  "T",
-  " ",
-  "I",
-  " ",
-  "N",
-  " ",
-  "G",
-  " ",
-  "S",
-  " ",
-  "Y",
-  " ",
-  "S",
-  " ",
-  "T",
-  " ",
-  "E",
-  " ",
-  "M",
-  "]",
-];
-const scanningFilesChars = [
-  "[",
-  "S",
-  " ",
-  "C",
-  " ",
-  "A",
-  " ",
-  "N",
-  " ",
-  "N",
-  " ",
-  "I",
-  " ",
-  "N",
-  " ",
-  "G",
-  " ",
-  "F",
-  " ",
-  "I",
-  " ",
-  "L",
-  " ",
-  "E",
-  " ",
-  "S",
-  "]",
-];
-
-const { text: memoryText, startTyping: startMemoryTyping } = useTypeWriter({
-  texts: CYBERINFO.MEMORY_GRID.map((text) => `${text}\n`),
-  delay: 10,
-  speed: 15,
-});
-
-const { text: dataStreamText, startTyping: startDataStreamText } =
+const { text: memoryTextTop, startTyping: startMemoryTypingTop } =
   useTypeWriter({
-    texts: CYBERINFO.DATA_STREAM.map((text) => `${text}\n`),
+    texts: CYBERINFO.MEMORY_GRID_TOP.map((text) => `${text}\n`),
+    delay: 10,
+    speed: 15,
+  });
+
+const { text: dataStreamTextTop, startTyping: startDataStreamTextTop } =
+  useTypeWriter({
+    texts: CYBERINFO.DATA_STREAM_TOP.map((text) => `${text}\n`),
     delay: 20,
     speed: 10,
-    persistLines: CYBERINFO.DATA_STREAM.map(Boolean),
+    persistLines: CYBERINFO.DATA_STREAM_TOP.map(Boolean),
+  });
+
+const { text: memoryTextBottom, startTyping: startMemoryTypingBottom } =
+  useTypeWriter({
+    texts: CYBERINFO.MEMORY_GRID_BOTTOM.map((text) => `${text}\n`),
+    delay: 10,
+    speed: 15,
+  });
+
+const { text: dataStreamTextBottom, startTyping: startDataStreamTextBottom } =
+  useTypeWriter({
+    texts: CYBERINFO.DATA_STREAM_BOTTOM.map((text) => `${text}\n`),
+    delay: 20,
+    speed: 10,
+    persistLines: CYBERINFO.DATA_STREAM_BOTTOM.map(Boolean),
   });
 
 const {
@@ -215,12 +202,22 @@ const {
   text: phaseThreeText,
   startTyping: startPhaseThree,
   isCompleted: isPhaseThreeCompleted,
-  isTyping: isPhaseThreeTyping,
 } = useTypeWriter({
   texts: CYBERINFO.FILES_LIST.map((text) => `${text}\n`),
-  delay: 50,
+  delay: 20,
   speed: 0,
   persistLines: CYBERINFO.FILES_LIST.map(Boolean),
+});
+
+const {
+  text: phaseFourText,
+  startTyping: startPhaseFour,
+  isCompleted: isPhaseFourCompleted,
+} = useTypeWriter({
+  texts: CYBERINFO.BOOT_SEQUENCE_LIST.map((text) => `${text}\n`),
+  delay: 20,
+  speed: 0,
+  persistLines: CYBERINFO.BOOT_SEQUENCE_LIST.map(Boolean),
 });
 
 const auxiliarTextsCompleted = ref<number[]>([]);
@@ -255,6 +252,7 @@ watch([isPhaseTwoCompleted, isAllAuxiliarTextsCompleted], (hasCompleted) => {
   if (hasCompleted.every((isCompleted) => isCompleted)) {
     setTimeout(() => {
       startPhaseThree();
+      startPhaseFour();
     }, 2000);
   }
 });
@@ -272,11 +270,13 @@ onMounted(() => {
     rightPhaseOneSeparatorRef.value?.classList.add(
       "animation--move-right-separator-to-top",
     );
-  }, 7000);
+  }, 9000);
 
   setTimeout(() => {
-    startMemoryTyping();
-    startDataStreamText();
+    startMemoryTypingTop();
+    startDataStreamTextTop();
+    startMemoryTypingBottom();
+    startDataStreamTextBottom();
   }, 3000);
 
   setTimeout(() => {
@@ -314,14 +314,6 @@ onMounted(() => {
 
     animation: expand-block-to-first-phase 2s cubic-bezier(0.25, 0.1, 0.25, 1);
     animation-fill-mode: forwards;
-
-    &__memory {
-      @apply absolute right-5 top-5 flex flex-col items-center justify-center p-5 text-right font-exo;
-
-      pre {
-        @apply text-[10px] text-secondarySoft;
-      }
-    }
 
     &__attention {
       @apply absolute h-[150px] w-[150px] object-cover opacity-0;
@@ -380,6 +372,22 @@ onMounted(() => {
       @apply font-lucania text-[8px] text-secondary;
     }
   }
+
+  &__phase-three-block {
+    @apply relative flex h-[90vh] w-[90vw] overflow-hidden border border-transparent p-10;
+
+    background-size: 5px 5px;
+    background-image: repeating-linear-gradient(
+      0deg,
+      $primary20,
+      $primary20 1px,
+      $primary10 1px,
+      $primary10
+    );
+
+    animation: fade-block-to-third-phase 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-fill-mode: forwards;
+  }
 }
 
 .animation--expand-block-to-first-phase {
@@ -390,6 +398,11 @@ onMounted(() => {
 .animation--expand-block-to-second-phase {
   animation: expand-block-to-second-phase 0.5s
     cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  animation-fill-mode: forwards;
+}
+
+.animation--fade-block-to-third-phase {
+  animation: fade-block-to-third-phase 3s cubic-bezier(0.25, 0.1, 0.25, 1);
   animation-fill-mode: forwards;
 }
 
@@ -407,7 +420,6 @@ onMounted(() => {
   animation: move-right-separator-to-top 1s cubic-bezier(0.25, 0.1, 0.25, 1);
   animation-fill-mode: forwards;
 }
-
 @keyframes expand-block-to-first-phase {
   0% {
     opacity: 0;
@@ -451,6 +463,17 @@ onMounted(() => {
     border-color: $secondarySoft;
     height: 90vh;
     width: 90vw;
+  }
+}
+
+@keyframes fade-block-to-third-phase {
+  0% {
+    opacity: 0;
+    border-color: $secondarySoft;
+  }
+  100% {
+    opacity: 1;
+    border-color: $primary;
   }
 }
 

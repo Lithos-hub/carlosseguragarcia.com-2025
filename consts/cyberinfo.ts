@@ -64,7 +64,7 @@ export const SECURITY_PROTOCOL = [
   "Quantum Barrier Stabilized... [SECURE]",
 ];
 
-export const DATA_STREAM = [
+export const DATA_STREAM_TOP = [
   "[DATA STREAM INCOMING]",
   "Verifying Data Hash... [MATCH]",
   "Packet ID: #F39210... [RECEIVED]",
@@ -74,13 +74,20 @@ export const DATA_STREAM = [
   "Suspicious Activity Logged... [MONITORING]",
 ];
 
+export const DATA_STREAM_BOTTOM = [
+  "[RECEIVING DATA]",
+  "Verifying Data Integrity... [DONE]",
+  "Packet ID: #F39210... [DONE]",
+  "FIREWALL ACTIVATED: [DONE]",
+  "Injecting Trace Protocol... [DONE]",
+  "GridNet Uplink Secured... [DONE]",
+  "Suspicious Activity Logged... [DONE]",
+];
+
 export const NODE_CONNECTION = [
   "[NODE CONNECTION ESTABLISHED]",
   "Handshaking Protocol Initiated... [OK]",
   "GridNet Uplink Secured... [STABLE]",
-  "External Pings Detected: 5 Hosts",
-  "Initiating Data Masking Protocol... [ACTIVE]",
-  "Cloaking Uplink Ports... [HIDDEN]",
 ];
 
 export const MALWARE_SCAN = [
@@ -142,7 +149,7 @@ export const EXTERNAL_SIGNAL = [
   "Countermeasure Protocol... [ARMED]",
 ];
 
-export const MEMORY_GRID = [
+export const MEMORY_GRID_TOP = [
   "[MEMORY GRID STATUS]",
   "Sector 01-A... [STABLE]",
   "Sector 02-B... [DAMAGED - RECOVERING]",
@@ -150,6 +157,43 @@ export const MEMORY_GRID = [
   "Root Structure Analysis... [REPAIRED]",
   "NeuronPulse Backup... [ENGAGED]",
   "DataSync Threshold... [OPTIMIZED]",
+];
+
+export const MEMORY_GRID_BOTTOM = [
+  "[MEMORY GRID STATUS]",
+  "Sector 01-A... [STABLE]",
+  "Sector 02-B... [DAMAGED - RECOVERING]",
+  "Sector 03-C... [INTEGRITY CHECK]",
+  "Root Structure Analysis... [REPAIRED]",
+];
+
+export const BOOT_SEQUENCE_LIST = [
+  "[    0.000000] InitOS Kernel v1.7.3 initializing...",
+  "[    0.002134] Mounting primary file system...",
+  "[    0.004678] RootFS mounted at /dev/initdisk0",
+  "[    0.006512] Detected 4 CPU cores @ 3.20GHz",
+  "[    0.007845] Initializing virtual memory subsystem...",
+  "[    0.009234] VM subsystem initialized",
+  "[    0.010390] Starting systemd-like service manager...",
+  "[    0.012589] [ OK ] Service manager started successfully",
+  "[    0.013420] Mounting /proc and /sys...",
+  "[    0.015221] [ OK ] /proc mounted",
+  "[    0.016789] [ OK ] /sys mounted",
+  "[    0.018332] Loading kernel modules...",
+  "[    0.020210] [FAILED] Failed to load module 'hypernet.ko'",
+  "[    0.020450] See '/var/log/initos/hypernet.log' for details",
+  "[    0.022190] Loading remaining kernel modules...",
+  "[    0.023000] [ OK ] All required modules loaded",
+  "[    0.025340] Initializing device manager...",
+  "[    0.026754] [ OK ] Device manager ready",
+  "[    0.028100] Starting InitOS Network Stack...",
+  "[    0.029670] [ OK ] Loopback interface up (lo)",
+  "[    0.030812] [ OK ] Interface eth0 configured via DHCP",
+  "[    0.032399] Syncing system clock with NTP...",
+  "[    0.035602] [ OK ] Clock synchronized: 2025-04-16 10:42:17",
+  "[    0.038210] Starting user session services...",
+  "[    0.040321] [ OK ] Session services initialized",
+  "[    0.043001] InitOS boot complete. Welcome to InitOS v1.7.3!",
 ];
 
 export const FILES_LIST = [
