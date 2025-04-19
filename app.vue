@@ -1,7 +1,6 @@
 <template>
   <div class="App">
     <WhiteNoise />
-    <RadialMenu />
     <MobileMenu />
     <NuxtLayout>
       <NuxtPage />

@@ -1,5 +1,5 @@
 interface UseTypeWriterProps {
-  texts: string[];
+  texts: readonly string[];
   delay: number;
   speed: number;
   caretAnimation?: boolean;

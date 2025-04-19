@@ -8,7 +8,21 @@
     />
 
     <!-- Directional Light -->
-    <TresDirectionalLight :position="[0, -15, 5]" :intensity="1" />
+    <TresDirectionalLight
+      :position="[70, 50, 50]"
+      :intensity="1"
+      color="#EF4444"
+      cast-shadow
+    />
+    <TresDirectionalLight
+      :position="[-70, -50, 50]"
+      :intensity="1"
+      color="#EF4444"
+      cast-shadow
+    />
+
+    <!-- Ambient Light -->
+    <TresAmbientLight :intensity="50" color="#55EAD4" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>

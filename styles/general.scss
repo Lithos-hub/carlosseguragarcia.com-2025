@@ -231,7 +231,7 @@
 
 // Squares
 @mixin square-shape {
-  @apply h-2 max-h-2 w-2 max-w-2;
+  @apply h-1 max-h-1 min-h-1 w-1 min-w-1 max-w-1 md:h-2 md:max-h-2 md:min-h-2 md:w-2 md:min-w-2 md:max-w-2;
 }
 
 .square {

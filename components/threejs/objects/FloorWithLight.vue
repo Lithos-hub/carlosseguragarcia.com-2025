@@ -9,15 +9,25 @@
     />
   </TresMesh>
 
-  <!-- Instances with GLTF model -->
-  <Suspense v-if="modelLoaded">
+  <!-- Instances of cubes -->
+  <Suspense>
     <TresInstancedMesh
       ref="instancesRef"
       cast-shadow
       receive-shadow
-      :scale="cubeSize"
-      :args="[gltfGeometry!, gltfMaterial!, numberOfCubes]"
-    />
+      :args="[null!, null!, numberOfCubes]"
+    >
+      <TresBoxGeometry :args="[cubeSize, cubeSize, cubeSize]" />
+      <TresMeshPhysicalMaterial
+        :roughness="0.4"
+        :metalness="1"
+        :transmission="0.5"
+        :thickness="1"
+        :ior="1.5"
+        :clearcoat="1.0"
+        color="black"
+      />
+    </TresInstancedMesh>
   </Suspense>
 </template>
 
@@ -97,9 +107,9 @@ onMounted(async () => {
 });
 
 // Configuration for cube distribution
-const cubeSize = 0.5; // Cube size
-const cubeSpacing = 0.8; // Cube spacing
-const numberOfCubes = 7000; // Total number of cubes
+const cubeSize = 1; // Cube size
+const cubeSpacing = 1.005; // Cube spacing
+const numberOfCubes = 5000; // Total number of cubes
 
 // Z movement configuration
 const cubeZConfig = ref(

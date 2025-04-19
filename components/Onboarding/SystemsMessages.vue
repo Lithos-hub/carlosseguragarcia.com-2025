@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-2">
+  <div class="flex min-h-[40px] items-center gap-2">
     <div
       class="square"
       :class="{
@@ -8,7 +8,7 @@
       }"
     />
     <small
-      class="text-[10px] transition-all duration-300"
+      class="text-[8px] transition-all duration-300 lg:text-[10px]"
       :class="{
         'text-green-500': systemAuxiliarText.length === props.texts[0].length,
         'text-secondarySoft':
