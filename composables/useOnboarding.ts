@@ -48,7 +48,7 @@ export const useOnboarding = () => {
     useTypeWriter({
       texts: CYBERINFO.MEMORY_GRID_BOTTOM.map((text) => `${text}\n`),
       delay: 10,
-      speed: 15,
+      speed: 50,
     });
 
   const { text: dataStreamTextBottom, startTyping: startDataStreamTextBottom } =
@@ -66,7 +66,7 @@ export const useOnboarding = () => {
   } = useTypeWriter({
     texts: ONBOARDING_CONSTANTS.PHASE_ONE.TEXTS,
     delay: 500,
-    speed: 25,
+    speed: 50,
   });
 
   const {

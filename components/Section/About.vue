@@ -30,6 +30,14 @@
         />
         <h1 class="About__title">About me</h1>
         <div class="About__text">
+          <div class="About__photo-wrapper">
+            <img
+              src="/foto-cv.jpg"
+              alt="Developer photo"
+              class="About__photo-image"
+            />
+            <div class="About__photo-pseudo-border" />
+          </div>
           <p class="About__description">
             I'm a front-end developer with a passion for creating beautiful and
             functional web applications, <br />mainly focused on
@@ -156,6 +164,41 @@ const techLogos: TechLogo[] = [
 
     &-name {
       @apply font-exo text-xs font-light text-primary;
+    }
+  }
+
+  &__photo {
+    &-wrapper {
+      @apply relative h-40 w-40;
+    }
+
+    &-image {
+      @apply absolute inset-0 z-10 h-full w-full object-cover;
+      clip-path: polygon(
+        0 0,
+        80% 0,
+        100% 20%,
+        100% 70%,
+        100% 100%,
+        20% 100%,
+        0 80%,
+        0% 30%
+      );
+    }
+
+    &-pseudo-border {
+      @apply absolute inset-0 left-[-2.5px] top-[-2.5px] z-0 h-[calc(100%+5px)] w-[calc(100%+5px)];
+      background: $secondary;
+      clip-path: polygon(
+        0 0,
+        80% 0,
+        100% 20%,
+        100% 70%,
+        100% 100%,
+        20% 100%,
+        0 80%,
+        0% 30%
+      );
     }
   }
 }

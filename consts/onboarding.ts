@@ -3,13 +3,13 @@ export const ONBOARDING_CONSTANTS = {
     TEXTS: ["Starting systems", "Please wait..."],
     ANIMATION_DELAYS: {
       ATTENTION_ICON: 3000,
-      SEPARATORS: 6000,
+      SEPARATORS: 7000,
       MEMORY_TYPING: 3000,
-      PHASE_START: 5000,
+      PHASE_START: 4000,
     },
   },
   PHASE_TWO: {
-    ANIMATION_DELAY: 2000,
+    ANIMATION_DELAY: 3000,
   },
   PHASE_THREE: {
     ANIMATION_DELAY: 2000,

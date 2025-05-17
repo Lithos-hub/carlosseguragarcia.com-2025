@@ -75,7 +75,7 @@ const onSystemAuxiliarCompleted = (index: number) => {
 @use "@/styles/variables.scss" as *;
 
 .OnboardingPhaseTwo {
-  @apply relative flex h-[200px] w-[90vw] max-w-[90vw] items-center justify-center overflow-hidden border border-transparent p-2 lg:h-[500px] lg:w-[1000px] lg:p-10;
+  @apply relative flex h-[200px] w-[90vw] max-w-[90vw] items-center justify-center overflow-hidden border border-transparent p-2 lg:h-[500px] lg:w-[1000px] lg:w-[50vw] lg:p-10;
 
   background-size: 5px 5px;
   background-image: repeating-linear-gradient(
@@ -100,7 +100,7 @@ const onSystemAuxiliarCompleted = (index: number) => {
 
 @keyframes expand-block-to-second-phase {
   0% {
-    @apply h-[500px] w-[90vw] max-w-[90vw] lg:w-[1000px];
+    @apply h-[500px] w-[90vw] max-w-[90vw] lg:w-[1000px] lg:w-[50vw];
   }
   50% {
     @apply h-[500px] w-[90vw] max-w-[90vw] lg:w-[1000px];

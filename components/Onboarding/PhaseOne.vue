@@ -61,6 +61,7 @@ const leftPhaseOneSeparatorRef = useTemplateRef("leftPhaseOneSeparatorRef");
 const rightPhaseOneSeparatorRef = useTemplateRef("rightPhaseOneSeparatorRef");
 
 onMounted(() => {
+  localStorage.setItem("hasSeenOnboarding", "true");
   setTimeout(() => {
     attentionImageRef.value?.classList.add(
       "animation--atention-icon-dissapear",
@@ -84,7 +85,7 @@ onMounted(() => {
 @use "@/styles/variables.scss" as *;
 
 .OnboardingPhaseOne {
-  @apply relative flex h-[10px] w-[10px] max-w-[90vw] items-center justify-center border border-transparent;
+  @apply relative flex h-[10px] w-[10px] max-w-[90vw] items-center justify-center border border-transparent lg:max-w-[50vw];
 
   background-size: 5px 5px;
   background-image: repeating-linear-gradient(
@@ -165,16 +166,25 @@ onMounted(() => {
     opacity: 0;
     overflow: hidden;
     height: 10px;
-    width: 1000px;
+    width: 90vw;
+    @screen lg {
+      width: 50vw;
+    }
   }
   25% {
     overflow: hidden;
     height: 100px;
-    width: 1000px;
+    width: 90vw;
+    @screen lg {
+      width: 50vw;
+    }
   }
   100% {
     height: 500px;
-    width: 1000px;
+    width: 90vw;
+    @screen lg {
+      width: 50vw;
+    }
   }
 }
 

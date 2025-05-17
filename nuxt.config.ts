@@ -15,12 +15,6 @@ export default defineNuxtConfig({
     preference: "system",
   },
 
-  // routeRules: {
-  //   "/": {
-  //     redirect: "/onboarding",
-  //   },
-  // },
-
   app: {
     pageTransition: {
       name: "page",

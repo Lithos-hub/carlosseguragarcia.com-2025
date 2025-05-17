@@ -1,5 +1,5 @@
 <template>
-  <div class="flex min-h-[40px] items-center gap-2">
+  <div class="flex min-h-[30px] items-center gap-1">
     <div
       class="square"
       :class="{
