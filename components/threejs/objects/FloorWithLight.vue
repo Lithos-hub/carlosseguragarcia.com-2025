@@ -3,9 +3,9 @@
   <TresMesh ref="lightEmissivePlaneRef" :position="[0, 0, -50]">
     <TresPlaneGeometry :args="[width, height]" />
     <TresMeshPhysicalMaterial
-      color="#EF4444"
-      emissive="#EF4444"
-      :emissive-intensity="5"
+      color="white"
+      emissive="white"
+      :emissive-intensity="1"
     />
   </TresMesh>
 

@@ -11,7 +11,7 @@
     <TresDirectionalLight
       :position="[70, 50, 50]"
       :intensity="1"
-      color="#EF4444"
+      color="cyan"
       cast-shadow
     />
     <TresDirectionalLight
@@ -20,9 +20,6 @@
       color="#EF4444"
       cast-shadow
     />
-
-    <!-- Ambient Light -->
-    <TresAmbientLight :intensity="50" color="#55EAD4" />
 
     <!-- Post-processing -->
     <EffectComposerPmndrs>
@@ -34,10 +31,10 @@
       />
       <!-- Bloom -->
       <BloomPmndrs
-        :radius="1"
-        :intensity="1"
-        :luminance-threshold="0.1"
-        :luminance-smoothing="1"
+        :radius="0.1"
+        :intensity="0.5"
+        :luminance-threshold="0.5"
+        :luminance-smoothing="0.75"
         mipmap-blur
       />
 
@@ -52,9 +49,9 @@
     </EffectComposerPmndrs>
 
     <!-- Hero Text -->
-    <Suspense>
+    <!-- <Suspense>
       <ThreejsObjectsHeroText />
-    </Suspense>
+    </Suspense> -->
 
     <Suspense>
       <ThreejsObjectsFloorWithLight />

@@ -8,15 +8,12 @@
         </div>
       </Suspense>
 
-      <div class="Hero__text">
-        <!-- This text is already displayed in the TresJS canvas, but we need to keep it for SEO -->
-        <div class="opacity-0">
-          <h1>Carlos Segura Garcia</h1>
-          <h2>Software Engineer</h2>
-        </div>
+      <h1 class="Hero__title">Carlos Segura Garcia</h1>
+      <h2 class="Hero__subtitle">Software Engineer</h2>
 
-        <BaseButton @click="scrollToPortfolio">View my work</BaseButton>
-      </div>
+      <BaseButton class="Hero__button-container" @click="scrollToPortfolio"
+        >View my work</BaseButton
+      >
     </div>
   </div>
 </template>
@@ -44,16 +41,16 @@ const scrollToPortfolio = () => {
     @apply relative h-[80vh] w-full border-x border-secondary bg-black p-5 lg:mx-auto lg:max-w-[80vw];
   }
 
-  &__text {
-    @apply absolute inset-0 flex flex-col items-center justify-between gap-10 p-20 font-rajdhaniLight text-secondary;
+  &__title {
+    @apply absolute left-5 top-5 text-center font-rajdhaniLight text-3xl leading-tight text-primary lg:text-[45px];
+  }
 
-    h1 {
-      @apply text-3xl lg:text-[60px];
-    }
+  &__subtitle {
+    @apply absolute bottom-5 right-5 text-center font-rajdhaniLight text-lg font-bold leading-tight text-secondary lg:text-[25px];
+  }
 
-    h2 {
-      @apply text-lg lg:text-[40px];
-    }
+  &__button-container {
+    @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
   }
 }
 </style>
