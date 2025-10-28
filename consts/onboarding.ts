@@ -3,17 +3,26 @@ export const ONBOARDING_CONSTANTS = {
     TEXTS: ["Starting systems", "Please wait..."],
     ANIMATION_DELAYS: {
       ATTENTION_ICON: 3000,
-      SEPARATORS: 7000,
-      MEMORY_TYPING: 3000,
-      PHASE_START: 4000,
+      SEPARATORS: 5000,
+      MEMORY_TYPING: 1000,
+      PHASE_START: 3500,
+      PHASE_END: 5000,
     },
   },
   PHASE_TWO: {
-    ANIMATION_DELAY: 3000,
-  },
-  PHASE_THREE: {
     ANIMATION_DELAY: 2000,
   },
+  PHASE_THREE: {
+    ANIMATION_DELAY: 1000,
+  },
+} as const;
+
+export const ONBOARDING_TIMING_PROFILE = {
+  TOTAL_DURATION: 35000,
+  PHASE_ONE_DURATION: 10000,
+  PHASE_TWO_DURATION: 15000,
+  PHASE_THREE_DURATION: 10000,
+  OVERLAP_DURATION: 500, // Para transiciones suaves
 } as const;
 
 export const ONBOARDING_ANIMATIONS = {

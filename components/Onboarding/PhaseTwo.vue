@@ -86,30 +86,19 @@ const onSystemAuxiliarCompleted = (index: number) => {
     $secondary10
   );
 
-  animation: expand-block-to-second-phase 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation: expand-block-to-second-phase 2s cubic-bezier(0.25, 0.1, 0.25, 1);
   animation-fill-mode: forwards;
 
   &__system-text {
     @apply h-[80vh] max-h-[80vh] w-full overflow-hidden text-secondary;
+    animation: fade-in-phase-two 0.5s cubic-bezier(0.25, 0.1, 0.25, 1);
+    animation-delay: 0.2s;
+    animation-fill-mode: forwards;
+    opacity: 0;
   }
 
   &__systems-messages-initial-text {
     @apply font-lucania text-[8px] text-secondary;
-  }
-}
-
-@keyframes expand-block-to-second-phase {
-  0% {
-    @apply h-[500px] w-[90vw] max-w-[90vw] lg:w-[1000px] lg:w-[50vw];
-  }
-  50% {
-    @apply h-[500px] w-[90vw] max-w-[90vw] lg:w-[1000px];
-  }
-  75% {
-    @apply h-[90vh] w-[90vw] border-secondarySoft lg:w-[1000px];
-  }
-  100% {
-    @apply h-[90vh] w-[90vw] border-secondarySoft lg:w-[1000px];
   }
 }
 </style>

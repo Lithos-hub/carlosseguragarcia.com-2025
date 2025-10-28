@@ -28,34 +28,43 @@ export const useOnboarding = () => {
     auxiliarTextsCompleted: [],
   });
 
+  // TypeWriter configuration constants
+  const TYPEWRITER_CONFIG = {
+    MEMORY_TEXT: { delay: 5, speed: 30 },
+    DATA_STREAM: { delay: 15, speed: 10 },
+    PHASE_ONE: { delay: 300, speed: 50 },
+    PHASE_TWO: { delay: 50, speed: 0 },
+    PHASE_THREE_FOUR: { delay: 10, speed: 0 },
+  };
+
   // TypeWriter hooks
   const { text: memoryTextTop, startTyping: startMemoryTypingTop } =
     useTypeWriter({
       texts: CYBERINFO.MEMORY_GRID_TOP.map((text) => `${text}\n`),
-      delay: 10,
-      speed: 50,
+      delay: TYPEWRITER_CONFIG.MEMORY_TEXT.delay,
+      speed: TYPEWRITER_CONFIG.MEMORY_TEXT.speed,
     });
 
   const { text: dataStreamTextTop, startTyping: startDataStreamTextTop } =
     useTypeWriter({
       texts: CYBERINFO.DATA_STREAM_TOP.map((text) => `${text}\n`),
-      delay: 20,
-      speed: 10,
+      delay: TYPEWRITER_CONFIG.DATA_STREAM.delay,
+      speed: TYPEWRITER_CONFIG.DATA_STREAM.speed,
       persistLines: CYBERINFO.DATA_STREAM_TOP.map(Boolean),
     });
 
   const { text: memoryTextBottom, startTyping: startMemoryTypingBottom } =
     useTypeWriter({
       texts: CYBERINFO.MEMORY_GRID_BOTTOM.map((text) => `${text}\n`),
-      delay: 10,
-      speed: 50,
+      delay: TYPEWRITER_CONFIG.MEMORY_TEXT.delay,
+      speed: TYPEWRITER_CONFIG.MEMORY_TEXT.speed,
     });
 
   const { text: dataStreamTextBottom, startTyping: startDataStreamTextBottom } =
     useTypeWriter({
       texts: CYBERINFO.DATA_STREAM_BOTTOM.map((text) => `${text}\n`),
-      delay: 20,
-      speed: 10,
+      delay: TYPEWRITER_CONFIG.DATA_STREAM.delay,
+      speed: TYPEWRITER_CONFIG.DATA_STREAM.speed,
       persistLines: CYBERINFO.DATA_STREAM_BOTTOM.map(Boolean),
     });
 
@@ -65,8 +74,8 @@ export const useOnboarding = () => {
     isCompleted: isPhaseOneCompleted,
   } = useTypeWriter({
     texts: ONBOARDING_CONSTANTS.PHASE_ONE.TEXTS,
-    delay: 500,
-    speed: 50,
+    delay: TYPEWRITER_CONFIG.PHASE_ONE.delay,
+    speed: TYPEWRITER_CONFIG.PHASE_ONE.speed,
   });
 
   const {
@@ -76,8 +85,8 @@ export const useOnboarding = () => {
     isTyping: isPhaseTwoTyping,
   } = useTypeWriter({
     texts: CYBERINFO.LOADING_SYSTEM_TEXT.map((text) => `\n${text}`),
-    delay: 100,
-    speed: 0,
+    delay: TYPEWRITER_CONFIG.PHASE_TWO.delay,
+    speed: TYPEWRITER_CONFIG.PHASE_TWO.speed,
     persistLines: CYBERINFO.LOADING_SYSTEM_TEXT.map(Boolean),
   });
 
@@ -87,8 +96,8 @@ export const useOnboarding = () => {
     isCompleted: isPhaseThreeCompleted,
   } = useTypeWriter({
     texts: CYBERINFO.FILES_LIST.map((text) => `${text}\n`),
-    delay: 20,
-    speed: 0,
+    delay: TYPEWRITER_CONFIG.PHASE_THREE_FOUR.delay,
+    speed: TYPEWRITER_CONFIG.PHASE_THREE_FOUR.speed,
     persistLines: CYBERINFO.FILES_LIST.map(Boolean),
   });
 
@@ -98,8 +107,8 @@ export const useOnboarding = () => {
     isCompleted: isPhaseFourCompleted,
   } = useTypeWriter({
     texts: CYBERINFO.BOOT_SEQUENCE_LIST.map((text) => `${text}\n`),
-    delay: 20,
-    speed: 0,
+    delay: TYPEWRITER_CONFIG.PHASE_THREE_FOUR.delay,
+    speed: TYPEWRITER_CONFIG.PHASE_THREE_FOUR.speed,
     persistLines: CYBERINFO.BOOT_SEQUENCE_LIST.map(Boolean),
   });
 

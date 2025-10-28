@@ -59,18 +59,11 @@ defineProps<Props>();
     $primary10
   );
 
-  animation: fade-block-to-third-phase 3s cubic-bezier(0.25, 0.1, 0.25, 1);
+  animation: fade-block-to-third-phase 2s cubic-bezier(0.25, 0.1, 0.25, 1);
   animation-fill-mode: forwards;
-}
 
-@keyframes fade-block-to-third-phase {
-  0% {
-    opacity: 0;
-    border-color: $secondarySoft;
-  }
-  100% {
-    opacity: 1;
-    border-color: $primary;
+  &:hover {
+    animation: glitch-effect 0.3s ease-in-out;
   }
 }
 </style>
