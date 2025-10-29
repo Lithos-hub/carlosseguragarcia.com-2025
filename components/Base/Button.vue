@@ -58,7 +58,7 @@ const props = withDefaults(defineProps<ButtonProps>(), {
     @apply border-primary;
 
     #{$self}__content {
-      @apply text-primary dark:text-primary;
+      @apply text-primary;
     }
 
     &::after {
@@ -73,18 +73,23 @@ const props = withDefaults(defineProps<ButtonProps>(), {
     }
 
     #{$self}__pseudo-border {
-      @apply bg-primary dark:bg-primary;
+      @apply bg-primary;
     }
 
     &:hover {
-      @apply scale-105 border-secondary;
+      @apply scale-105 border-white;
 
       #{$self}__content {
-        @apply text-secondary dark:text-secondary;
+        @apply text-white;
+      }
+
+      // Cambiar color de iconos a blanco en hover
+      #{$self}__content * {
+        @apply text-white !important;
       }
 
       #{$self}__pseudo-border {
-        @apply bg-secondary dark:bg-secondary;
+        @apply bg-white;
       }
 
       &::after {
@@ -102,13 +107,58 @@ const props = withDefaults(defineProps<ButtonProps>(), {
   }
 
   &--secondary {
-    @apply border-secondary dark:border-secondary;
+    @apply border-secondary;
 
     #{$self}__content {
-      @apply text-secondary dark:text-secondary;
+      @apply text-secondary;
+    }
+
+    &::after {
+      @apply bg-black/90;
+      background-image: repeating-linear-gradient(
+        0deg,
+        $gradient-primary,
+        $gradient-primary 1px,
+        $gradient-black 1px,
+        $gradient-black
+      );
+    }
+
+    #{$self}__pseudo-border {
+      @apply bg-secondary;
+    }
+
+    &:hover {
+      @apply scale-105 border-white;
+
+      #{$self}__content {
+        @apply text-white;
+      }
+
+      // Cambiar color de iconos a blanco en hover
+      #{$self}__content * {
+        @apply text-white !important;
+      }
+
+      #{$self}__pseudo-border {
+        @apply bg-white;
+      }
+
+      &::after {
+        @apply transition-all duration-300 ease-in-out;
+        background-size: 5px 5px;
+        background-image: repeating-linear-gradient(
+          45deg,
+          $gradient-secondary,
+          $gradient-secondary 1px,
+          rgba(255, 255, 255, 0.1) 1px,
+          $gradient-black 50%
+        );
+      }
     }
   }
 
+  // Sizes
   &--sm {
     @apply h-10 w-24;
 

@@ -11,6 +11,7 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@nuxt/icon": "^2.1.0",
     "@nuxt/ui": "^2.21.0",
     "@pinia/nuxt": "^0.10.1",
     "@tresjs/cientos": "^4.2.0",
