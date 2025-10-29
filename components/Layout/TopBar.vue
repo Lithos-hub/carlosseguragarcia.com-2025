@@ -16,6 +16,9 @@
           v-for="link in sections"
           :key="link.title"
           class="TopBar__link"
+          :class="{
+            'TopBar__link--active': visibleSection.toLowerCase().includes(link.id.toLowerCase()),
+          }"
           @click="scrollToSection(link.path)"
         >
           {{ link.title }}
@@ -41,7 +44,7 @@
 
 <script setup lang="ts">
 import { sections } from "@/consts/sections";
-const { visualDataBySection } = storeToRefs(useUiStore());
+const { visualDataBySection, visibleSection } = storeToRefs(useUiStore());
 const { toggleRadialMenu, toggleMobileMenu } = useUiStore();
 
 const selectedLanguage = reactive({
@@ -148,6 +151,13 @@ const scrollToSection = (section: string) => {
 
   &__right {
     @apply flex h-full w-[50vw] flex-col items-center justify-center bg-black transition-all duration-300 lg:w-[10vw];
+  }
+
+  &__link--active {
+    @include corner-effect-secondary;
+    @apply bg-black text-secondary transition-all duration-300;
+    background-size: 100% 100%;
+    text-shadow: 0 0 0px;
   }
 }
 </style>
