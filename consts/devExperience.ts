@@ -180,6 +180,11 @@ export const DEV_EXPERIENCE = [
     ],
     tasks: [
       "I'm working in an internal squad for El Corte Inglés to develop a new e-commerce experience",
+      "I am developing new features and solving issues and defects in several projects for a new search experience.",
+      "I work on developing new features that expand or improve the website experience, as well as refactoring and improving its performance.",
+      "I am developing unit tests with Jest, Testing Library and Vue Test Utils.",
+      "I collaborate with the QA team for manual testing.",
+      "I am working under Scrum methodology.",
     ],
   },
 ].sort((a, b) => b.id - a.id) as Experience[];

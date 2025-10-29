@@ -24,10 +24,6 @@
 import { refDebounced } from "@vueuse/core";
 import type { Section } from "~/consts/sections";
 
-definePageMeta({
-  middleware: ["onboarding"],
-});
-
 // SEO metadata
 useHead({
   title: "Carlos Segura Garcia - Software Engineer",
